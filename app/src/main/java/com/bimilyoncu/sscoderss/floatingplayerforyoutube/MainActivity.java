@@ -122,7 +122,6 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener{
         if (item.getItemId() == R.id.search_button) {
             Intent myIntent = new Intent(MainActivity.this, SearchActivity.class);
             startActivity(myIntent);
-
         } else if (item.getItemId() == R.id.checkHighQuality) {
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor editor = preferences.edit();
