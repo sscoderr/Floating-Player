@@ -92,6 +92,11 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+
+
+
         Random rand=new Random();
         int randValue=rand.nextInt(YoutubeConnector.myApiKeys.length);
         YoutubeConnector.KEY=YoutubeConnector.myApiKeys[randValue];
