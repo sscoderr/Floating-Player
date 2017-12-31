@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        /**Aminyiyum**/
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Random rand=new Random();
