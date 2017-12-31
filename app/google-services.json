@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "360605206794",
+    "project_id": "floating-player-for-youtube"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:360605206794:android:34a39307aff5643c",
+        "android_client_info": {
+          "package_name": "com.bimilyoncu.sscoderss.floatingplayerforyoutube"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyTgbaPBwXS-bkq62fx24vSyidxnotbPQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-98050235-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

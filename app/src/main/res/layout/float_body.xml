@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="190dp">
+
+        <WebView
+            android:layout_width="fill_parent"
+            android:layout_height="190dp"
+            android:id="@+id/mWebView"
+            android:background="#000">
+
+        </WebView>
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="140dp"
+            android:id="@+id/clickRelative"
+            android:visibility="invisible">
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <!--<include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/activity_webview_include" />-->
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#424242">
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtVideoTitle"
+                android:textColor="#FFF"
+                android:text="Title"
+                android:layout_marginLeft="5dp"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentRight="true">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/img_repeat"
+                android:src="@mipmap/repeat_icon_for_float"
+                android:background="@drawable/selector_for_moreoption_button"
+                android:scaleType="center" />
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/img_suffle"
+                android:src="@mipmap/suffle_icon_for_float"
+                android:background="@drawable/selector_for_moreoption_button"
+                android:scaleType="center" />
+
+            <ImageView
+                android:id="@+id/img_stopingfinishvideo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_for_moreoption_button"
+                android:padding="5dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/autoplay_off" />
+        </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#FFFFFF"></RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <ListView
+            android:id="@+id/mListForFloat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:scrollbars="none"
+            android:background="#424242"
+            />
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/myPBForPlayedVideosList"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:indeterminateDrawable="@drawable/progresbar"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FloatingPlayerForYoutube</string>
+    <string name="subscriberName">" Abone"</string>
+    <string name="videoCountName">" Video"</string>
+    <string name="videoView">" Goruntuleme"</string>
+
+    <string name="dateDay">" Gun Once"</string>
+    <string name="dateMonth">" Ay Once"</string>
+    <string name="dateYear">" Yil Once"</string>
+
+    <string name="title_activity_playlist_activityy">Playlist</string>
+    <string name="title_activity_playlist">Playlist</string>
+    <string name="title_activity_main">Floating Player</string>
+    <string name="filter">Filter</string>
+    <string name="search">Arama</string>
+    <string name="optionMenuItemOne">Favorilere Ekle</string>
+    <string name="optionMenuItemTwo">Paylaş</string>
+    <string name="optionMenuItemDelete">Sil</string>
+
+    <!-- TODO Filter Dialog -->
+    <string name="titleForFilter">Sonuçları Filtrele</string>
+    <string name="sorting">Sıralama</string>
+    <string name="contentType">Icerik Turu</string>
+    <string name="btnSave">Kaydet</string>
+    <string name="btnCancelForFilter">Iptal</string>
+
+
+    <!-- TODO PlaylistChooseWindow -->
+    <string name="playlistChooseTitle">Oynatma Listesi Seçin</string>
+    <string name="playlistLikedVideos">Beğendiklerim</string>
+    <string name="btnCancel">Iptal</string>
+
+    <!-- TODO geting Data progres bar -->
+    <string name="progressMessage">Lutfen Bekleyin Verileriniz Getiriliyor</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- TODO: suffle and repeat Toast Message -->
+    <string name="suffleMessageOn">Karışık Modu Etkin</string>
+    <string name="suffleMessageOff">Karışık Modu Devre Dışı</string>
+    <string name="repeatMessageOn">Tekrar Modu Etkin</string>
+    <string name="repeatMessageOff">Tekrar Modu Devre Dışı</string>
+
+
+    <!-- TODO: internetConnection Toast Message -->
+    <string name="internetConnectionMessage">Lütfen Internet Bağlantınızı Kontrol Edin</string>
+    <string name="internetConnectionTryAgain">Tekrar Deneyin</string>
+    <string name="internetConnectionQuit">Çıkış</string>
+    <!-- TODO: permissionMessage For above marshmallow -->
+    <string name="permissionMessage">Lutfen Uygulama Izinlerini Etkinleştirin</string>
+    <string name="rateApp">Oy Ver</string>
+    <string name="shareApp">Paylaş</string>
+    <string name="qualityOption">Yüksek Çözünürlük</string>
+    <string name="myDataFavorite">Favoriler</string>
+    <string name="myDataHistory">Geçmiş</string>
+    <string name="myDataFromYT">Youtubeden</string>
+    <string name="myDataSuggest">Önerilenler</string>
+    <string name="forKitkatAndBeforeMessage">Lütfen Videoyu Durdurup Tekrar Oynatın</string>
+
+
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sortby_array">
+        <item>Releated</item>
+        <item>View Count</item>
+        <item>Publised Date</item>
+    </string-array>
+</resources>
