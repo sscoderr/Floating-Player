@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/FloatingPlayerForYoutube.iml" filepath="$PROJECT_DIR$/FloatingPlayerForYoutube.iml" />
+      <module fileurl="file://C:\Users\furkan0\Desktop\floplaforyou\floatingPlayerForYoutube\FloatingPlayerForYoutube.iml" filepath="C:\Users\furkan0\Desktop\floplaforyou\floatingPlayerForYoutube\FloatingPlayerForYoutube.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\furkan0\Desktop\floplaforyou\floatingPlayerForYoutube\app\app.iml" filepath="C:\Users\furkan0\Desktop\floplaforyou\floatingPlayerForYoutube\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/floatingPlayerForYoutube.iml" filepath="$PROJECT_DIR$/.idea/floatingPlayerForYoutube.iml" />
     </modules>
   </component>
 </project>
