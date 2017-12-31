@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/FloatingPlayerForYoutubeTeamProject.iml" filepath="$PROJECT_DIR$/FloatingPlayerForYoutubeTeamProject.iml" />
-      <module fileurl="file://C:\Users\furkan0\Desktop\floplaforyou\floatingPlayerForYoutube\FloatingPlayerForYoutubeTeamProject.iml" filepath="C:\Users\furkan0\Desktop\floplaforyou\floatingPlayerForYoutube\FloatingPlayerForYoutubeTeamProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\Sabahattin\AndroidStudioProjects\FloatingPlayerForYoutubeTeamProject\floatingPlayerForYoutube.iml" filepath="C:\Users\Sabahattin\AndroidStudioProjects\FloatingPlayerForYoutubeTeamProject\floatingPlayerForYoutube.iml" />
+      <module fileurl="file://$PROJECT_DIR$/floatingPlayerForYoutube.iml" filepath="$PROJECT_DIR$/floatingPlayerForYoutube.iml" />
     </modules>
   </component>
 </project>

@@ -65,45 +65,48 @@ import static com.bimilyoncu.sscoderss.floatingplayerforyoutube.MSettings.checkS
 import static com.bimilyoncu.sscoderss.floatingplayerforyoutube.MSettings.similarVideosList;
 
 
-public class MainActivity extends AppCompatActivity implements OnScrollListener{
+public class MainActivity extends AppCompatActivity implements OnScrollListener {
     private static final int NOTIFICATION_ID = 1500;
     public static final int PERMISSION_REQUEST_CODE = 16;
 
-    private boolean isLoading=false;
+    private boolean isLoading = false;
     private ProgressBar myPg;
     private Handler handler;
     public Handler mHandler;
-    private int sizeOfMoreData=1;
+    private int sizeOfMoreData = 1;
     private View myView;
 
 
     ViewPager viewPager;
     TabLayout tabLayout;
-    private int[] tabIcons = { R.mipmap.trend_music_icon,R.mipmap.trend_video_icon,R.mipmap.favorite_video_icon};
+    private int[] tabIcons = {R.mipmap.trend_music_icon, R.mipmap.trend_video_icon, R.mipmap.favorite_video_icon};
 
     private InterstitialAd interstitial;
 
     private YouTube.Videos.List queryTwo;
-    private List<VideoItem> items=new ArrayList<>();
+    private List<VideoItem> items = new ArrayList<>();
     private YouTube youtube;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        /**Aminyiyuma**/
+        /* Bu kodlar nasıl kodlar... */
+        // new GET_KEYS().execute();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Random rand=new Random();
-        int randValue=rand.nextInt(YoutubeConnector.myApiKeys.length);
-        YoutubeConnector.KEY=YoutubeConnector.myApiKeys[randValue];
+        Random rand = new Random();
+        int randValue = rand.nextInt(YoutubeConnector.myApiKeys.length);
+        YoutubeConnector.KEY = YoutubeConnector.myApiKeys[randValue];
         (MainActivity.this).getSupportActionBar().setElevation(0);
-        TelephonyManager tm = (TelephonyManager)getSystemService(getApplicationContext().TELEPHONY_SERVICE);
+        TelephonyManager tm = (TelephonyManager) getSystemService(getApplicationContext().TELEPHONY_SERVICE);
         MSettings.countryCode = tm.getNetworkCountryIso();
         mHandler = new MyHandler();
         handler = new Handler();
-        LayoutInflater li = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater li = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         myView = li.inflate(R.layout.loading_result, null);
         connectiveStart();
     }
+
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -111,12 +114,13 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener{
         inflater.inflate(R.menu.option_menu_mainactivity, menu);
         MenuItem item = menu.findItem(R.id.checkHighQuality);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        if (preferences.getBoolean("isHighQuality",false))
+        if (preferences.getBoolean("isHighQuality", false))
             item.setChecked(true);
-        else if (!preferences.getBoolean("isHighQuality",false))
+        else if (!preferences.getBoolean("isHighQuality", false))
             item.setChecked(false);
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.search_button) {
@@ -133,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener{
                 editor.putBoolean("isHighQuality", true);
             }
             editor.commit();
-            if (getFragmentRefreshListener() != null&&getFragmentRefreshListenerForVideo() != null) {
+            if (getFragmentRefreshListener() != null && getFragmentRefreshListenerForVideo() != null) {
                 getFragmentRefreshListener().onRefresh();
                 getFragmentRefreshListenerForVideo().onRefresh();
             }
@@ -157,8 +161,8 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener{
         return super.onOptionsItemSelected(item);
     }
 
-    private  void connectiveStart(){
-        if (!MSettings.isHaveNetworkAccesQuickly(MainActivity.this)){
+    private void connectiveStart() {
+        if (!MSettings.isHaveNetworkAccesQuickly(MainActivity.this)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(getString(R.string.internetConnectionMessage))
                     .setNegativeButton(MainActivity.this.getString(R.string.internetConnectionQuit), new DialogInterface.OnClickListener() {
@@ -170,11 +174,11 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener{
                     connectiveStart();
                 }
             }).setCancelable(false).create().show();
-        }else {
-            viewPager=(ViewPager)findViewById(R.id.viewPager);
+        } else {
+            viewPager = (ViewPager) findViewById(R.id.viewPager);
             viewPager.setOffscreenPageLimit(3);
             viewPager.setAdapter(new CustomAdapterForFragments(getSupportFragmentManager()));
-            tabLayout=(TabLayout)findViewById(R.id.tabLayout);
+            tabLayout = (TabLayout) findViewById(R.id.tabLayout);
             tabLayout.setupWithViewPager(viewPager);
             tabLayout.getTabAt(0).setIcon(tabIcons[0]);
             tabLayout.getTabAt(1).setIcon(tabIcons[1]);
@@ -208,17 +212,17 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener{
         }
     }
 
-    private void loadFloatWindow(){
+    private void loadFloatWindow() {
         Intent intent = new Intent(this, MainActivity.class);
         //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
         PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        Notification notification = Floaty.createNotification(this, "Floating Player", "", R.mipmap.play_icon_for_float,resultPendingIntent);
+        Notification notification = Floaty.createNotification(this, "Floating Player", "", R.mipmap.play_icon_for_float, resultPendingIntent);
 
-        if(MSettings.head==null)
+        if (MSettings.head == null)
             MSettings.head = LayoutInflater.from(this).inflate(R.layout.float_head, null);
-        if(MSettings.body==null)
+        if (MSettings.body == null)
             MSettings.body = LayoutInflater.from(this).inflate(R.layout.float_body, null);
-        ImageView imgForClose=(ImageView)MSettings.head.findViewById(R.id.imageViewForClose);
+        ImageView imgForClose = (ImageView) MSettings.head.findViewById(R.id.imageViewForClose);
         imgForClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -230,29 +234,29 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener{
                 MSettings.floaty.stopService();
             }
         });
-        final ImageView imgRepeat=(ImageView)MSettings.body.findViewById(R.id.img_repeat);
-        final ImageView imgSuffle=(ImageView)MSettings.body.findViewById(R.id.img_suffle);
+        final ImageView imgRepeat = (ImageView) MSettings.body.findViewById(R.id.img_repeat);
+        final ImageView imgSuffle = (ImageView) MSettings.body.findViewById(R.id.img_suffle);
         final ImageView imageViewStopFinishVideo = (ImageView) MSettings.body.findViewById(R.id.img_stopingfinishvideo);
         imgRepeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!checkRepeat) {
-                    checkRepeat=true;
+                    checkRepeat = true;
                     Toast.makeText(MainActivity.this, getString(R.string.repeatMessageOn), Toast.LENGTH_SHORT).show();
                     imgRepeat.setImageResource(R.mipmap.repeat_black_icon_for_float);
-                    MSettings.currentVideoId=MSettings.nextVideoId;
+                    MSettings.currentVideoId = MSettings.nextVideoId;
                     MSettings.setVideoTitle(MSettings.nextVideoTitle);
-                }else {
-                    checkRepeat=false;
+                } else {
+                    checkRepeat = false;
                     Toast.makeText(MainActivity.this, getString(R.string.repeatMessageOff), Toast.LENGTH_SHORT).show();
-                    MSettings.isLaterRepeate=true;
-                    CounterForSimilarVideos-=1;
+                    MSettings.isLaterRepeate = true;
+                    CounterForSimilarVideos -= 1;
                     MSettings.currentVideoId = similarVideosList.get(CounterForSimilarVideos).getId();
                     MSettings.setVideoTitle(similarVideosList.get(CounterForSimilarVideos).getTitle());
                     //Toast.makeText(MSettings.activeActivity, String.valueOf(CounterForSimilarVideos), Toast.LENGTH_SHORT).show();
                     imgRepeat.setImageResource(R.mipmap.repeat_icon_for_float);
                 }
-                checkSuffle=false;
+                checkSuffle = false;
                 imgSuffle.setImageResource(R.mipmap.suffle_icon_for_float);
             }
         });
@@ -260,16 +264,16 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener{
             @Override
             public void onClick(View view) {
                 if (!checkSuffle) {
-                    checkSuffle=true;
+                    checkSuffle = true;
                     Toast.makeText(MainActivity.this, getString(R.string.suffleMessageOn), Toast.LENGTH_SHORT).show();
                     imgSuffle.setImageResource(R.mipmap.suffle_black_icon_for_float);
                     MSettings.suffleVideo();
-                }else {
-                    checkSuffle=false;
+                } else {
+                    checkSuffle = false;
                     Toast.makeText(MainActivity.this, getString(R.string.suffleMessageOff), Toast.LENGTH_SHORT).show();
                     imgSuffle.setImageResource(R.mipmap.suffle_icon_for_float);
                 }
-                checkRepeat=false;
+                checkRepeat = false;
                 imgRepeat.setImageResource(R.mipmap.repeat_icon_for_float);
 
             }
@@ -289,8 +293,8 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener{
             }
         });
 
-        MSettings.clickableRelative=(RelativeLayout)MSettings.body.findViewById(R.id.clickRelative);
-        if (Integer.valueOf(android.os.Build.VERSION.SDK) >= 21&&!MSettings.isFirstOpenApp) {
+        MSettings.clickableRelative = (RelativeLayout) MSettings.body.findViewById(R.id.clickRelative);
+        if (Integer.valueOf(android.os.Build.VERSION.SDK) >= 21 && !MSettings.isFirstOpenApp) {
             MSettings.clickableRelative.setVisibility(View.VISIBLE);
         }
         MSettings.clickableRelative.setOnClickListener(new View.OnClickListener() {
@@ -302,14 +306,15 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener{
 
 
         MSettings.floaty = Floaty.createInstance(this, MSettings.head, MSettings.body, NOTIFICATION_ID, notification);
-        MSettings.mHandler=new Handler();
+        MSettings.mHandler = new Handler();
         MSettings.webView = (WebView) MSettings.body.findViewById(R.id.mWebView);
-        MSettings.mListForFloat=(ListView)MSettings.body.findViewById(R.id.mListForFloat);
-        MSettings.activeActivity=MainActivity.this;
+        MSettings.mListForFloat = (ListView) MSettings.body.findViewById(R.id.mListForFloat);
+        MSettings.activeActivity = MainActivity.this;
         loadWebView(MSettings.webView);
         //getSimilarVideos();
 
     }
+
     @TargetApi(Build.VERSION_CODES.M)
     public void startFloatyForAboveAndroidL() {
         if (!Settings.canDrawOverlays(MSettings.activeActivity)) {
@@ -362,9 +367,10 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener{
         wv.setWebViewClient(new WebViewClient());
         //wv.getSettings().setUserAgentString("Mozilla/5.0 (Linux; Android 4.4; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36");
         wv.getSettings().setUserAgentString("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.117 Safari/537.36");
-        wv.addJavascriptInterface(new JSInterface(wv),"WebPlayerInterface");
+        wv.addJavascriptInterface(new JSInterface(wv), "WebPlayerInterface");
         wv.loadUrl(MSettings.URL);
     }
+
     @TargetApi(Build.VERSION_CODES.M)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -386,7 +392,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener{
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        if(view.getLastVisiblePosition() == totalItemCount-1 && MSettings.mListForFloat.getCount() >=4 && isLoading == false&&sizeOfMoreData!=0&&!MSettings.isUserVideo) {
+        if (view.getLastVisiblePosition() == totalItemCount - 1 && MSettings.mListForFloat.getCount() >= 4 && isLoading == false && sizeOfMoreData != 0 && !MSettings.isUserVideo) {
             isLoading = true;
             Thread thread = new MainActivity.ThreadGetMoreData();
             thread.start();
@@ -403,19 +409,20 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener{
                 case 1:
                     MSettings.mAdapter.addListItemToAdapter((ArrayList<VideoItem>) msg.obj);
                     MSettings.mListForFloat.removeFooterView(myView);
-                    isLoading=false;
+                    isLoading = false;
                     break;
                 default:
                     break;
             }
         }
     }
+
     public class ThreadGetMoreData extends Thread {
         @Override
         public void run() {
             try {
                 mHandler.sendEmptyMessage(0);
-                YoutubeConnector yc = new YoutubeConnector(MSettings.activeActivity, MSettings.currentVideoId, "", false, "", true,false);
+                YoutubeConnector yc = new YoutubeConnector(MSettings.activeActivity, MSettings.currentVideoId, "", false, "", true, false);
                 List<VideoItem> list = yc.search("", false, false, true);
                 sizeOfMoreData = list.size();
                 ArrayList<VideoItem> lstResult = (ArrayList<VideoItem>) list;
@@ -433,48 +440,45 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener{
         }
     }
 
-    public void getSimilarVideos(final String vId, final boolean isPlaylist, final boolean isChannel, final boolean isYoutubeUserVideo, final String[] userYoutubeVideosId){
-        MSettings.isUserVideo=false;
+    public void getSimilarVideos(final String vId, final boolean isPlaylist, final boolean isChannel, final boolean isYoutubeUserVideo, final String[] userYoutubeVideosId) {
+        MSettings.isUserVideo = false;
         MSettings.mListForFloat.setAdapter(null);
         myPg = (ProgressBar) MSettings.body.findViewById(R.id.myPBForPlayedVideosList);
-        new Thread(){
-            public void run(){
+        new Thread() {
+            public void run() {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         myPg.setVisibility(View.VISIBLE);
                     }
                 });
-                MSettings.isPlayedVideo=true;
-                similarVideosList=new ArrayList<>();
-                ConnectorForVideoId cvId=new ConnectorForVideoId(MSettings.activeActivity);
-                if (!isPlaylist&&!isChannel&&!isYoutubeUserVideo)
-                    similarVideosList.addAll(cvId.getVideoItems(new String[][]{{vId}},0,true));
-                if (isPlaylist)  {
-                    ConnectorForPlaylist pc = new ConnectorForPlaylist(MSettings.activeActivity,MSettings.activePlaylistId,true);
+                MSettings.isPlayedVideo = true;
+                similarVideosList = new ArrayList<>();
+                ConnectorForVideoId cvId = new ConnectorForVideoId(MSettings.activeActivity);
+                if (!isPlaylist && !isChannel && !isYoutubeUserVideo)
+                    similarVideosList.addAll(cvId.getVideoItems(new String[][]{{vId}}, 0, true));
+                if (isPlaylist) {
+                    ConnectorForPlaylist pc = new ConnectorForPlaylist(MSettings.activeActivity, MSettings.activePlaylistId, true);
                     similarVideosList.addAll(pc.search(true));
-                }
-                else if(isChannel){
-                    YoutubeConnector yc=new YoutubeConnector(MSettings.activeActivity,"date","video",true,MSettings.activeChannelId,false,true);
-                    similarVideosList.addAll(yc.search("",true,true,false));
-                }
-                else if(isYoutubeUserVideo){
-                    MSettings.isUserVideo=true;
+                } else if (isChannel) {
+                    YoutubeConnector yc = new YoutubeConnector(MSettings.activeActivity, "date", "video", true, MSettings.activeChannelId, false, true);
+                    similarVideosList.addAll(yc.search("", true, true, false));
+                } else if (isYoutubeUserVideo) {
+                    MSettings.isUserVideo = true;
                     similarVideosList.addAll(getVideoItems(userYoutubeVideosId));
+                } else {
+                    YoutubeConnector yc = new YoutubeConnector(MSettings.activeActivity, MSettings.currentVideoId, "", false, "", true, true);
+                    similarVideosList.addAll(yc.search("", true, false, true));
                 }
-                else{
-                    YoutubeConnector yc = new YoutubeConnector(MSettings.activeActivity,MSettings.currentVideoId,"",false,"",true,true);
-                    similarVideosList.addAll(yc.search("",true,false,true));
-                }
-                MSettings.mHandler.post(new Runnable(){
-                    public void run(){
-                        MSettings.mAdapter = new CustomAdapter(MSettings.activeActivity, similarVideosList,"");
+                MSettings.mHandler.post(new Runnable() {
+                    public void run() {
+                        MSettings.mAdapter = new CustomAdapter(MSettings.activeActivity, similarVideosList, "");
                         //-----------MSettings.isPlayedVideo=false;
                         MSettings.mListForFloat.setAdapter(null);
                         MSettings.mListForFloat.setAdapter(MSettings.mAdapter);
-                        MSettings.nextVideoId=MSettings.currentVideoId;
-                        MSettings.nextVideoTitle=MSettings.currentVideoTitle;
-                        if (similarVideosList.size()>1) {
+                        MSettings.nextVideoId = MSettings.currentVideoId;
+                        MSettings.nextVideoTitle = MSettings.currentVideoTitle;
+                        if (similarVideosList.size() > 1) {
                             MSettings.currentVideoId = similarVideosList.get(1).getId();
                             MSettings.setVideoTitle(MSettings.similarVideosList.get(1).getTitle());
                         }
@@ -492,27 +496,27 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener{
         }.start();
     }
 
-    public List<VideoItem> getVideoItems(String[] matrix){
+    public List<VideoItem> getVideoItems(String[] matrix) {
         youtube = new YouTube.Builder(new NetHttpTransport(), new JacksonFactory(), new HttpRequestInitializer() {
             @Override
             public void initialize(HttpRequest request) throws IOException {
                 String packageName = MSettings.activeActivity.getPackageName();
-                String SHA1 = MSettings.getSHA1(packageName,MSettings.activeActivity);
+                String SHA1 = MSettings.getSHA1(packageName, MSettings.activeActivity);
 
                 request.getHeaders().set("X-Android-Package", packageName);
-                request.getHeaders().set("X-Android-Cert",SHA1);
+                request.getHeaders().set("X-Android-Cert", SHA1);
             }
         }).setApplicationName(MSettings.activeActivity.getString(R.string.app_name)).build();
-        try{
+        try {
             queryTwo = youtube.videos().list("snippet,contentDetails,statistics");
             queryTwo.setKey(YoutubeConnector.KEY);
-        }catch(IOException e){
-            Log.d("YC", "Could not initialize: "+e);
+        } catch (IOException e) {
+            Log.d("YC", "Could not initialize: " + e);
         }
 
-        try{
-            for (int i=0;i<matrix.length;i++) {
-                if (matrix[i]!=null) {
+        try {
+            for (int i = 0; i < matrix.length; i++) {
+                if (matrix[i] != null) {
                     queryTwo.setId(matrix[i]);
                     VideoListResponse response = queryTwo.execute();
                     List<Video> results = response.getItems();
@@ -533,7 +537,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener{
                 }
             }
             return items;
-        }catch(IOException e){
+        } catch (IOException e) {
             return null;
         }
     }
@@ -542,18 +546,19 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener{
         MSettings.mListForFloat.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> av, View v, int pos, long id) {
-                if (similarVideosList.get(pos).getId().length()==11) {
-                    MSettings.currentVideoId= similarVideosList.get(pos).getId();
+                if (similarVideosList.get(pos).getId().length() == 11) {
+                    MSettings.currentVideoId = similarVideosList.get(pos).getId();
                     MSettings.setVideoTitle(similarVideosList.get(pos).getTitle());
                     MSettings.getVideoTitle();
                     MSettings.LoadVideo();
-                    MSettings.activeActivity=MainActivity.this;
-                }
-                else Toast.makeText(MSettings.activeActivity, "Getting an Error", Toast.LENGTH_SHORT).show();
+                    MSettings.activeActivity = MainActivity.this;
+                } else
+                    Toast.makeText(MSettings.activeActivity, "Getting an Error", Toast.LENGTH_SHORT).show();
             }
 
         });
     }
+
     public FragmentRefreshListenerForMusic getFragmentRefreshListener() {
         return fragmentRefreshListener;
     }
@@ -582,7 +587,8 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener{
     public interface FragmentRefreshListenerForVideo {
         void onRefresh();
     }
-    private void LoadFullScreenAds(){
+
+    private void LoadFullScreenAds() {
         MobileAds.initialize(MainActivity.this, "ca-app-pub-5808367634056272~8476127349");
         AdRequest adRequest = new AdRequest.Builder().build();/*778ADE18482DD7E44193371217202427 Device Id*/
         interstitial = new InterstitialAd(MainActivity.this);
@@ -593,10 +599,12 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener{
                 if (interstitial.isLoaded())
                     interstitial.show();
             }
+
             public void onAdClosed() {
             }
         });
     }
+
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(newBase);
