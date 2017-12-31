@@ -109,8 +109,6 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener{
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.option_menu_mainactivity, menu);
-
-
         MenuItem item = menu.findItem(R.id.checkHighQuality);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         if (preferences.getBoolean("isHighQuality",false))
