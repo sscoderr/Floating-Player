@@ -235,11 +235,11 @@ public class ChannelVideoList extends AppCompatActivity implements OnScrollListe
             public void onClick(View view) {
                 if (!MSettings.videoFinishStopVideo) {
                     MSettings.videoFinishStopVideo = true;
-                    imageViewStopFinishVideo.setImageResource(R.mipmap.stop_open);
+                    imageViewStopFinishVideo.setImageResource(R.mipmap.autoplay_off);
                     Toast.makeText(ChannelVideoList.this, getString(R.string.stopfinishvideoOff), Toast.LENGTH_SHORT).show();
                 } else {
                     MSettings.videoFinishStopVideo = false;
-                    imageViewStopFinishVideo.setImageResource(R.mipmap.stop_close);
+                    imageViewStopFinishVideo.setImageResource(R.mipmap.autoplay_on);
                     Toast.makeText(ChannelVideoList.this, getString(R.string.stopfinishvideoOn), Toast.LENGTH_SHORT).show();
                 }
             }
