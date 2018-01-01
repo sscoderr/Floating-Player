@@ -91,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
     protected void onCreate(Bundle savedInstanceState) {
         /* Bu kodlar nasıl kodlar... */
         // new GET_KEYS().execute();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Random rand = new Random();
