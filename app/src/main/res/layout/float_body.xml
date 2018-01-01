@@ -75,32 +75,94 @@
                 android:src="@mipmap/autoplay_off" />
         </LinearLayout>
     </RelativeLayout>
-    <RelativeLayout
+
+    <LinearLayout
+        android:id="@+id/cizgi"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#FFFFFF"></RelativeLayout>
+        android:background="#FFFFFF" />
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center">
-        <ListView
-            android:id="@+id/mListForFloat"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#424242"
+        android:orientation="vertical">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@null"
-            android:dividerHeight="0dp"
-            android:scrollbars="none"
-            android:background="#424242"
-            />
-        <ProgressBar
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/myPBForPlayedVideosList"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:indeterminateDrawable="@drawable/progresbar"
-            android:visibility="invisible" />
-    </RelativeLayout>
+            android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/btn_service_similar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="SIMILAR" />
+
+            <Button
+                android:id="@+id/btn_service_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="SEARCH" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/relativesimilar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <ListView
+                    android:id="@+id/mListForFloat"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="@null"
+                    android:dividerHeight="0dp"
+                    android:scrollbars="none" />
+
+                <ProgressBar
+                    android:id="@+id/myPBForPlayedVideosList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:indeterminateDrawable="@drawable/progresbar"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/relativesearch"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:padding="7dp"
+                android:visibility="visible">
+
+
+                <EditText
+                    android:id="@+id/editText_searchservice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="" />
+
+                <ListView
+                    android:id="@+id/service_search_listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </ListView>
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>

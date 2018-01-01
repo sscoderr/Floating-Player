@@ -41,8 +41,8 @@
     <string name="suffleMessageOff">Suffle Mode Off</string>
     <string name="repeatMessageOn">Repeat Mode On</string>
     <string name="repeatMessageOff">Repeat Mode Off</string>
-    <string name="stopfinishvideoOn">Auto Play:ON</string>
-    <string name="stopfinishvideoOff">Auto Play:OFF</string>
+    <string name="stopfinishvideoOn" translatable="false">Auto Play:ON</string>
+    <string name="stopfinishvideoOff" translatable="false">Auto Play:OFF</string>
 
 
     <!-- TODO: internetConnection Toast Message -->
@@ -60,13 +60,15 @@
     <string name="myDataSuggest">Suggested</string>
 
 
-    <string name="banner_ad_unit_id_trend_music">ca-app-pub-5808367634056272/3906326944</string>
-    <string name="banner_ad_unit_id_trend_video">ca-app-pub-5808367634056272/8820877743</string>
-    <string name="banner_ad_unit_id_my_data">ca-app-pub-5808367634056272/4251077344</string>
+    <string name="banner_ad_unit_id_trend_music" translatable="false">ca-app-pub-5808367634056272/3906326944</string>
+    <string name="banner_ad_unit_id_trend_video" translatable="false">ca-app-pub-5808367634056272/8820877743</string>
+    <string name="banner_ad_unit_id_my_data" translatable="false">ca-app-pub-5808367634056272/4251077344</string>
 
-    <string name="admob_interstitial_id_close_service">ca-app-pub-5808367634056272/9460006141</string>
-    <string name="admob_interstitial_six_tap">ca-app-pub-5808367634056272/4169458037</string>
+    <string name="admob_interstitial_id_close_service" translatable="false">ca-app-pub-5808367634056272/9460006141</string>
+    <string name="admob_interstitial_six_tap" translatable="false">ca-app-pub-5808367634056272/4169458037</string>
     <string name="forKitkatAndBeforeMessage">Please Stop Video And Play Again</string>
+
+    <string name="please_click_back_again_to_exit">Please click BACK again to exit!</string>
 
 </resources>
 

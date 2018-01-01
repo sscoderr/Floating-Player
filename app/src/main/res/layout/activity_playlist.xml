@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.bimilyoncu.sscoderss.floatingplayerforyoutube.PlaylistActivity">
+    tools:context="com.bimilyoncu.sscoderss.floatingplayerforyoutube.Page.PlaylistActivity">
 
     <include layout="@layout/content_activity_playlist" />
 

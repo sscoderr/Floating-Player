@@ -6,8 +6,9 @@
     android:gravity="center">
 
     <ProgressBar
+        android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="60px"
-        android:id="@+id/progressBar"
-        android:indeterminateDrawable="@drawable/progresbar"/>
+        android:indeterminateDrawable="@drawable/progresbar"
+        android:padding="3dp" />
 </LinearLayout>
