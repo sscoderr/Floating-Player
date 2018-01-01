@@ -25,13 +25,13 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".SearchActivity"
+            android:name=".Page.SearchActivity"
             android:label="@string/app_name" />
         <activity
-            android:name=".PlaylistActivity"
+            android:name=".Page.PlaylistActivity"
             android:label="@string/title_activity_playlist" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Page.MainActivity"
             android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,7 +39,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChannelVideoList" />
+        <activity android:name=".Page.ChannelVideoList" />
 
         <service android:name=".Floaties.Floaty$FloatHeadService" />
 
@@ -48,6 +48,17 @@
             android:enabled="true">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".Custom.Notification.ButtonPlayPause">
+            <intent-filter>
+                <action android:name="PlayPauseClicked" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".Custom.Notification.ButtonClose">
+            <intent-filter>
+                <action android:name="Close" />
             </intent-filter>
         </receiver>
 

@@ -1,6 +1,6 @@
 package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Floaties;
 
-import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
@@ -22,8 +22,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.RemoteViews;
 
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.MSettings;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.R;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
  *
@@ -38,72 +42,39 @@ public class Floaty {
     private final View head;
     private final View body;
     private final Context context;
-    private final Notification notification;
     private final int notificationId;
-    private static Floaty floaty;
+    public static Floaty floaty;
     private final FloatyOrientationListener floatyOrientationListener;
     private float ratioY = 0;
     private float oldWidth = 0;
     private float oldX = 0;
     private boolean confChange = false;
 
+    public static WindowManager.LayoutParams params;
+    public static int[] clickLocation = new int[2];
+    public static LinearLayout mLinearLayout;
+    public static WindowManager windowManager;
+
     private static final String LOG_TAG = "Floaty";
 
-
     /**
-     *
      * @return The body of the floaty which is assigned through the {@link #createInstance} method.
      */
-
     public View getBody() {
         return floaty.body;
     }
 
-
     /**
-     *
-     * @return The head of the floaty which is assigned through the {@link #createInstance} method.
-     */
-
-    public View getHead() {
-        return floaty.head;
-    }
-
-    /**
-     *
      * Creates a Singleton of the Floating Window
      *
-     * @param context The application context
-     * @param head The head View, upon clicking it the body is to be opened
-     * @param body The body View
+     * @param context        The application context
+     * @param head           The head View, upon clicking it the body is to be opened
+     * @param body           The body View
      * @param notificationId The notificationId for your notification
-     * @param notification The notification which is displayed for the foreground service
-     * @param floatyOrientationListener The {@link FloatyOrientationListener} interface with callbacks which are called when orientation changes.
+     * @param notification   The notification which is displayed for the foreground service
      * @return A Floating Window
-     *
      */
-
-    public static synchronized Floaty createInstance(Context context, View head, View body, int notificationId, Notification notification, FloatyOrientationListener
-            floatyOrientationListener) {
-        if (floaty == null) {
-            floaty = new Floaty(context, head, body, notificationId, notification, floatyOrientationListener);
-        }
-        return floaty;
-    }
-
-    /**
-     *
-     * Creates a Singleton of the Floating Window
-     *
-     * @param context The application context
-     * @param head The head View, upon clicking it the body is to be opened
-     * @param body The body View
-     * @param notificationId The notificationId for your notification
-     * @param notification The notification which is displayed for the foreground service
-     * @return A Floating Window
-     *
-     */
-    public static synchronized Floaty createInstance(Context context, View head, View body, int notificationId, Notification notification) {
+    public static synchronized Floaty createInstance(Context context, View head, View body, int notificationId, com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.Notification.Notification notification) {
         if (floaty == null) {
             floaty = new Floaty(context, head, body, notificationId, notification, new FloatyOrientationListener() {
                 @Override
@@ -120,17 +91,7 @@ public class Floaty {
         return floaty;
     }
 
-    /**
-     * @return The same instance of Floating Window, which has been created through {@link #createInstance}. Don't call this method before createInstance
-     */
-    public static synchronized Floaty getInstance() {
-        if (floaty == null) {
-            throw new NullPointerException("Floaty not initialized! First call createInstance method, then to access Floaty in any other class call getInstance()");
-        }
-        return floaty;
-    }
-
-    private Floaty(Context context, View head, View body, int notificationId, Notification notification, FloatyOrientationListener floatyOrientationListener) {
+    private Floaty(Context context, View head, View body, int notificationId, com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.Notification.Notification notification, FloatyOrientationListener floatyOrientationListener) {
         this.head = head;
         this.body = body;
         this.context = context;
@@ -139,12 +100,11 @@ public class Floaty {
         this.floatyOrientationListener = floatyOrientationListener;
     }
 
-
     /**
      * Starts the service and adds it to the screen
      */
     public void startService() {
-        MSettings.CheckService=true;
+        MSettings.CheckService = true;
         Intent intent = new Intent(context, FloatHeadService.class);
         context.startService(intent);
     }
@@ -153,42 +113,74 @@ public class Floaty {
      * Stops the service and removes it from the screen
      */
     public void stopService() {
-        MSettings.CheckService=false;
+        MSettings.CheckService = false;
+
+        if (MSettings.floaty.notification != null) {
+            if (MSettings.floaty.notification.getNotificationManager() != null) {
+                MSettings.floaty.notification.getNotificationManager().cancelAll();
+            }
+        }
+
         Intent intent = new Intent(context, FloatHeadService.class);
         context.stopService(intent);
     }
 
-
+    public static com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.Notification.Notification notification;
     /**
-     *
      * Helper method for notification creation.
      *
      * @param context
-     * @param contentTitle
-     * @param contentText
-     * @param notificationIcon
-     * @param contentIntent
+    //     * @param contentTitle
+    //     * @param contentText
+    //     * @param notificationIcon
+    //     * @param contentIntent
      * @return Notification for the Service
      */
-    public static Notification createNotification(Context context, String contentTitle, String contentText, int notificationIcon, PendingIntent contentIntent) {
-        return new NotificationCompat.Builder(context)
+    public static com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.Notification.Notification createNotification(Context context, int notificationId) {
+
+        /* ----- NOTIFICATION ----- */
+        notification = new com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.Notification.Notification(context
+                , (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE)
+                , new RemoteViews(context.getPackageName(), R.layout.notification_player)
+                , notificationId
+                , new NotificationCompat.Builder(context));
+
+        notification.getRemoteViews().setImageViewResource(R.id.image_notification_icon, R.drawable.play_icon_for_float);
+
+        Intent button_intent = new Intent("PlayPauseClicked");
+        button_intent.putExtra("id", notification.getNotification_id());
+        PendingIntent p_button_intent = PendingIntent.getBroadcast(context, 123, button_intent, 0);
+        notification.getRemoteViews().setOnClickPendingIntent(R.id.image_notification_playpause, p_button_intent);
+
+        Intent ButtonClose = new Intent("Close");
+        ButtonClose.putExtra("id", notification.getNotification_id());
+        PendingIntent PendingClose = PendingIntent.getBroadcast(context, 1023, ButtonClose, 0);
+        notification.getRemoteViews().setOnClickPendingIntent(R.id.image_notification_close, PendingClose);
+
+        /*-- Create --*/
+        Intent inIntent = new Intent(context, Floaty.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, inIntent, 0);
+
+
+        notification.getBuilder().setSmallIcon(R.drawable.ic_notification_icon)
+                .setAutoCancel(false)
+                .setCustomContentView(notification.getRemoteViews())
+                .setContentIntent(pendingIntent)
+                .setOngoing(true);
+
+        return notification;
+
+        /*   return new NotificationCompat.Builder(context)
                 .setContentTitle(contentTitle)
                 .setContentText(contentText)
                 .setSmallIcon(notificationIcon)
-                .setContentIntent(contentIntent).build();
-
+                .setContentIntent(contentIntent).build();*/
     }
 
     public static class FloatHeadService extends Service {
-
-        private WindowManager windowManager;
-        private WindowManager.LayoutParams params;
-        private LinearLayout mLinearLayout;
         GestureDetectorCompat gestureDetectorCompat;
         DisplayMetrics metrics;
         private boolean didFling;
-        private int[] clickLocation = new int[2];
-
 
         @Nullable
         @Override
@@ -222,7 +214,13 @@ public class Floaty {
             Log.d(LOG_TAG, "onStartCommand");
             metrics = new DisplayMetrics();
             windowManager.getDefaultDisplay().getMetrics(metrics);
-            startForeground(floaty.notificationId, floaty.notification);
+//            startForeground(floaty.notificationId, floaty.notification);
+
+            if (MSettings.floaty.notification != null) {
+                if (MSettings.floaty.notification.getNotificationManager() != null) {
+                    MSettings.floaty.notification.getNotificationManager().notify(MSettings.floaty.notification.getNotification_id(), MSettings.floaty.notification.getBuilder().build());
+                }
+            }
             return START_STICKY;
         }
 
@@ -234,7 +232,7 @@ public class Floaty {
                 @Override
                 public boolean dispatchKeyEvent(KeyEvent event) {
                     if (event.getKeyCode() == KeyEvent.KEYCODE_BACK || event.getKeyCode() == KeyEvent.KEYCODE_HOME) {
-                        Log.e("sadas","dsf");
+                        Log.e("sadas", "dsf");
                         floaty.body.setVisibility(View.GONE);
                         params.x = clickLocation[0];
                         params.y = clickLocation[1] - 36;
@@ -245,7 +243,7 @@ public class Floaty {
                         windowManager.updateViewLayout(mLinearLayout, params);
                         return true;
                     }
-                return super.dispatchKeyEvent(event);
+                    return super.dispatchKeyEvent(event);
                 }
             };
 
@@ -257,27 +255,25 @@ public class Floaty {
 
                 @Override
                 public boolean onDown(MotionEvent event) {
-                    try{
+                    try {
                         Log.d(LOG_TAG, "onDown");
                         initialX = params.x;
                         initialY = params.y;
                         initialTouchX = event.getRawX();
                         initialTouchY = event.getRawY();
                         didFling = false;
+                    } catch (Exception ex) {
                     }
-                    catch(Exception ex)
-                    {}
                     return false;
                 }
 
                 @Override
                 public void onShowPress(MotionEvent e) {
-                    try{
+                    try {
                         Log.d(LOG_TAG, "onShowPress");
                         floaty.head.setAlpha(0.8f);
+                    } catch (Exception ex) {
                     }
-                    catch(Exception ex)
-                    {}
                 }
 
                 @Override
@@ -297,6 +293,7 @@ public class Floaty {
                     }
                     return false;
                 }
+
                 @Override
                 public boolean onSingleTapConfirmed(MotionEvent e) {
                     try {
@@ -327,7 +324,7 @@ public class Floaty {
 
                 @Override
                 public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                    try{
+                    try {
                         Log.d(LOG_TAG, "onFling");
                         didFling = true;
                         int newX = params.x;
@@ -336,9 +333,8 @@ public class Floaty {
                         else
                             params.x = 0;
                         windowManager.updateViewLayout(mLinearLayout, params);
+                    } catch (Exception ex) {
                     }
-                    catch(Exception ex)
-                    {}
                     return false;
                 }
             });
@@ -408,9 +404,11 @@ public class Floaty {
                 mLinearLayout.removeAllViews();
                 windowManager.removeView(mLinearLayout);
             }
+
             stopForeground(true);
         }
-        private void showBody(){
+
+        private void showBody() {
             params.x = metrics.widthPixels;
             params.y = 0;
             params.flags = params.flags & ~WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;

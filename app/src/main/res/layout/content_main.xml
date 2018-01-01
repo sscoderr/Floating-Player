@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.bimilyoncu.sscoderss.floatingplayerforyoutube.MainActivity"
+    tools:context="com.bimilyoncu.sscoderss.floatingplayerforyoutube.Page.MainActivity"
     tools:showIn="@layout/activity_main"
     android:orientation="vertical">
     <LinearLayout

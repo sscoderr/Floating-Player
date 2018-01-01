@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context="com.bimilyoncu.sscoderss.floatingplayerforyoutube.SearchActivity">
+    tools:context="com.bimilyoncu.sscoderss.floatingplayerforyoutube.Page.SearchActivity">
 <RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
