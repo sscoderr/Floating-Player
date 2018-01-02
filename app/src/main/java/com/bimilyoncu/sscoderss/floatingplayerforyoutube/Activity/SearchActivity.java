@@ -1,4 +1,4 @@
-package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Page;
+package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity;
 
 import android.annotation.TargetApi;
 import android.app.Dialog;
@@ -432,7 +432,6 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
             if (!netControl.isOnline())
                 Toast.makeText(SearchActivity.this, SearchActivity.this.getString(R.string.internetConnectionMessage), Toast.LENGTH_LONG).show();
         }
-
     }
 
     @Override

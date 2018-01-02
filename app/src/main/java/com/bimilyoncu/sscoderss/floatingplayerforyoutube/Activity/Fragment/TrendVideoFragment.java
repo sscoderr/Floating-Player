@@ -1,4 +1,4 @@
-package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Page.Fragment;
+package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.Fragment;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -18,10 +18,6 @@ import android.widget.ProgressBar;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.Toast;
 
-/*import com.github.ksoichiro.android.observablescrollview.ObservableListView;
-import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
-import com.github.ksoichiro.android.observablescrollview.ScrollState;*/
-
 
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.CustomAdapter;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.CustomAdapterForTrends;
@@ -29,7 +25,7 @@ import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Connector.ConnectorForT
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.NetControl;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Item.VideoItem;
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Page.MainActivity;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.MainActivity;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -40,7 +36,7 @@ import java.util.List;
 import static com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings.playedPoss;
 
 
-public class TrendMusicFragment extends Fragment implements OnScrollListener  {
+public class TrendVideoFragment extends Fragment implements OnScrollListener  {
     public Handler mHandler;
     private boolean isLoading=false;
     private ProgressBar myPg;
@@ -57,20 +53,20 @@ public class TrendMusicFragment extends Fragment implements OnScrollListener  {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_trend_music, container, false);
-        LayoutInflater li = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        AdView mAdView = (AdView)v.findViewById(R.id.adViewTrendMusic);
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice("6AFA29CB9314195950E590C9BEACC344").build();/*778ADE18482DD7E44193371217202427 Device Id*/
-        /*.addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice("6EE0EC7A08848B41A3A8B3C52624F39A").addTestDevice("D840C07DDBAA5E0897B010411FABE6AC").addTestDevice("778ADE18482DD7E44193371217202427")*/
-        mAdView.loadAd(adRequest);
+        View v= inflater.inflate(R.layout.fragment_trend_video,container,false);
+        LayoutInflater li = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         netControl = new NetControl(getActivity());
 
+        AdView mAdView = (AdView)v.findViewById(R.id.adViewTrendVideo);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice("6AFA29CB9314195950E590C9BEACC344").build();
+        mAdView.loadAd(adRequest);
+
         myView = li.inflate(R.layout.loading_result, null);
-        myPg = (ProgressBar) v.findViewById(R.id.myPBForFav);
-        listView = (ListView) v.findViewById(R.id.trend_music_list);
+        myPg=(ProgressBar)v.findViewById(R.id.myPBForFav);
+        listView = (ListView) v.findViewById(R.id.trend_video_list);
+
         mHandler = new MyHandler();
         searchResults = new ArrayList<>();
         addClickListener();
@@ -96,22 +92,21 @@ public class TrendMusicFragment extends Fragment implements OnScrollListener  {
             };
             new Thread(runnable).start();
         }*/
-        ((MainActivity)getActivity()).setFragmentRefreshListener(new MainActivity.FragmentRefreshListenerForMusic() {
+        ((MainActivity)getActivity()).setFragmentRefreshListenerForVideo(new MainActivity.FragmentRefreshListenerForVideo() {
             @Override
             public void onRefresh() {
                 loadStartData(true);
             }
         });
-
-        return v;
+        return  v;
     }
 
     private void addClickListener() {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> av, View v, final int pos, long id) {
+            public void onItemClick(AdapterView<?> av, View v, int pos, long id) {
                 MSettings.CounterForSimilarVideos=2;
-                playedPoss=new ArrayList<>();
+                playedPoss=new ArrayList<Integer>();
                 MSettings.currentVideoId = searchResults.get(pos).getId();
                 MSettings.playedVideoPos=pos;
                 MSettings.setVideoTitle(searchResults.get(pos).getTitle());
@@ -123,12 +118,32 @@ public class TrendMusicFragment extends Fragment implements OnScrollListener  {
             }
         });
     }
+    public boolean isSmallScreen(){
+        int screenSize = getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK;
+        if (Configuration.SCREENLAYOUT_SIZE_LARGE==screenSize||getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE)
+            return false;
+        else return true;
+    }
 
     private void loadStartData(final boolean first){
         new Thread(){
             public void run(){
-                ConnectorForTrends
-                        connectorForTrends = new ConnectorForTrends(getContext(),true);
+
+                /*List<VideoItem> items=new ArrayList<VideoItem>();
+                try{
+                    VideoItem item = new VideoItem();
+                    item.setTitle("dsfsd");
+                    item.setThumbnailURL("https://i.ytimg.com/vi/ZxT0576FTsk/mqdefault.jpg");
+                    item.setChanelTitle("dsf",false);
+                    item.setViewCount("55",Byte.parseByte(String.valueOf("0")));
+                    item.setDuration("2:15");
+                    item.setId("ZxT0576FTsk");
+                    item.setPublishedAt("2011-10-20T19:59:56.000Z");
+                    items.add(item);
+                }catch (Exception e){}
+                searchResults=items;*/
+
+                ConnectorForTrends connectorForTrends = new ConnectorForTrends(getContext(),false);
                 searchResults=connectorForTrends.Trends(first,false);
                 handler.post(new Runnable(){
                     public void run() {
@@ -150,12 +165,6 @@ public class TrendMusicFragment extends Fragment implements OnScrollListener  {
             }
         }.start();
     }
-    public boolean isSmallScreen(){
-        int screenSize = getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK;
-        if (Configuration.SCREENLAYOUT_SIZE_LARGE==screenSize||getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE)
-            return false;
-        else return true;
-    }
 
     @Override
     public void onScrollStateChanged(AbsListView absListView, int i) {
@@ -165,29 +174,9 @@ public class TrendMusicFragment extends Fragment implements OnScrollListener  {
     @Override
     public void onScroll(AbsListView absListView, int i, int i1, int i2) {
         if(absListView.getLastVisiblePosition() == i2-1 && listView.getCount() >=5 && isLoading == false&&sizeOfMoreData!=0) {
-            //if (MSettings.isHaveNetworkAccesQuickly(getActivity())) {
             isLoading = true;
-            Thread thread = new ThreadGetMoreData();
+            Thread thread = new TrendVideoFragment.ThreadGetMoreData();
             thread.start();
-            /*}else {
-                Runnable runnable = new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        while (!MSettings.isHaveNetworkAccesQuickly(getActivity())){
-                        }
-                        getActivity().runOnUiThread(new Runnable() {
-                            public void run() {
-                                isLoading = true;
-                                Thread thread = new ThreadGetMoreData();
-                                thread.start();
-                            }
-                        });
-                    }
-                };
-                new Thread(runnable).start();
-            }*/
         }
     }
 
@@ -201,10 +190,9 @@ public class TrendMusicFragment extends Fragment implements OnScrollListener  {
                 case 1:
                     if (isSmallScreen())
                         adapterForSmallScreen.addListItemToAdapter((ArrayList<VideoItem>) msg.obj);
-                    else
-                        adapterForLargeScreen.addListItemToAdapter((ArrayList<VideoItem>) msg.obj);
+                    else  adapterForLargeScreen.addListItemToAdapter((ArrayList<VideoItem>) msg.obj);
                     listView.removeFooterView(myView);
-                    isLoading = false;
+                    isLoading=false;
                     break;
                 default:
                     break;
@@ -217,16 +205,20 @@ public class TrendMusicFragment extends Fragment implements OnScrollListener  {
             try {
                 mHandler.sendEmptyMessage(0);
                 ConnectorForTrends
-                        connectorForTrends = new ConnectorForTrends(getContext(), true);
+                        connectorForTrends = new ConnectorForTrends(getContext(), false);
                 List<VideoItem> list = connectorForTrends.Trends(false, false);
                 sizeOfMoreData = list.size();
                 ArrayList<VideoItem> lstResult = (ArrayList<VideoItem>) list;
                 Message msg = mHandler.obtainMessage(1, lstResult);
                 mHandler.sendMessage(msg);
             } catch (Exception e) {
-                if (!netControl.isOnline()) {
-                    Toast.makeText(getActivity(), getActivity().getString(R.string.internetConnectionMessage), Toast.LENGTH_LONG).show();
-                }
+                if (!netControl.isOnline())
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getActivity(), getActivity().getString(R.string.internetConnectionMessage), Toast.LENGTH_LONG).show();
+                        }
+                    });
             }
         }
     }

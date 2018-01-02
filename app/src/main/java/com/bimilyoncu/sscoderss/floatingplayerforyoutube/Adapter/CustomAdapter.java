@@ -15,13 +15,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Page.ChannelVideoList;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.ChannelVideoList;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Database.DatabaseForPlaylists;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings;
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Page.Fragment.MyDateFragment;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.Fragment.MyDateFragment;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.R;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.RoundedImage;
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Page.SearchActivity;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.SearchActivity;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Item.VideoItem;
 import com.squareup.picasso.Picasso;
 

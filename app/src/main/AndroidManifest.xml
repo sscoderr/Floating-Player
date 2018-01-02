@@ -25,13 +25,13 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".Page.SearchActivity"
+            android:name=".Activity.SearchActivity"
             android:label="@string/app_name" />
         <activity
-            android:name=".Page.PlaylistActivity"
+            android:name=".Activity.PlaylistActivity"
             android:label="@string/title_activity_playlist" />
         <activity
-            android:name=".Page.MainActivity"
+            android:name=".Activity.MainActivity"
             android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,7 +39,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Page.ChannelVideoList" />
+        <activity android:name=".Activity.ChannelVideoList" />
 
         <service android:name=".Floaties.Floaty$FloatHeadService" />
 

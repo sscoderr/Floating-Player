@@ -1,4 +1,4 @@
-package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Page;
+package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity;
 
 import android.annotation.TargetApi;
 import android.app.PendingIntent;
@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,7 +21,6 @@ import android.support.multidex.MultiDex;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -76,6 +76,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings.CheckService;
 import static com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings.CounterForSimilarVideos;
 import static com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings.checkRepeat;
 import static com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings.checkSuffle;
@@ -112,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        MSettings.activeActivity = MainActivity.this;
         YoutubeConnector.KEY = YoutubeConnector.myApiKeys[(new Random()).nextInt(YoutubeConnector.myApiKeys.length)];
 
         netControl = new NetControl(this);
@@ -324,6 +326,9 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
         final RelativeLayout rlSimilar = (RelativeLayout) MSettings.body.findViewById(R.id.relativesimilar);
         final LinearLayout rlSearch = (LinearLayout) MSettings.body.findViewById(R.id.relativesearch);
 
+        Similar.setTypeface(Typeface.createFromAsset(MSettings.activeActivity.getAssets(), "VarelaRound-Regular.ttf"));
+        Search.setTypeface(Typeface.createFromAsset(MSettings.activeActivity.getAssets(), "VarelaRound-Regular.ttf"));
+
         Similar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -367,15 +372,24 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
 
     private void ServiceSearch(){
         EditText searchText = (EditText) MSettings.body.findViewById(R.id.editText_searchservice);
+        searchText.setTypeface(Typeface.createFromAsset(MSettings.activeActivity.getAssets(), "VarelaRound-Regular.ttf"));
         searchText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                if (linearAutoComplate.getVisibility() == View.INVISIBLE) {
-//                    linearAutoComplate.setVisibility(View.VISIBLE);
-//                    mList.setVisibility(View.INVISIBLE);
-//                }
-//                filterText = newText;
-//                new SearchActivity.ThreadA().execute();
+                if (CheckService != null) {
+                    if (!String.valueOf(charSequence).equals("")) {
+                        MSettings.serviceSearchKey = String.valueOf(charSequence);
+                        new MSettings.threadSearchKey().execute();
+                    }
+                }
+
+                ListView listViewKey = (ListView) MSettings.floaty.getBody().findViewById(R.id.service_search_listview);
+                ListView listViewVideo = (ListView) MSettings.floaty.getBody().findViewById(R.id.service_searchvideo_listview);
+                ProgressBar progressBar = (ProgressBar) MSettings.floaty.getBody().findViewById(R.id.service_search_progressbar);
+
+                listViewKey.setVisibility(View.VISIBLE);
+                listViewVideo.setVisibility(View.GONE);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override

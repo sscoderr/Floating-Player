@@ -1,4 +1,4 @@
-package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Page;
+package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity;
 
 import android.app.PendingIntent;
 import android.content.Context;

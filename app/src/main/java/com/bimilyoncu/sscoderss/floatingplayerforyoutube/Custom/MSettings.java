@@ -6,22 +6,42 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.RequestFuture;
+import com.android.volley.toolbox.Volley;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.MainActivity;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.SearchActivity;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.AdapterServiceSearchKey;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.AdapterServiceSearchVideo;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.CustomAdapter;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.CustomAdapterAutoComplate;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Connector.ServiceSearchConnector;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Connector.YoutubeConnector;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Database.DatabaseForPlaylists;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Database.DatabaseForSearchHistory;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Floaties.Floaty;
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Page.Fragment.MyDateFragment;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.Fragment.MyDateFragment;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.R;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Item.VideoItem;
 import com.google.android.gms.ads.AdListener;
@@ -33,12 +53,18 @@ import com.google.api.services.youtube.model.Channel;
 import com.google.api.services.youtube.model.ChannelListResponse;
 import com.google.common.io.BaseEncoding;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
  * Created by Sabahattin on 2.04.2017.
@@ -176,6 +202,7 @@ public class MSettings {
 
     public static void getVideoTitle() {
         TextView txtVideoTitle = (TextView) MSettings.body.findViewById(R.id.txtVideoTitle);
+        txtVideoTitle.setTypeface(Typeface.createFromAsset(MSettings.activeActivity.getAssets(), "VarelaRound-Regular.ttf"));
         try {
             if (currentVideoTitle.length() > 35) {
                 txtVideoTitle.setText(currentVideoTitle.substring(0, 35) + "...");
@@ -261,5 +288,115 @@ public class MSettings {
             img_url = null;
 
         return img_url;
+    }
+
+    public static String serviceSearchKey;
+    public static class threadSearchKey extends AsyncTask<Void, Void, JSONArray> {
+        @Override
+        protected JSONArray doInBackground(Void... params) {
+            if (serviceSearchKey != null) {
+                if (!serviceSearchKey.equals("")) {
+                    final String template = serviceSearchKey.replace(" ", "+");
+                    String myURL = "http://suggestqueries.google.com/complete/search?hl=en&ds=yt&client=firefox&hjson=t&cp=1&q=" + template + "&format=5&alt=json&callback=?";
+                    final RequestFuture<JSONArray> future = RequestFuture.newFuture();
+                    JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, myURL, (String) null, future, future);
+                    RequestQueue requestQueue = Volley.newRequestQueue(MSettings.activeActivity);
+                    future.setRequest(requestQueue.add(request));
+                    try {
+                        return future.get(10, TimeUnit.SECONDS);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (TimeoutException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        List<VideoItem> searchResults;
+        @Override
+        protected void onPostExecute(JSONArray response) {
+            if (!(response == null)) {
+                final String[] myAutoComplateArray = new String[10];
+                try {
+                    JSONArray responseTwo = (JSONArray) response.get(1);
+                    for (int i = 0; i < 10; i++) {
+                        myAutoComplateArray[i] = responseTwo.get(i).toString();
+                    }
+
+                    final ListView searchListView = (ListView) MSettings.floaty.getBody().findViewById(R.id.service_search_listview);
+                    final ProgressBar progressBar = (ProgressBar) MSettings.floaty.getBody().findViewById(R.id.service_search_progressbar);
+                    final ListView listViewVideo = (ListView) MSettings.floaty.getBody().findViewById(R.id.service_searchvideo_listview);
+
+                    AdapterServiceSearchKey adapterServiceSearchKey = new AdapterServiceSearchKey(MSettings.activeActivity, myAutoComplateArray);
+                    searchListView.setAdapter(adapterServiceSearchKey);
+                    searchListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
+                            listViewVideo.setVisibility(View.GONE);
+                            searchListView.setVisibility(View.GONE);
+                            progressBar.setVisibility(View.VISIBLE);
+
+                            listViewVideo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                    if (searchResults.get(i).getId() != null) {
+                                        MSettings.CounterForSimilarVideos = 2;
+                                        playedPoss = new ArrayList<Integer>();
+                                        MSettings.currentVideoId = searchResults.get(i).getId();
+                                        MSettings.setVideoTitle(searchResults.get(i).getTitle());
+                                        MainActivity mainActivity = new MainActivity();
+                                        mainActivity.getSimilarVideos(String.valueOf(searchResults.get(i).getId()), false, false, false, new String[]{});
+                                        MSettings.LoadVideo();
+                                        MSettings.LoadSixTapAds();
+                                    }
+                                }
+                            });
+
+                            new Thread() {
+                                public void run() {
+                                    ServiceSearchConnector yc = new ServiceSearchConnector(MSettings.activeActivity, "relevance", "video", false, "", false, false);
+                                    searchResults = yc.search(myAutoComplateArray[i], true, false, false);
+                                    mHandler.post(new Runnable() {
+                                        public void run() {
+                                            try {
+                                                AdapterServiceSearchVideo adapter = new AdapterServiceSearchVideo(MSettings.activeActivity, searchResults, "");
+                                                listViewVideo.setAdapter(adapter);
+
+                                                progressBar.setVisibility(View.GONE);
+                                                searchListView.setVisibility(View.GONE);
+                                                listViewVideo.setVisibility(View.VISIBLE);
+                                            } catch (Exception e) {
+                                                if (!(new NetControl(MSettings.activeActivity)).isOnline()) {
+                                                    Toast.makeText(MSettings.activeActivity, MSettings.activeActivity.getString(R.string.internetConnectionMessage), Toast.LENGTH_LONG).show();
+                                                }
+                                            }
+                                        }
+                                    });
+                                }
+                            }.start();
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            try {
+//                filterData(serviceSearchKey);
+            } catch (Exception e) {
+                if (!(new NetControl(MSettings.activeActivity)).isOnline()) {
+                    Toast.makeText(MSettings.activeActivity, MSettings.activeActivity.getString(R.string.internetConnectionMessage), Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+    }
+
+    public static Typeface getFont(){
+        return Typeface.createFromAsset(MSettings.activeActivity.getAssets(), "pragatinarrow.ttf");
     }
 }

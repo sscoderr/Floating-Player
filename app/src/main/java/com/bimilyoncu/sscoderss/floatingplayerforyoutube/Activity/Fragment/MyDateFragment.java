@@ -1,4 +1,4 @@
-package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Page.Fragment;
+package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.Fragment;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -47,7 +47,7 @@ import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Database.DatabaseForPla
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Item.GetUserVideos;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Item.GetterSetterForExpandable;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Item.VideoItem;
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Page.MainActivity;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.MainActivity;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -191,6 +191,11 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
         txtHistory = (TextView) vw.findViewById(R.id.txtHistoryButton);
         txtFromYoutube = (TextView) vw.findViewById(R.id.txtFromYoutubeButton);
         txtRecommented = (TextView) vw.findViewById(R.id.txtRecommentedButton);
+
+        txtFav.setTypeface(MSettings.getFont());
+        txtHistory.setTypeface(MSettings.getFont());
+        txtFromYoutube.setTypeface(MSettings.getFont());
+        txtRecommented.setTypeface(MSettings.getFont());
 
 
         relative_fav.setOnClickListener(new View.OnClickListener() {

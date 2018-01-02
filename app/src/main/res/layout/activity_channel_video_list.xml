@@ -4,7 +4,7 @@
     android:id="@+id/activity_channel_video_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bimilyoncu.sscoderss.floatingplayerforyoutube.Page.ChannelVideoList">
+    tools:context="com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.ChannelVideoList">
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

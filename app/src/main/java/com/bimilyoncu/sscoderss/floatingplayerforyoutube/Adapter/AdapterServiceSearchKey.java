@@ -2,6 +2,7 @@ package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings;
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.R;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Item.VideoItem;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.R;
 
 import java.util.List;
 
@@ -19,26 +20,23 @@ import java.util.List;
  * Created by Sabahattin on 29.12.2016.
  */
 
-public class CustomAdapterAutoComplate extends BaseAdapter {
-    private int[] imagesId = {R.mipmap.history_button, R.mipmap.search_button};
+public class AdapterServiceSearchKey extends BaseAdapter {
     private LayoutInflater mInflater;
-    private List<VideoItem> searchResults;
-    private int count;
+    private String[] searchResults;
 
-    public CustomAdapterAutoComplate(Activity activity, List<VideoItem> list, int count) {
+    public AdapterServiceSearchKey(Activity activity, String[] list) {
         this.mInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.searchResults = list;
-        this.count = searchResults.size() - count;
     }
 
     @Override
     public int getCount() {
-        return searchResults.size();
+        return searchResults.length;
     }
 
     @Override
-    public VideoItem getItem(int position) {
-        return searchResults.get(position);
+    public String getItem(int position) {
+        return searchResults[position];
     }
 
     @Override
@@ -52,19 +50,18 @@ public class CustomAdapterAutoComplate extends BaseAdapter {
 
         if (view == null) {
             view = mInflater.inflate(R.layout.search_item, null);
-            vw = new CustomAdapterAutoComplate.myViewHolder();
+            vw = new AdapterServiceSearchKey.myViewHolder();
+
             vw.image = (ImageView) view.findViewById(R.id.search_autocomplate_image);
             vw.text = (TextView) view.findViewById(R.id.search_autocomplate_text);
             view.setTag(vw);
         } else {
-            vw = (CustomAdapterAutoComplate.myViewHolder) view.getTag();
+            vw = (AdapterServiceSearchKey.myViewHolder) view.getTag();
         }
-        vw.text.setText(searchResults.get(position).getText());
-        vw.text.setTypeface(MSettings.getFont());
-        if (count > position)
-            vw.image.setImageResource(imagesId[0]);
-        else
-            vw.image.setImageResource(imagesId[1]);
+
+        vw.text.setTypeface(Typeface.createFromAsset(MSettings.activeActivity.getAssets(), "VarelaRound-Regular.ttf"));
+        vw.text.setText(searchResults[position]);
+        vw.image.setImageResource(R.mipmap.search_button);
         return view;
     }
 

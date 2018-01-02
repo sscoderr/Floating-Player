@@ -3,7 +3,7 @@ package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Connector;
 import android.content.Context;
 import android.util.Log;
 
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Page.ChannelVideoList;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.ChannelVideoList;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.R;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Item.VideoItem;

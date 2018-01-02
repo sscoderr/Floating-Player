@@ -3,102 +3,112 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.bimilyoncu.sscoderss.floatingplayerforyoutube.Page.Fragment.MyDateFragment"
+    tools:context="com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.Fragment.MyDateFragment"
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
         android:gravity="center">
-        <HorizontalScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scrollbarSize="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <!--android:scrollbarSize="0dp"-->
+
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:orientation="horizontal">
+
                 <RelativeLayout
-                    android:layout_width="@dimen/custom_button_width"
-                    android:layout_height="@dimen/custom_button_height"
-                    android:background="@drawable/my_custom_button_selected"
-                    android:gravity="center"
                     android:id="@+id/rel_favorite"
-                    >
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/custom_button_height"
+                    android:layout_weight="1"
+                    android:background="@drawable/my_custom_button_selected"
+                    android:gravity="center">
+
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:id="@+id/txtFavButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/custom_button_padding_horizontal"
+                        android:paddingRight="@dimen/custom_button_padding_horizontal"
                         android:text="@string/myDataFavorite"
-                        android:textSize="12dp"
                         android:textColor="#FFFFFF"
-                        android:paddingLeft="@dimen/custom_button_padding_horizontal"
-                        android:paddingRight="@dimen/custom_button_padding_horizontal" />
+                        android:textSize="14sp" />
                 </RelativeLayout>
 
 
                 <RelativeLayout
-                    android:layout_width="@dimen/custom_button_width"
-                    android:layout_height="@dimen/custom_button_height"
-                    android:background="@drawable/selector_my_custom_button"
-                    android:gravity="center"
-                    android:layout_marginLeft="@dimen/custom_button_spaces"
                     android:id="@+id/rel_history"
-                    >
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/custom_button_height"
+                    android:layout_marginLeft="@dimen/custom_button_spaces"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_my_custom_button"
+                    android:gravity="center">
+
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/myDataHistory"
                         android:id="@+id/txtHistoryButton"
-                        android:textSize="12dp"
-                        android:textColor="#424242"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:paddingLeft="@dimen/custom_button_padding_horizontal"
-                        android:paddingRight="@dimen/custom_button_padding_horizontal" />
+                        android:paddingRight="@dimen/custom_button_padding_horizontal"
+                        android:text="@string/myDataHistory"
+                        android:textColor="#424242"
+                        android:textSize="14sp" />
                 </RelativeLayout>
 
 
                 <RelativeLayout
-                    android:layout_width="@dimen/custom_button_width"
-                    android:layout_height="@dimen/custom_button_height"
-                    android:background="@drawable/selector_my_custom_button"
-                    android:gravity="center"
-                    android:layout_marginLeft="@dimen/custom_button_spaces"
                     android:id="@+id/rel_from_youtube"
-                    >
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/custom_button_height"
+                    android:layout_marginLeft="@dimen/custom_button_spaces"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_my_custom_button"
+                    android:gravity="center">
+
                     <TextView
+                        android:id="@+id/txtFromYoutubeButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/txtFromYoutubeButton"
-                        android:text="@string/myDataFromYT"
-                        android:textSize="12dp"
-                        android:textColor="#424242"
                         android:paddingLeft="@dimen/custom_button_padding_horizontal"
-                        android:paddingRight="@dimen/custom_button_padding_horizontal" />
+                        android:paddingRight="@dimen/custom_button_padding_horizontal"
+                        android:text="@string/myDataFromYT"
+                        android:textColor="#424242"
+                        android:textSize="14sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:layout_width="@dimen/custom_button_width"
-                    android:layout_height="@dimen/custom_button_height"
-                    android:background="@drawable/selector_my_custom_button"
-                    android:gravity="center"
-                    android:layout_marginLeft="@dimen/custom_button_spaces"
                     android:id="@+id/rel_recommented"
-                    >
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/custom_button_height"
+                    android:layout_marginLeft="@dimen/custom_button_spaces"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_my_custom_button"
+                    android:gravity="center">
+
                     <TextView
+                        android:id="@+id/txtRecommentedButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/txtRecommentedButton"
-                        android:text="@string/myDataSuggest"
-                        android:textSize="12dp"
-                        android:textColor="#424242"
                         android:paddingLeft="@dimen/custom_button_padding_horizontal"
-                        android:paddingRight="@dimen/custom_button_padding_horizontal"/>
+                        android:paddingRight="@dimen/custom_button_padding_horizontal"
+                        android:text="@string/myDataSuggest"
+                        android:textColor="#424242"
+                        android:textSize="14sp" />
                 </RelativeLayout>
             </LinearLayout>
-        </HorizontalScrollView>
+        </LinearLayout>
     </LinearLayout>
 
     <RelativeLayout

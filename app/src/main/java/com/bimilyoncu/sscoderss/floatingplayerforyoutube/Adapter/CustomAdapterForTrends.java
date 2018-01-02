@@ -23,7 +23,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import static com.bimilyoncu.sscoderss.floatingplayerforyoutube.Page.Fragment.MyDateFragment.isHaveUpdate;
+import static com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.Fragment.MyDateFragment.isHaveUpdate;
 
 /**
  * Created by Sabahattin on 11/22/2016.

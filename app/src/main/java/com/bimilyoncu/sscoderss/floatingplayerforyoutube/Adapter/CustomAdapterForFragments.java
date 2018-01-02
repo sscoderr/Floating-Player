@@ -4,9 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Page.Fragment.MyDateFragment;
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Page.Fragment.TrendMusicFragment;
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Page.Fragment.TrendVideoFragment;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.Fragment.MyDateFragment;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.Fragment.TrendMusicFragment;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.Fragment.TrendVideoFragment;
 
 /**
  * Created by Sabahattin on 1/9/2016.

@@ -30,39 +30,44 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#424242">
+        android:background="#262626">
+
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:gravity="center_vertical">
+
             <TextView
+                android:id="@+id/txtVideoTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtVideoTitle"
-                android:textColor="#FFF"
+                android:layout_marginLeft="8dp"
                 android:text="Title"
-                android:layout_marginLeft="5dp"/>
+                android:textColor="#FFF"
+                android:textSize="13sp" />
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_alignParentRight="true">
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal">
+
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
                 android:id="@+id/img_repeat"
-                android:src="@mipmap/repeat_icon_for_float"
-                android:background="@drawable/selector_for_moreoption_button"
-                android:scaleType="center" />
-            <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:id="@+id/img_suffle"
-                android:src="@mipmap/suffle_icon_for_float"
                 android:background="@drawable/selector_for_moreoption_button"
-                android:scaleType="center" />
+                android:scaleType="center"
+                android:src="@mipmap/repeat_icon_for_float" />
+
+            <ImageView
+                android:id="@+id/img_suffle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/selector_for_moreoption_button"
+                android:scaleType="center"
+                android:src="@mipmap/suffle_icon_for_float" />
 
             <ImageView
                 android:id="@+id/img_stopingfinishvideo"
@@ -78,10 +83,10 @@
 
     <LinearLayout
         android:id="@+id/cizgi"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#FFFFFF" />
+        android:background="#333333"
+        android:orientation="vertical" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -98,14 +103,18 @@
                 android:id="@+id/btn_service_similar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="3dp"
                 android:layout_weight="1"
+                android:background="@drawable/service_button_design"
                 android:text="SIMILAR" />
 
             <Button
                 android:id="@+id/btn_service_search"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="3dp"
                 android:layout_weight="1"
+                android:background="@drawable/service_button_design"
                 android:text="SEARCH" />
         </LinearLayout>
 
@@ -140,28 +149,53 @@
 
             <LinearLayout
                 android:id="@+id/relativesearch"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
-                android:padding="7dp"
+                android:orientation="vertical"
+                android:padding="3dp"
                 android:visibility="visible">
 
 
                 <EditText
                     android:id="@+id/editText_searchservice"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
+                    android:layout_height="35dp"
+                    android:background="@drawable/service_search_textview_design"
+                    android:hint="@string/search"
                     android:inputType="textPersonName"
-                    android:text="" />
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp" />
 
-                <ListView
-                    android:id="@+id/service_search_listview"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:gravity="center">
 
-                </ListView>
+                    <ListView
+                        android:id="@+id/service_search_listview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp" />
+
+                    <ListView
+                        android:id="@+id/service_searchvideo_listview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:visibility="gone" />
+
+                    <ProgressBar
+                        android:id="@+id/service_search_progressbar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
