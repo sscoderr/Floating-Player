@@ -162,7 +162,7 @@ public class Floaty {
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, inIntent, 0);
 
 
-        notification.getBuilder().setSmallIcon(R.drawable.ic_notification_icon)
+        notification.getBuilder().setSmallIcon(R.drawable.notification_icon)
                 .setAutoCancel(false)
                 .setCustomContentView(notification.getRemoteViews())
                 .setContentIntent(pendingIntent)
