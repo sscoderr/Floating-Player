@@ -61,7 +61,11 @@
                 <action android:name="Close" />
             </intent-filter>
         </receiver>
+        <receiver android:name=".Custom.Notification.ButtonNextMusic">
+            <intent-filter>
+                <action android:name="NextMusic" />
+            </intent-filter>
+        </receiver>
 
     </application>
-
 </manifest>

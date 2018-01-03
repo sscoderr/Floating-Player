@@ -157,6 +157,11 @@ public class Floaty {
         PendingIntent PendingClose = PendingIntent.getBroadcast(context, 1023, ButtonClose, 0);
         notification.getRemoteViews().setOnClickPendingIntent(R.id.image_notification_close, PendingClose);
 
+        Intent buttonNext = new Intent("NextMusic");
+        buttonNext.putExtra("id", notification.getNotification_id());
+        PendingIntent PendingNext = PendingIntent.getBroadcast(context, 1, buttonNext, 0);
+        notification.getRemoteViews().setOnClickPendingIntent(R.id.image_notification_nextmusic, PendingNext);
+
         /*-- Create --*/
         Intent inIntent = new Intent(context, Floaty.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, inIntent, 0);

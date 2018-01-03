@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
@@ -94,40 +95,17 @@
         android:background="#424242"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_service_similar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="3dp"
-                android:layout_weight="1"
-                android:background="@drawable/service_button_design"
-                android:text="SIMILAR" />
-
-            <Button
-                android:id="@+id/btn_service_search"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="3dp"
-                android:layout_weight="1"
-                android:background="@drawable/service_button_design"
-                android:text="SEARCH" />
-        </LinearLayout>
-
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
             <RelativeLayout
                 android:id="@+id/relativesimilar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <ListView
                     android:id="@+id/mListForFloat"
@@ -154,20 +132,50 @@
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:padding="3dp"
-                android:visibility="visible">
+                android:visibility="gone">
 
 
-                <EditText
-                    android:id="@+id/editText_searchservice"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:background="@drawable/service_search_textview_design"
-                    android:hint="@string/search"
-                    android:inputType="textPersonName"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp" />
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/editText_searchservice"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/service_search_textview_design"
+                            android:hint="@string/search"
+                            android:inputType="textPersonName"
+                            android:paddingLeft="15dp"
+                            android:paddingRight="15dp"
+                            android:textColor="#FFFFFF"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right">
+
+                        <ImageButton
+                            android:id="@+id/imageButtonServiceSearch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:background="@drawable/service_search_textview_design"
+                            android:padding="12dp"
+                            android:src="@mipmap/search_icon" />
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -198,5 +206,29 @@
                 </RelativeLayout>
             </LinearLayout>
         </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_service_similar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/service_button_design"
+                android:text="@string/similar" />
+
+            <Button
+                android:id="@+id/btn_service_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/service_button_design"
+                android:text="@string/search" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

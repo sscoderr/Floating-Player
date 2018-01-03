@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -48,10 +50,12 @@ import android.widget.Toast;
 import android.widget.AbsListView.OnScrollListener;
 
 
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.AdapterServiceSearchVideo;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.CustomAdapter;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.CustomAdapterForFragments;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Connector.ConnectorForPlaylist;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Connector.ConnectorForVideoId;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Connector.ServiceSearchConnector;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Connector.YoutubeConnector;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.NetControl;
@@ -370,8 +374,13 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
 
     }
 
+    List<VideoItem> searchResults;
     private void ServiceSearch(){
-        EditText searchText = (EditText) MSettings.body.findViewById(R.id.editText_searchservice);
+        final EditText searchText = (EditText) MSettings.body.findViewById(R.id.editText_searchservice);
+        final ListView listViewKey = (ListView) MSettings.body.findViewById(R.id.service_search_listview);
+        final ListView listViewVideo = (ListView) MSettings.body.findViewById(R.id.service_searchvideo_listview);
+        final ProgressBar progressBar = (ProgressBar) MSettings.body.findViewById(R.id.service_search_progressbar);
+
         searchText.setTypeface(Typeface.createFromAsset(MSettings.activeActivity.getAssets(), "VarelaRound-Regular.ttf"));
         searchText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -380,16 +389,12 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
                     if (!String.valueOf(charSequence).equals("")) {
                         MSettings.serviceSearchKey = String.valueOf(charSequence);
                         new MSettings.threadSearchKey().execute();
+
+                        listViewKey.setVisibility(View.VISIBLE);
+                        listViewVideo.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.GONE);
                     }
                 }
-
-                ListView listViewKey = (ListView) MSettings.floaty.getBody().findViewById(R.id.service_search_listview);
-                ListView listViewVideo = (ListView) MSettings.floaty.getBody().findViewById(R.id.service_searchvideo_listview);
-                ProgressBar progressBar = (ProgressBar) MSettings.floaty.getBody().findViewById(R.id.service_search_progressbar);
-
-                listViewKey.setVisibility(View.VISIBLE);
-                listViewVideo.setVisibility(View.GONE);
-                progressBar.setVisibility(View.GONE);
             }
 
             @Override
@@ -401,25 +406,61 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
             public void afterTextChanged(Editable editable) {
 
             }
+        });
 
-            /*@Override
-            public boolean onQueryTextSubmit(String query) {
-//                setQueryForResult(query);
-                return false;
-            }
 
+        ImageButton imageButtonSearch = (ImageButton) MSettings.body.findViewById(R.id.imageButtonServiceSearch);
+        imageButtonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onQueryTextChange(final String newText) {
-//                if (linearAutoComplate.getVisibility() == View.INVISIBLE) {
-//                    linearAutoComplate.setVisibility(View.VISIBLE);
-//                    mList.setVisibility(View.INVISIBLE);
-//                }
-//                filterText = newText;
-//                new SearchActivity.ThreadA().execute();
+            public void onClick(View view) {
+                if (CheckService != null) {
+                    if (MSettings.serviceSearchKey != null) {
+                        if (!MSettings.serviceSearchKey.equals("")) {
+                            listViewVideo.setVisibility(View.GONE);
+                            listViewKey.setVisibility(View.GONE);
+                            progressBar.setVisibility(View.VISIBLE);
 
+                            listViewVideo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                    if (searchResults.get(i).getId() != null) {
+                                        MSettings.CounterForSimilarVideos = 2;
+                                        MSettings.currentVideoId = searchResults.get(i).getId();
+                                        MSettings.setVideoTitle(searchResults.get(i).getTitle());
+                                        MainActivity mainActivity = new MainActivity();
+                                        mainActivity.getSimilarVideos(String.valueOf(searchResults.get(i).getId()), false, false, false, new String[]{});
+                                        MSettings.LoadVideo();
+                                        MSettings.LoadSixTapAds();
+                                    }
+                                }
+                            });
 
-                return false;
-            }*/
+                            new Thread() {
+                                public void run() {
+                                    ServiceSearchConnector yc = new ServiceSearchConnector(MSettings.activeActivity, "relevance", "video", false, "", false, false);
+                                    searchResults = yc.search(MSettings.serviceSearchKey, true, false, false);
+                                    mHandler.post(new Runnable() {
+                                        public void run() {
+                                            try {
+                                                AdapterServiceSearchVideo adapter = new AdapterServiceSearchVideo(MSettings.activeActivity, searchResults, "");
+                                                listViewVideo.setAdapter(adapter);
+
+                                                progressBar.setVisibility(View.GONE);
+                                                listViewKey.setVisibility(View.GONE);
+                                                listViewVideo.setVisibility(View.VISIBLE);
+                                            } catch (Exception e) {
+                                                if (!(new NetControl(MSettings.activeActivity)).isOnline()) {
+                                                    Toast.makeText(MSettings.activeActivity, MSettings.activeActivity.getString(R.string.internetConnectionMessage), Toast.LENGTH_LONG).show();
+                                                }
+                                            }
+                                        }
+                                    });
+                                }
+                            }.start();
+                        }
+                    }
+                }
+            }
         });
     }
 

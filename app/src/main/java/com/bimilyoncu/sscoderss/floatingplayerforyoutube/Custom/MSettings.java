@@ -290,6 +290,7 @@ public class MSettings {
         return img_url;
     }
 
+
     public static String serviceSearchKey;
     public static class threadSearchKey extends AsyncTask<Void, Void, JSONArray> {
         @Override
@@ -328,9 +329,9 @@ public class MSettings {
                         myAutoComplateArray[i] = responseTwo.get(i).toString();
                     }
 
-                    final ListView searchListView = (ListView) MSettings.floaty.getBody().findViewById(R.id.service_search_listview);
-                    final ProgressBar progressBar = (ProgressBar) MSettings.floaty.getBody().findViewById(R.id.service_search_progressbar);
-                    final ListView listViewVideo = (ListView) MSettings.floaty.getBody().findViewById(R.id.service_searchvideo_listview);
+                    final ListView searchListView = (ListView) MSettings.body.findViewById(R.id.service_search_listview);
+                    final ProgressBar progressBar = (ProgressBar) MSettings.body.findViewById(R.id.service_search_progressbar);
+                    final ListView listViewVideo = (ListView) MSettings.body.findViewById(R.id.service_searchvideo_listview);
 
                     AdapterServiceSearchKey adapterServiceSearchKey = new AdapterServiceSearchKey(MSettings.activeActivity, myAutoComplateArray);
                     searchListView.setAdapter(adapterServiceSearchKey);
@@ -383,14 +384,6 @@ public class MSettings {
                     });
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
-            }
-
-            try {
-//                filterData(serviceSearchKey);
-            } catch (Exception e) {
-                if (!(new NetControl(MSettings.activeActivity)).isOnline()) {
-                    Toast.makeText(MSettings.activeActivity, MSettings.activeActivity.getString(R.string.internetConnectionMessage), Toast.LENGTH_LONG).show();
                 }
             }
         }

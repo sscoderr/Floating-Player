@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -29,6 +30,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -138,6 +140,8 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
 
     NetControl netControl;
 
+    LinearLayout linearLayoutFragmentWarning;
+    TextView textViewFragmentWarning;
 
     @Nullable
     @Override
@@ -179,6 +183,13 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
             };
             new Thread(runnable).start();
         }*/
+
+        linearLayoutFragmentWarning = (LinearLayout) vw.findViewById(R.id.linearLayout_fragment_warning);
+        textViewFragmentWarning = (TextView) vw.findViewById(R.id.textView_mydata_warning);
+
+        linearLayoutFragmentWarning.setVisibility(View.GONE);
+        textViewFragmentWarning.setTypeface(Typeface.createFromAsset(vw.getContext().getAssets(), "VarelaRound-Regular.ttf"));
+
         addClickListener();
         clickListenerExpand();
         setupComponent();
@@ -216,6 +227,7 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
                 }
             }
         });
+
         relative_history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -234,6 +246,7 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
                 }
             }
         });
+
         relative_recommented.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -252,6 +265,7 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
                 }
             }
         });
+
         relative_fromyoutube.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -469,6 +483,9 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
         });
     }
 
+    // tbl_favorite
+    // tbl_history
+    // tbl_recommented
     public void loadData(final String tblName) {
         mList.setAdapter(null);
         order = 0;
@@ -488,6 +505,20 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
                             mList.setAdapter(adapter);
                             myPg.setVisibility(View.INVISIBLE);
                             isLoadingForThread = false;
+
+                            linearLayoutFragmentWarning.setVisibility(View.GONE);
+                            if (response.size() <= 0) {
+                                if (String.valueOf(tblName).equals("tbl_favorite")) {
+                                    linearLayoutFragmentWarning.setVisibility(View.VISIBLE);
+                                    textViewFragmentWarning.setText(getString(R.string.favorites_list_is_empty));
+                                } else if (String.valueOf(tblName).equals("tbl_history")) {
+                                    linearLayoutFragmentWarning.setVisibility(View.VISIBLE);
+                                    textViewFragmentWarning.setText(getString(R.string.history_list_is_empty));
+                                } else if (String.valueOf(tblName).equals("tbl_recommented")) {
+                                    linearLayoutFragmentWarning.setVisibility(View.VISIBLE);
+                                    textViewFragmentWarning.setText(getString(R.string.recommented_list_is_empty));
+                                }
+                            }
                         } catch (Exception e) {
                         }
                     }

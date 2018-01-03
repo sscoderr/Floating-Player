@@ -111,11 +111,26 @@
         </LinearLayout>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/linearLayout_fragment_warning"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView_mydata_warning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="!!!" />
+    </LinearLayout>
+
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
         android:layout_weight="1"
-        android:layout_marginTop="8dp"
         android:elevation="2dp">
         <!--android:background="#424242"-->
         <ListView
@@ -124,39 +139,41 @@
             android:layout_height="match_parent"
             android:divider="@null"
             android:dividerHeight="0dp"
-            android:scrollbars="none"
-            />
+            android:scrollbars="none" />
 
         <ProgressBar
+            android:id="@+id/myPBForFav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/myPBForFav"
+            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:layout_centerHorizontal="true"
             android:indeterminateDrawable="@drawable/progresbar"
             android:visibility="invisible" />
+
         <ExpandableListView
+            android:id="@+id/user_dataExpand"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:visibility="invisible"
-            android:id="@+id/user_dataExpand"
             android:divider="@null"
             android:dividerHeight="0dp"
-            android:scrollbars="none">
+            android:scrollbars="none"
+            android:visibility="invisible">
 
         </ExpandableListView>
+
         <android.support.design.widget.CoordinatorLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
+
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
                 android:layout_margin="@dimen/fab_margin"
-                app:layout_anchorGravity="bottom|right|end"
                 app:backgroundTint="?attr/colorPrimary"
+                app:layout_anchorGravity="bottom|right|end"
                 app:srcCompat="@mipmap/get_user_data_icon" />
         </android.support.design.widget.CoordinatorLayout>
     </RelativeLayout>

@@ -60,4 +60,8 @@
     <string name="forKitkatAndBeforeMessage">Lütfen Videoyu Durdurup Tekrar Oynatın</string>
 
     <string name="please_click_back_again_to_exit">Çıkmak için tekrar basınız!</string>
+    <string name="similar">BENZER</string>
+    <string name="favorites_list_is_empty">Favoriler Listesi Boş!</string>
+    <string name="history_list_is_empty">Geçmiş Listesi Boş!</string>
+    <string name="recommented_list_is_empty">Önerilen Listesi Boş!</string>
 </resources>

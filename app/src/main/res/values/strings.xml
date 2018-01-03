@@ -70,5 +70,10 @@
 
     <string name="please_click_back_again_to_exit">Please click BACK again to exit!</string>
 
+    <string name="similar">SIMILAR</string>
+    <string name="favorites_list_is_empty">Favorites List Is Empty!</string>
+    <string name="history_list_is_empty">History List Is Empty!</string>
+    <string name="recommented_list_is_empty">Recommented List Is Empty!</string>
+
 </resources>
 

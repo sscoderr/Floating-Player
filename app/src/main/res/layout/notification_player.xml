@@ -77,6 +77,14 @@
                 android:src="@drawable/play" />
 
             <ImageView
+                android:id="@+id/image_notification_nextmusic"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:padding="6dp"
+                android:src="@drawable/next_music" />
+
+            <ImageView
                 android:id="@+id/image_notification_close"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
