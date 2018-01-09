@@ -577,9 +577,8 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
                 } catch (TimeoutException e) {
                     e.printStackTrace();
                 }
-            } else {
-                return null;
             }
+
             return null;
         }
 
@@ -595,6 +594,7 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
                     e.printStackTrace();
                 }
             }
+
             try {
                 filterData(filterText);
             } catch (Exception e) {

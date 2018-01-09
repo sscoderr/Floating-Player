@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme"
         tools:replace="android:theme"
-        android:name="android.support.multidex.MultiDexApplication">
+        android:name="android.support.multidex.MultiDexApplication"
+        android:showOnLockScreen="true">
 
         <meta-data
             android:name="com.google.android.gms.version"

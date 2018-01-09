@@ -1,5 +1,6 @@
 package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Floaties;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
+import android.net.Uri;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.view.GestureDetectorCompat;
@@ -233,11 +235,12 @@ public class Floaty {
         public void onCreate() {
             super.onCreate();
             Log.d(LOG_TAG, "onCreate");
+
             mLinearLayout = new LinearLayout(getApplicationContext()) {
                 @Override
                 public boolean dispatchKeyEvent(KeyEvent event) {
                     if (event.getKeyCode() == KeyEvent.KEYCODE_BACK || event.getKeyCode() == KeyEvent.KEYCODE_HOME) {
-                        Log.e("sadas", "dsf");
+                        Log.e(LOG_TAG, "dispatchKeyEvent");
                         floaty.body.setVisibility(View.GONE);
                         params.x = clickLocation[0];
                         params.y = clickLocation[1] - 36;
