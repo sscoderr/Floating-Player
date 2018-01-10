@@ -9,4 +9,6 @@
 
     <color name="pressed_color">#797979</color>
     <color name="default_color">#424242</color>
+
+    <color name="actionBarCustom">#262626</color>
 </resources>

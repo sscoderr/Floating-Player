@@ -1,8 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:autofit="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/actionBarCustom"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+
+            <!--<TextView
+                android:id="@+id/txtVideoTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="Title"
+                android:textColor="#FFF"
+                android:textSize="13sp" />-->
+
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/txtVideoTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:paddingLeft="9dp"
+                android:paddingRight="9dp"
+                android:singleLine="true"
+                android:text="..."
+                android:textSize="15sp"
+                autofit:minTextSize="16sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageViewServiceMinimize"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/selector_for_moreoption_button"
+                android:scaleType="center"
+                android:src="@drawable/minimize" />
+
+            <ImageView
+                android:id="@+id/imageViewServiceClose"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_for_moreoption_button"
+                android:padding="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/close" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/cizgi"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#333333"
+        android:orientation="vertical" />
+
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="190dp">
@@ -14,10 +84,11 @@
             android:background="#000">
 
         </WebView>
+
         <RelativeLayout
+            android:id="@+id/clickRelative"
             android:layout_width="fill_parent"
             android:layout_height="140dp"
-            android:id="@+id/clickRelative"
             android:visibility="invisible">
 
         </RelativeLayout>
@@ -28,67 +99,6 @@
         android:layout_height="wrap_content"
         layout="@layout/activity_webview_include" />-->
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#262626">
-
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:id="@+id/txtVideoTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:text="Title"
-                android:textColor="#FFF"
-                android:textSize="13sp" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/img_repeat"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/selector_for_moreoption_button"
-                android:scaleType="center"
-                android:src="@mipmap/repeat_icon_for_float" />
-
-            <ImageView
-                android:id="@+id/img_suffle"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/selector_for_moreoption_button"
-                android:scaleType="center"
-                android:src="@mipmap/suffle_icon_for_float" />
-
-            <ImageView
-                android:id="@+id/img_stopingfinishvideo"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:background="@drawable/selector_for_moreoption_button"
-                android:padding="5dp"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/autoplay_off" />
-        </LinearLayout>
-    </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/cizgi"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#333333"
-        android:orientation="vertical" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -97,13 +107,92 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/actionBarCustom"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_service_similar"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/service_button_design"
+                    android:text="@string/similar"
+                    android:textSize="10sp" />
+
+                <Button
+                    android:id="@+id/btn_service_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/service_button_design"
+                    android:text="@string/search"
+                    android:textSize="10sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_alignParentRight="true"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/img_repeat"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginRight="2dp"
+                        android:background="@drawable/selector_for_moreoption_button"
+                        android:scaleType="center"
+                        android:src="@mipmap/repeat_icon_for_float" />
+
+                    <ImageView
+                        android:id="@+id/img_suffle"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="2dp"
+                        android:background="@drawable/selector_for_moreoption_button"
+                        android:scaleType="center"
+                        android:src="@mipmap/suffle_icon_for_float" />
+
+                    <ImageView
+                        android:id="@+id/img_stopingfinishvideo"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginLeft="2dp"
+                        android:background="@drawable/selector_for_moreoption_button"
+                        android:padding="5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/autoplay_off" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/cizgi"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#333333"
+                android:orientation="vertical" />
 
             <RelativeLayout
                 android:id="@+id/relativesimilar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="1dp"
                 android:gravity="center"
                 android:visibility="visible">
 
@@ -111,7 +200,6 @@
                     android:id="@+id/mListForFloat"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:divider="@null"
                     android:dividerHeight="0dp"
                     android:scrollbars="none" />
 
@@ -131,13 +219,14 @@
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
-                android:padding="3dp"
+                android:padding="1dp"
                 android:visibility="gone">
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -150,7 +239,7 @@
                         <EditText
                             android:id="@+id/editText_searchservice"
                             android:layout_width="match_parent"
-                            android:layout_height="35dp"
+                            android:layout_height="30dp"
                             android:layout_weight="1"
                             android:background="@drawable/service_search_textview_design"
                             android:hint="@string/search"
@@ -169,10 +258,10 @@
                         <ImageButton
                             android:id="@+id/imageButtonServiceSearch"
                             android:layout_width="wrap_content"
-                            android:layout_height="35dp"
+                            android:layout_height="30dp"
                             android:background="@drawable/service_search_textview_design"
                             android:padding="12dp"
-                            android:src="@mipmap/search_icon" />
+                            android:src="@mipmap/search_button" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -180,19 +269,18 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="2dp"
                     android:gravity="center">
 
                     <ListView
                         android:id="@+id/service_search_listview"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="5dp" />
+                        android:layout_height="match_parent" />
 
                     <ListView
                         android:id="@+id/service_searchvideo_listview"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="5dp"
                         android:visibility="gone" />
 
                     <ProgressBar
@@ -207,28 +295,5 @@
             </LinearLayout>
         </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_service_similar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="3dp"
-                android:layout_weight="1"
-                android:background="@drawable/service_button_design"
-                android:text="@string/similar" />
-
-            <Button
-                android:id="@+id/btn_service_search"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="3dp"
-                android:layout_weight="1"
-                android:background="@drawable/service_button_design"
-                android:text="@string/search" />
-        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -201,11 +201,11 @@ public class MSettings {
     }
 
     public static void getVideoTitle() {
-        TextView txtVideoTitle = (TextView) MSettings.body.findViewById(R.id.txtVideoTitle);
+        me.grantland.widget.AutofitTextView txtVideoTitle = (me.grantland.widget.AutofitTextView) MSettings.body.findViewById(R.id.txtVideoTitle);
         txtVideoTitle.setTypeface(Typeface.createFromAsset(MSettings.activeActivity.getAssets(), "VarelaRound-Regular.ttf"));
         try {
-            if (currentVideoTitle.length() > 35) {
-                txtVideoTitle.setText(currentVideoTitle.substring(0, 35) + "...");
+            if (currentVideoTitle.length() > 45) {
+                txtVideoTitle.setText(currentVideoTitle.substring(0, 45) + " ...");
             } else {
                 txtVideoTitle.setText(currentVideoTitle);
             }

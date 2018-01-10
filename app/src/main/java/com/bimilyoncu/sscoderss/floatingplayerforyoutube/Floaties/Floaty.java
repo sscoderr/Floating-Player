@@ -66,6 +66,10 @@ public class Floaty {
         return floaty.body;
     }
 
+    public View getHead() {
+        return floaty.head;
+    }
+
     /**
      * Creates a Singleton of the Floating Window
      *
@@ -315,6 +319,8 @@ public class Floaty {
                             floaty.head.getLocationOnScreen(clickLocation);
                             floaty.body.setVisibility(View.VISIBLE);
                             mLinearLayout.setBackgroundColor(Color.argb(0, 0, 0, 0));
+
+                            floaty.head.setVisibility(View.GONE);
                         } else {
                             floaty.body.setVisibility(View.GONE);
                             params.x = clickLocation[0];
@@ -323,6 +329,8 @@ public class Floaty {
                             params.height = WindowManager.LayoutParams.WRAP_CONTENT;
                             params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
                             mLinearLayout.setBackgroundColor(Color.argb(0, 0, 0, 0));
+
+                            floaty.head.setVisibility(View.VISIBLE);
                         }
                         windowManager.updateViewLayout(mLinearLayout, params);
                     } catch (Exception ex) {
@@ -403,6 +411,7 @@ public class Floaty {
             mLinearLayout.addView(floaty.head, headParams);
             mLinearLayout.addView(floaty.body, bodyParams);
             floaty.body.setVisibility(View.VISIBLE);
+            floaty.head.setVisibility(View.GONE);
             showBody();
         }
 

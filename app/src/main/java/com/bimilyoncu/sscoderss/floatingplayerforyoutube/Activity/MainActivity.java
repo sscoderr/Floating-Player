@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.media.Image;
 import android.net.Uri;
@@ -257,6 +258,37 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
             MSettings.body = LayoutInflater.from(this).inflate(R.layout.float_body, null);
         ImageView imgForClose = (ImageView) MSettings.head.findViewById(R.id.imageViewForClose);
         imgForClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //MSettings.webView.loadUrl("about:blank");
+                LoadFullScreenAds();
+                MSettings.webView.loadUrl("javascript:stopVideo();");
+                MSettings.webView.onPause();
+                //MSettings.webView.pauseTimers();
+                MSettings.floaty.stopService();
+            }
+        });
+
+        final ImageView imageViewClose = (ImageView) MSettings.body.findViewById(R.id.imageViewServiceClose);
+        final ImageView imageViewMinimize = (ImageView) MSettings.body.findViewById(R.id.imageViewServiceMinimize);
+
+        imageViewMinimize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MSettings.floaty.floaty.getBody().setVisibility(View.GONE);
+                MSettings.floaty.params.x = MSettings.floaty.clickLocation[0];
+                MSettings.floaty.params.y = MSettings.floaty.clickLocation[1] - 36;
+                MSettings.floaty.params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                MSettings.floaty.params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                MSettings.floaty.params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+                MSettings.floaty.mLinearLayout.setBackgroundColor(Color.argb(0, 0, 0, 0));
+
+                MSettings.floaty.floaty.getHead().setVisibility(View.VISIBLE);
+                MSettings.floaty.windowManager.updateViewLayout(MSettings.floaty.mLinearLayout, MSettings.floaty.params);
+            }
+        });
+
+        imageViewClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //MSettings.webView.loadUrl("about:blank");

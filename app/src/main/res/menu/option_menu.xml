@@ -8,9 +8,10 @@
         android:icon="@mipmap/my_filter_icon"
         app:showAsAction="always"
         android:orderInCategory="2" />
+
     <item android:id="@+id/menuSearch"
         android:title="@string/search"
-        android:icon="@drawable/abc_ic_search_api_mtrl_alpha"
+        android:icon="@mipmap/search_icon"
         app:showAsAction="always"
         app:actionViewClass="android.support.v7.widget.SearchView"
         android:layout_width="fill_parent"
