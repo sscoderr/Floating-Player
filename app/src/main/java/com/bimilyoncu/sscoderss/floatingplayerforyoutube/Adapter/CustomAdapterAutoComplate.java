@@ -60,7 +60,6 @@ public class CustomAdapterAutoComplate extends BaseAdapter {
             vw = (CustomAdapterAutoComplate.myViewHolder) view.getTag();
         }
         vw.text.setText(searchResults.get(position).getText());
-        vw.text.setTypeface(MSettings.getFont());
         if (count > position)
             vw.image.setImageResource(imagesId[0]);
         else

@@ -829,6 +829,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
         try {
             if (MSettings.floaty.floaty.getBody().getVisibility() != View.GONE) {
                 MSettings.floaty.floaty.getBody().setVisibility(View.GONE);
+                MSettings.floaty.floaty.getHead().setVisibility(View.VISIBLE);
                 MSettings.floaty.params.x = MSettings.floaty.clickLocation[0];
                 MSettings.floaty.params.y = MSettings.floaty.clickLocation[1] - 36;
                 MSettings.floaty.params.width = WindowManager.LayoutParams.WRAP_CONTENT;

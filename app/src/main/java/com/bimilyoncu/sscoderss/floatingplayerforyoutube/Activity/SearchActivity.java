@@ -611,6 +611,7 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
         try {
             if (MSettings.floaty.floaty.getBody().getVisibility() != View.GONE) {
                 MSettings.floaty.floaty.getBody().setVisibility(View.GONE);
+                MSettings.floaty.floaty.getHead().setVisibility(View.VISIBLE);
                 MSettings.floaty.params.x = MSettings.floaty.clickLocation[0];
                 MSettings.floaty.params.y = MSettings.floaty.clickLocation[1] - 36;
                 MSettings.floaty.params.width = WindowManager.LayoutParams.WRAP_CONTENT;
@@ -619,6 +620,7 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
                 MSettings.floaty.mLinearLayout.setBackgroundColor(Color.argb(0, 0, 0, 0));
 
                 MSettings.floaty.windowManager.updateViewLayout(MSettings.floaty.mLinearLayout, MSettings.floaty.params);
+
             }
         } catch (Exception e) {
             e.printStackTrace();
