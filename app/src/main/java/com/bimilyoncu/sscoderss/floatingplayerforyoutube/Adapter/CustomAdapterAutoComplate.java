@@ -20,7 +20,7 @@ import java.util.List;
  */
 
 public class CustomAdapterAutoComplate extends BaseAdapter {
-    private int[] imagesId = {R.mipmap.history_button, R.mipmap.search_button};
+    private int[] imagesId = {R.mipmap.history_button, R.mipmap.search};
     private LayoutInflater mInflater;
     private List<VideoItem> searchResults;
     private int count;

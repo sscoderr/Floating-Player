@@ -15,7 +15,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -45,6 +45,7 @@ dependencies {
     compile 'com.android.support:multidex:1.0.0'
 //    compile 'com.getkeepsafe.taptargetview:taptargetview:1.11.0'
     compile 'me.grantland:autofittextview:0.2.+'
+    compile 'com.pnikosis:materialish-progress:1.0'
     testCompile 'junit:junit:4.12'
 }
 

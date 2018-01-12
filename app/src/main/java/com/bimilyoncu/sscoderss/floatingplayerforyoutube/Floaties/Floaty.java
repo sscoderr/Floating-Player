@@ -188,6 +188,7 @@ public class Floaty {
                 .setContentIntent(contentIntent).build();*/
     }
 
+
     public static class FloatHeadService extends Service {
         GestureDetectorCompat gestureDetectorCompat;
         DisplayMetrics metrics;
@@ -235,6 +236,8 @@ public class Floaty {
             return START_STICKY;
         }
 
+
+
         @Override
         public void onCreate() {
             super.onCreate();
@@ -253,6 +256,8 @@ public class Floaty {
                         params.height = WindowManager.LayoutParams.WRAP_CONTENT;
                         mLinearLayout.setBackgroundColor(Color.argb(0, 0, 0, 0));
                         windowManager.updateViewLayout(mLinearLayout, params);
+
+                        floaty.getHead().setVisibility(View.VISIBLE);
                         return true;
                     }
                     return super.dispatchKeyEvent(event);
@@ -387,7 +392,7 @@ public class Floaty {
                     if (event.getAction() == MotionEvent.ACTION_UP) {
                         floaty.head.setAlpha(1.0f);
                         if (!didFling) {
-                            Log.e("dsfds", "ACTION_UP");
+                            Log.e(LOG_TAG, "ACTION_UP");
                             int newX = params.x;
                             if (newX > (metrics.widthPixels / 2))
                                 params.x = metrics.widthPixels;

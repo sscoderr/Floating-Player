@@ -261,7 +261,7 @@
                             android:layout_height="30dp"
                             android:background="@drawable/service_search_textview_design"
                             android:padding="12dp"
-                            android:src="@mipmap/search_button" />
+                            android:src="@mipmap/search" />
                     </LinearLayout>
 
                 </LinearLayout>

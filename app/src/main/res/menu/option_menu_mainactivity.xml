@@ -4,7 +4,7 @@
 
     <item android:id="@+id/search_button"
         android:title="@string/search"
-        android:icon="@mipmap/search_icon"
+        android:icon="@mipmap/search"
         app:showAsAction="always"
         android:layout_width="wrap_content"
         android:orderInCategory="1"/>

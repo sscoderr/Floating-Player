@@ -75,5 +75,21 @@
     <string name="history_list_is_empty">History List Is Empty!</string>
     <string name="recommented_list_is_empty">Recommented List Is Empty!</string>
 
+
+
+
+
+
+
+    <string name="dialog_default_title">Here\'s a message!</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="LOADING">Loading...</string>
+    <string name="AreYouSure">Are you sure?</string>
+    <string name="DeleteThisHistory">Delete this history!</string>
+    <string name="YesDeleteIt">Yes,delete it!</string>
+    <string name="Deleted">Deleted!</string>
+    <string name="YourHistoryHasBeenDeleted">Your history has been deleted!</string>
+
 </resources>
 

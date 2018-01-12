@@ -58,6 +58,7 @@ import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.CustomAdapterAu
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Connector.YoutubeConnector;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.NetControl;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.SweetAlertDialog.SweetAlertDialog;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Database.DatabaseForSearchHistory;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Item.VideoItem;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.R;
@@ -142,32 +143,42 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
         historyList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(final AdapterView<?> adapterView, View view, final int position, long l) {
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(SearchActivity.this);
-                builder1.setMessage("Delete This History");
-                builder1.setTitle("Confirim Delete");
-                builder1.setCancelable(true);
+                DatabaseForSearchHistory db = new DatabaseForSearchHistory(getApplicationContext());
+                SQLiteDatabase readableDatabase = db.getReadableDatabase();
+                Integer count = (readableDatabase.rawQuery("SELECT * FROM textHistory where searchText like '"+
+                        ((VideoItem) adapterView.getItemAtPosition(position)).getText()+"' order by id desc", null)).getCount();
 
-                builder1.setPositiveButton(
-                        "Yes",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                DatabaseForSearchHistory db = new DatabaseForSearchHistory(SearchActivity.this);
-                                VideoItem name = (VideoItem) adapterView.getItemAtPosition(position);
-                                db.textDelete(name.getText());
-                                filterData(filterText);
-                            }
-                        });
+                if (count > 0) {
+                    new SweetAlertDialog(SearchActivity.this, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText(getString(R.string.AreYouSure))
+                            .setContentText(getString(R.string.DeleteThisHistory))
+                            .setConfirmText(getString(R.string.YesDeleteIt))
+                            .showCancelButton(true)
+                            .setCancelText(getString(R.string.dialog_cancel))
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    DatabaseForSearchHistory db = new DatabaseForSearchHistory(SearchActivity.this);
+                                    VideoItem name = (VideoItem) adapterView.getItemAtPosition(position);
+                                    db.textDelete(name.getText());
+                                    filterData(filterText);
 
-                builder1.setNegativeButton(
-                        "No",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
 
-                AlertDialog alert11 = builder1.create();
-                alert11.show();
+                                    sDialog.setTitleText(getString(R.string.Deleted))
+                                            .setContentText(getString(R.string.YourHistoryHasBeenDeleted))
+                                            .setConfirmText(getString(R.string.dialog_ok))
+                                            .setConfirmClickListener(null)
+                                            .showCancelButton(false)
+                                            .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+                                }
+                            })
+                            .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.cancel();
+                                }
+                            }).show();
+                }
                 return true;
             }
         });
@@ -618,6 +629,7 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
                 MSettings.floaty.params.height = WindowManager.LayoutParams.WRAP_CONTENT;
                 MSettings.floaty.params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
                 MSettings.floaty.mLinearLayout.setBackgroundColor(Color.argb(0, 0, 0, 0));
+
 
                 MSettings.floaty.windowManager.updateViewLayout(MSettings.floaty.mLinearLayout, MSettings.floaty.params);
 

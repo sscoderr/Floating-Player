@@ -61,7 +61,7 @@ public class AdapterServiceSearchKey extends BaseAdapter {
 
 //        vw.text.setTypeface(Typeface.createFromAsset(MSettings.activeActivity.getAssets(), "VarelaRound-Regular.ttf"));
         vw.text.setText(searchResults[position]);
-        vw.image.setImageResource(R.mipmap.search_button);
+        vw.image.setImageResource(R.mipmap.search);
         return view;
     }
 
