@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
@@ -233,6 +234,7 @@ public class Floaty {
                     MSettings.floaty.notification.getNotificationManager().notify(MSettings.floaty.notification.getNotification_id(), MSettings.floaty.notification.getBuilder().build());
                 }
             }
+
             return START_STICKY;
         }
 

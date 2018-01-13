@@ -20,9 +20,11 @@ import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.design.widget.TabLayout;
 import android.support.multidex.MultiDex;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -32,6 +34,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -47,6 +50,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AbsListView.OnScrollListener;
 
@@ -64,6 +68,7 @@ import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Floaties.Floaty;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Floaties.JSInterface;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Item.VideoItem;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.R;
+import com.gigamole.navigationtabstrip.NavigationTabStrip;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -97,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
 
     private ProgressBar myPg;
 
-    private TabLayout tabLayout;
+    private NavigationTabStrip tabLayout;
     private ViewPager viewPager;
     private View myView;
     private Handler mHandler;
@@ -122,7 +127,11 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
         YoutubeConnector.KEY = YoutubeConnector.myApiKeys[(new Random()).nextInt(YoutubeConnector.myApiKeys.length)];
 
         netControl = new NetControl(this);
-        (MainActivity.this).getSupportActionBar().setElevation(0);
+//        (MainActivity.this).getSupportActionBar().setElevation(0);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.content_main_toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
 
         AlertgetKeys();
     }
@@ -159,10 +168,12 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
         inflater.inflate(R.menu.option_menu_mainactivity, menu);
         MenuItem item = menu.findItem(R.id.checkHighQuality);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        if (preferences.getBoolean("isHighQuality", false))
+
+        if (preferences.getBoolean("isHighQuality", false)) {
             item.setChecked(true);
-        else if (!preferences.getBoolean("isHighQuality", false))
+        } else if (!preferences.getBoolean("isHighQuality", false)) {
             item.setChecked(false);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -210,8 +221,39 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPager.setOffscreenPageLimit(3);
         viewPager.setAdapter(new CustomAdapterForFragments(getSupportFragmentManager()));
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        tabLayout.setupWithViewPager(viewPager);
+
+        tabLayout = (NavigationTabStrip) findViewById(R.id.tabLayout);
+        tabLayout.setTitles("Trend Music", "Trend Video", "My Data");
+//        tabLayout.setTabIndex(0, false);
+        tabLayout.setViewPager(viewPager, 0);
+        tabLayout.setTitleSize(15);
+
+        /*viewPager.setAdapter(new PagerAdapter() {
+            @Override
+            public int getCount() {
+                return 3;
+            }
+
+            @Override
+            public boolean isViewFromObject(final View view, final Object object) {
+                return view.equals(object);
+            }
+
+            @Override
+            public void destroyItem(final View container, final int position, final Object object) {
+                ((ViewPager) container).removeView((View) object);
+            }
+
+            @Override
+            public Object instantiateItem(final ViewGroup container, final int position) {
+                final View view = new View(getBaseContext());
+                container.addView(view);
+                return view;
+            }
+        });*/
+
+
+        /*tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setIcon(tabIcons[0]);
         tabLayout.getTabAt(1).setIcon(tabIcons[1]);
         tabLayout.getTabAt(2).setIcon(tabIcons[2]);
@@ -230,7 +272,9 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
             public void onTabReselected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
             }
-        });
+        });*/
+
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             if (!Settings.canDrawOverlays(MainActivity.this)) {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,

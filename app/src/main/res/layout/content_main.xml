@@ -14,14 +14,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/linearForTabAnimation"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
             android:orientation="vertical">
 
-            <android.support.design.widget.TabLayout
+            <!--   <android.support.design.widget.TabLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/tabLayout"
@@ -32,16 +31,42 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                app:tabTextAppearance="@style/TabSize"/>
+                app:tabTextAppearance="@style/TabSize"/>-->
+
+            <com.gigamole.navigationtabstrip.NavigationTabStrip
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/colorPrimary"
+                android:paddingBottom="5dp"
+                app:nts_active_color="#FFFFFF"
+                app:nts_animation_duration="300"
+                app:nts_color="#949494"
+                app:nts_corners_radius="5dp"
+                app:nts_factor="2"
+                app:nts_gravity="bottom"
+                app:nts_inactive_color="#949494"
+                app:nts_size="5sp"
+                app:nts_type="point"
+                app:nts_typeface="fonts/typeface.otf"
+                app:nts_weight="5dp" />
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#292929"
+            android:orientation="vertical" />
+
         <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/viewPager"
             android:layout_below="@+id/linearForTabAnimation"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true">
+
+        </android.support.v4.view.ViewPager>
 
     </LinearLayout>
 </LinearLayout>

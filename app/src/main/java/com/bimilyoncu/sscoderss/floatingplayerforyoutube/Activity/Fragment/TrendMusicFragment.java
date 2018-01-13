@@ -2,6 +2,7 @@ package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.Fragment;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,11 +18,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.Toast;
-
-/*import com.github.ksoichiro.android.observablescrollview.ObservableListView;
-import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
-import com.github.ksoichiro.android.observablescrollview.ScrollState;*/
-
 
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.CustomAdapter;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.CustomAdapterForTrends;
@@ -77,25 +73,8 @@ public class TrendMusicFragment extends Fragment implements OnScrollListener  {
         handler = new Handler();
         listView.setOnScrollListener(this);
         myPg.setVisibility(View.VISIBLE);
-        //if (MSettings.isHaveNetworkAccesQuickly(getActivity()))
         loadStartData(true);
-        /*else {
-            Runnable runnable = new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    while (!MSettings.isHaveNetworkAccesQuickly(getActivity())){
-                    }
-                    getActivity().runOnUiThread(new Runnable() {
-                        public void run() {
-                            loadStartData(true);
-                        }
-                    });
-                }
-            };
-            new Thread(runnable).start();
-        }*/
+
         ((MainActivity)getActivity()).setFragmentRefreshListener(new MainActivity.FragmentRefreshListenerForMusic() {
             @Override
             public void onRefresh() {
@@ -165,29 +144,9 @@ public class TrendMusicFragment extends Fragment implements OnScrollListener  {
     @Override
     public void onScroll(AbsListView absListView, int i, int i1, int i2) {
         if(absListView.getLastVisiblePosition() == i2-1 && listView.getCount() >=5 && isLoading == false&&sizeOfMoreData!=0) {
-            //if (MSettings.isHaveNetworkAccesQuickly(getActivity())) {
             isLoading = true;
             Thread thread = new ThreadGetMoreData();
             thread.start();
-            /*}else {
-                Runnable runnable = new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        while (!MSettings.isHaveNetworkAccesQuickly(getActivity())){
-                        }
-                        getActivity().runOnUiThread(new Runnable() {
-                            public void run() {
-                                isLoading = true;
-                                Thread thread = new ThreadGetMoreData();
-                                thread.start();
-                            }
-                        });
-                    }
-                };
-                new Thread(runnable).start();
-            }*/
         }
     }
 

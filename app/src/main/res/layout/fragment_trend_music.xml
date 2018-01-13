@@ -10,48 +10,52 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:ignore="UselessParent"
-            android:layout_weight="10">
+            android:layout_weight="10"
+            tools:ignore="UselessParent">
+
             <ListView
                 android:id="@+id/trend_music_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:divider="@null"
                 android:dividerHeight="0dp"
-                android:scrollbars="none"
-                />
+                android:scrollbars="none" />
+
             <ProgressBar
+                android:id="@+id/myPBForFav"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/myPBForFav"
-                android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:indeterminateDrawable="@drawable/progresbar"
                 android:visibility="invisible" />
 
         </RelativeLayout>
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_centerHorizontal="true">
+
                     <com.google.android.gms.ads.AdView
                         android:id="@+id/adViewTrendMusic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
                         ads:adSize="BANNER"
-                        ads:adUnitId="@string/banner_ad_unit_id_trend_music">
-                    </com.google.android.gms.ads.AdView>
+                        ads:adUnitId="@string/banner_ad_unit_id_trend_music"></com.google.android.gms.ads.AdView>
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
