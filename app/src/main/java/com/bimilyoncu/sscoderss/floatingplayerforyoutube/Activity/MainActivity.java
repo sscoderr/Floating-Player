@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
 
     private ProgressBar myPg;
 
-    private NavigationTabStrip tabLayout;
+    private TabLayout tabLayout;
     private ViewPager viewPager;
     private View myView;
     private Handler mHandler;
@@ -222,38 +222,14 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
         viewPager.setOffscreenPageLimit(3);
         viewPager.setAdapter(new CustomAdapterForFragments(getSupportFragmentManager()));
 
-        tabLayout = (NavigationTabStrip) findViewById(R.id.tabLayout);
+        /*tabLayout = (NavigationTabStrip) findViewById(R.id.tabLayout);
         tabLayout.setTitles("Trend Music", "Trend Video", "My Data");
-//        tabLayout.setTabIndex(0, false);
         tabLayout.setViewPager(viewPager, 0);
-        tabLayout.setTitleSize(15);
-
-        /*viewPager.setAdapter(new PagerAdapter() {
-            @Override
-            public int getCount() {
-                return 3;
-            }
-
-            @Override
-            public boolean isViewFromObject(final View view, final Object object) {
-                return view.equals(object);
-            }
-
-            @Override
-            public void destroyItem(final View container, final int position, final Object object) {
-                ((ViewPager) container).removeView((View) object);
-            }
-
-            @Override
-            public Object instantiateItem(final ViewGroup container, final int position) {
-                final View view = new View(getBaseContext());
-                container.addView(view);
-                return view;
-            }
-        });*/
+        tabLayout.setTitleSize(15);*/
 
 
-        /*tabLayout.setupWithViewPager(viewPager);
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setIcon(tabIcons[0]);
         tabLayout.getTabAt(1).setIcon(tabIcons[1]);
         tabLayout.getTabAt(2).setIcon(tabIcons[2]);
@@ -272,7 +248,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
             public void onTabReselected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
             }
-        });*/
+        });
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
