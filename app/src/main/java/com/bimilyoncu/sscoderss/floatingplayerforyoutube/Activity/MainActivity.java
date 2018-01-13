@@ -127,11 +127,11 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
         YoutubeConnector.KEY = YoutubeConnector.myApiKeys[(new Random()).nextInt(YoutubeConnector.myApiKeys.length)];
 
         netControl = new NetControl(this);
-//        (MainActivity.this).getSupportActionBar().setElevation(0);
+        (MainActivity.this).getSupportActionBar().setElevation(0);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.content_main_toolbar);
-        toolbar.setTitle("");
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.content_main_toolbar);
+//        toolbar.setTitle("");
+//        setSupportActionBar(toolbar);
 
         AlertgetKeys();
     }
