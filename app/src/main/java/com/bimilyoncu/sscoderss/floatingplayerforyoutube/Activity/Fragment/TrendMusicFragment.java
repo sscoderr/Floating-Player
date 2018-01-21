@@ -58,8 +58,12 @@ public class TrendMusicFragment extends Fragment implements OnScrollListener  {
 
         AdView mAdView = (AdView)v.findViewById(R.id.adViewTrendMusic);
         AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice("6AFA29CB9314195950E590C9BEACC344").addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice("6EE0EC7A08848B41A3A8B3C52624F39A").addTestDevice("D840C07DDBAA5E0897B010411FABE6AC").addTestDevice("778ADE18482DD7E44193371217202427").build();/*778ADE18482DD7E44193371217202427 Device Id*/
-        /*.addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice("6EE0EC7A08848B41A3A8B3C52624F39A").addTestDevice("D840C07DDBAA5E0897B010411FABE6AC").addTestDevice("778ADE18482DD7E44193371217202427")*/
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("6EE0EC7A08848B41A3A8B3C52624F39A")
+                .addTestDevice("D840C07DDBAA5E0897B010411FABE6AC")
+                .addTestDevice("778ADE18482DD7E44193371217202427")
+                .addTestDevice("6AFA29CB9314195950E590C9BEACC344")
+                .addTestDevice("0CEA9CA5F2DAED70F0678D8F2D8669A3").build();
         mAdView.loadAd(adRequest);
 
         netControl = new NetControl(getActivity());
