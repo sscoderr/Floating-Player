@@ -110,26 +110,45 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btn_service_similar"
+                <RelativeLayout
+                    android:id="@+id/relative_service_similar"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/service_button_design"
-                    android:text="@string/similar"
-                    android:textSize="10sp" />
+                    android:background="@drawable/selector_my_custom_button"
+                    android:gravity="center">
 
-                <Button
-                    android:id="@+id/btn_service_search"
+                    <TextView
+                        android:id="@+id/text_service_similar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/custom_button_padding_horizontal"
+                        android:paddingRight="@dimen/custom_button_padding_horizontal"
+                        android:text="@string/similar"
+                        android:textColor="#424242"
+                        android:textSize="10sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relative_service_search"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/service_button_design"
-                    android:text="@string/search"
-                    android:textSize="10sp" />
+                    android:background="@drawable/my_custom_button_selected"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/text_service_search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/custom_button_padding_horizontal"
+                        android:paddingRight="@dimen/custom_button_padding_horizontal"
+                        android:text="@string/search"
+                        android:textColor="#FFFFFF"
+                        android:textSize="10sp" />
+                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -176,7 +195,7 @@
             android:layout_weight="1">
 
             <LinearLayout
-                android:id="@+id/cizgi"
+                android:id="@+id/cizgi2"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#333333"

@@ -81,6 +81,9 @@ import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.Video;
 import com.google.api.services.youtube.model.VideoListResponse;
 
+import org.w3c.dom.Text;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -123,6 +126,8 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        CacheClear(this);
+
         MSettings.activeActivity = MainActivity.this;
         YoutubeConnector.KEY = YoutubeConnector.myApiKeys[(new Random()).nextInt(YoutubeConnector.myApiKeys.length)];
 
@@ -135,6 +140,35 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
 
         AlertgetKeys();
     }
+
+    public static void CacheClear(Context context) {
+        try {
+            File dir = context.getCacheDir();
+            deleteDir(dir);
+
+            Log.d(".. MainActivity ..", "CasheClear Successful!!! ...");
+        } catch (Exception e) {
+            Log.e(".. MainActivity ..", "CasheClear Catch!!! ...");
+        }
+    }
+
+    public static boolean deleteDir(File dir) {
+        if (dir != null && dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+            return dir.delete();
+        } else if (dir != null && dir.isFile()) {
+            return dir.delete();
+        } else {
+            return false;
+        }
+    }
+
 
     private void AlertgetKeys() {
         if (!netControl.isOnline()) {
@@ -377,19 +411,27 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
             }
         });
 
-        Button Similar = (Button) MSettings.body.findViewById(R.id.btn_service_similar);
-        Button Search = (Button) MSettings.body.findViewById(R.id.btn_service_search);
+        final RelativeLayout Similar = (RelativeLayout) MSettings.body.findViewById(R.id.relative_service_similar);
+        final RelativeLayout Search = (RelativeLayout) MSettings.body.findViewById(R.id.relative_service_search);
         final RelativeLayout rlSimilar = (RelativeLayout) MSettings.body.findViewById(R.id.relativesimilar);
         final LinearLayout rlSearch = (LinearLayout) MSettings.body.findViewById(R.id.relativesearch);
+        final TextView textViewServiceSimilar = (TextView) MSettings.body.findViewById(R.id.text_service_similar);
+        final TextView textViewServiceSearch = (TextView) MSettings.body.findViewById(R.id.text_service_search);
 
-        Similar.setTypeface(Typeface.createFromAsset(MSettings.activeActivity.getAssets(), "VarelaRound-Regular.ttf"));
-        Search.setTypeface(Typeface.createFromAsset(MSettings.activeActivity.getAssets(), "VarelaRound-Regular.ttf"));
+        textViewServiceSimilar.setTypeface(Typeface.createFromAsset(MSettings.activeActivity.getAssets(), "VarelaRound-Regular.ttf"));
+        textViewServiceSearch.setTypeface(Typeface.createFromAsset(MSettings.activeActivity.getAssets(), "VarelaRound-Regular.ttf"));
 
         Similar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 rlSimilar.setVisibility(View.VISIBLE);
                 rlSearch.setVisibility(View.GONE);
+
+                Similar.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_my_custom_button));
+                Search.setBackgroundDrawable(getResources().getDrawable(R.drawable.my_custom_button_selected));
+
+                textViewServiceSimilar.setTextColor(Color.parseColor("#424242"));
+                textViewServiceSearch.setTextColor(Color.parseColor("#FFFFFF"));
             }
         });
 
@@ -398,13 +440,19 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
             public void onClick(View view) {
                 rlSimilar.setVisibility(View.GONE);
                 rlSearch.setVisibility(View.VISIBLE);
+
+                Similar.setBackgroundDrawable(getResources().getDrawable(R.drawable.my_custom_button_selected));
+                Search.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_my_custom_button));
+
+                textViewServiceSimilar.setTextColor(Color.parseColor("#FFFFFF"));
+                textViewServiceSearch.setTextColor(Color.parseColor("#424242"));
             }
         });
 
         ServiceSearch();
 
 
-        /*MSettings.clickableRelative = (RelativeLayout) MSettings.body.findViewById(R.id.clickRelative);
+        MSettings.clickableRelative = (RelativeLayout) MSettings.body.findViewById(R.id.clickRelative);
         if (Integer.valueOf(android.os.Build.VERSION.SDK) >= 21 && !MSettings.isFirstOpenApp) {
             MSettings.clickableRelative.setVisibility(View.VISIBLE);
         }
@@ -413,7 +461,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
             public void onClick(View view) {
                 MSettings.webView.loadUrl(String.format("javascript:playPause();"));
             }
-        });*/
+        });
 
 
         MSettings.floaty = Floaty.createInstance(this, MSettings.head, MSettings.body, NOTIFICATION_ID, notification);
@@ -565,13 +613,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
         wv.getSettings().setSupportZoom(false);
         wv.setHorizontalScrollBarEnabled(false);
         wv.setVerticalScrollBarEnabled(false);
-        wv.setWebViewClient(new WebViewClient() {
-                                    @Override
-                                    public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                                        return true;
-                                    }
-                                }
-        );
+        wv.setWebViewClient(new WebViewClient());
         //wv.getSettings().setUserAgentString("Mozilla/5.0 (Linux; Android 4.4; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36");
         wv.getSettings().setUserAgentString("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.117 Safari/537.36");
         wv.addJavascriptInterface(new JSInterface(wv), "WebPlayerInterface");
@@ -798,7 +840,9 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
 
     private void LoadFullScreenAds() {
         MobileAds.initialize(MainActivity.this, "ca-app-pub-5808367634056272~8476127349");
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice("6EE0EC7A08848B41A3A8B3C52624F39A").addTestDevice("D840C07DDBAA5E0897B010411FABE6AC").addTestDevice("778ADE18482DD7E44193371217202427").build();/*778ADE18482DD7E44193371217202427 Device Id*/
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice("6AFA29CB9314195950E590C9BEACC344")
+                .addTestDevice("0CEA9CA5F2DAED70F0678D8F2D8669A3").build();/*778ADE18482DD7E44193371217202427 Device Id*/
         final InterstitialAd interstitial = new InterstitialAd(MainActivity.this);
         interstitial.setAdUnitId(getString(R.string.admob_interstitial_id_close_service));
         interstitial.loadAd(adRequest);
