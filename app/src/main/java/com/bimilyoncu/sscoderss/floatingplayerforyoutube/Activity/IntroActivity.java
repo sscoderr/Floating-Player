@@ -31,13 +31,13 @@ public class IntroActivity extends AppIntro {
 
         SliderPage sliderPage2 = new SliderPage();
         sliderPage2.setTitle(getString(R.string.videoControlPanel));
-        sliderPage2.setImageDrawable(R.drawable.controller);
+        sliderPage2.setImageDrawable(R.drawable.service_controller);
         sliderPage2.setBgColor(Color.TRANSPARENT);
         addSlide(AppIntroFragment.newInstance(sliderPage2));
 
         SliderPage sliderPage3 = new SliderPage();
         sliderPage3.setTitle(getString(R.string.homeAndBackButtonFunction));
-        sliderPage3.setImageDrawable(R.drawable.servicekeyfunction);
+        sliderPage3.setImageDrawable(R.drawable.service_key_function);
         sliderPage3.setBgColor(Color.TRANSPARENT);
         addSlide(AppIntroFragment.newInstance(sliderPage3));
     }
