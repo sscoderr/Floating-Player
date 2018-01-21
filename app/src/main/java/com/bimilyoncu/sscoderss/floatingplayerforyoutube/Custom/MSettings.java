@@ -102,7 +102,6 @@ public class MSettings {
     public static boolean isUserVideo = false;
     public static boolean isLaterRepeate = false;
     public static boolean isFirstOpenApp = false;
-//    public static RelativeLayout clickableRelative;
     public static final String URL = "http://fsbimilyoncu.gulernet.net/player.html";
     public static byte adsCounter = 0;
     public static InterstitialAd interstitial;

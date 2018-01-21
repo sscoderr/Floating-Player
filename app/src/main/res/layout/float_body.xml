@@ -35,6 +35,7 @@
                 android:paddingLeft="9dp"
                 android:paddingRight="9dp"
                 android:singleLine="true"
+                android:textColor="#ffffff"
                 android:text="..."
                 android:textSize="15sp"
                 autofit:minTextSize="16sp" />
