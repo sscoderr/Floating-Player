@@ -85,6 +85,10 @@
     <string name="YesDeleteIt">Yes,delete it!</string>
     <string name="Deleted">Deleted!</string>
     <string name="YourHistoryHasBeenDeleted">Your history has been deleted!</string>
+    <string name="welcome">Welcome!</string>
+    <string name="thisIsThePlayerScreen">This is the player screen!</string>
+    <string name="videoControlPanel">Video Control Panel</string>
+    <string name="homeAndBackButtonFunction">Home and Back button function</string>
 
 </resources>
 

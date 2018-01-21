@@ -46,6 +46,7 @@ dependencies {
     compile 'me.grantland:autofittextview:0.2.+'
     compile 'com.pnikosis:materialish-progress:1.0'
     compile 'com.github.devlight.navigationtabstrip:navigationtabstrip:1.0.4'
+    compile 'com.github.apl-devs:appintro:v4.2.2'
     testCompile 'junit:junit:4.12'
 }
 

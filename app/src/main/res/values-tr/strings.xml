@@ -75,4 +75,8 @@
     <string name="YourHistoryHasBeenDeleted">Geçmiş silindi!</string>
     <string name="stopfinishvideoOff">Auto Play:Kapalı</string>
     <string name="stopfinishvideoOn">Auto Play:Açık</string>
+    <string name="welcome">Hoşgeldiniz!</string>
+    <string name="thisIsThePlayerScreen">Burası player ekranı!</string>
+    <string name="videoControlPanel">Video Kontrol Paneli</string>
+    <string name="homeAndBackButtonFunction">Ev ve Geri tuşlarının görevleri</string>
 </resources>

@@ -80,7 +80,7 @@ public class Floaty {
      * @param head           The head View, upon clicking it the body is to be opened
      * @param body           The body View
      * @param notificationId The notificationId for your notification
-     * @param notification   The notification which is displayed for the foreground service
+     * @param notification   The notification which is displayed for the foreground player
      * @return A Floating Window
      */
     public static synchronized Floaty createInstance(Context context, View head, View body, int notificationId, com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.Notification.Notification notification) {
@@ -110,7 +110,7 @@ public class Floaty {
     }
 
     /**
-     * Starts the service and adds it to the screen
+     * Starts the player and adds it to the screen
      */
     public void startService() {
         MSettings.CheckService = true;
@@ -119,7 +119,7 @@ public class Floaty {
     }
 
     /**
-     * Stops the service and removes it from the screen
+     * Stops the player and removes it from the screen
      */
     public void stopService() {
         MSettings.CheckService = false;

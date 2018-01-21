@@ -297,6 +297,8 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
 
         MSettings.mListForFloat.setOnScrollListener(this);
         addClickListener();
+
+        startActivity(new Intent(MainActivity.this, IntroActivity.class));
     }
 
     private void loadFloatWindow() {
@@ -367,13 +369,17 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
                     MSettings.setVideoTitle(MSettings.nextVideoTitle);
                     Toast.makeText(MainActivity.this, getString(R.string.repeatMessageOff), Toast.LENGTH_SHORT).show();
                 } else {
-                    checkRepeat = false;
-                    MSettings.isLaterRepeate = true;
-                    CounterForSimilarVideos -= 1;
-                    MSettings.currentVideoId = similarVideosList.get(CounterForSimilarVideos).getId();
-                    MSettings.setVideoTitle(similarVideosList.get(CounterForSimilarVideos).getTitle());
-                    imgRepeat.setImageResource(R.mipmap.repeat_icon_for_float2);
-                    Toast.makeText(MainActivity.this, getString(R.string.repeatMessageOn), Toast.LENGTH_SHORT).show();
+                    try {
+                        checkRepeat = false;
+                        MSettings.isLaterRepeate = true;
+                        CounterForSimilarVideos -= 1;
+                        MSettings.currentVideoId = similarVideosList.get(CounterForSimilarVideos).getId();
+                        MSettings.setVideoTitle(similarVideosList.get(CounterForSimilarVideos).getTitle());
+                        imgRepeat.setImageResource(R.mipmap.repeat_icon_for_float2);
+                        Toast.makeText(MainActivity.this, getString(R.string.repeatMessageOn), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
                 checkSuffle = false;
                 imgSuffle.setImageResource(R.mipmap.suffle_icon_for_float2);
