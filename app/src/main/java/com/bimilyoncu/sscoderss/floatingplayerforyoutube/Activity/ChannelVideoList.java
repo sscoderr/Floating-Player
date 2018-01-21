@@ -226,7 +226,7 @@ public class ChannelVideoList extends AppCompatActivity implements OnScrollListe
             public void onClick(View view) {
                 if (!checkRepeat) {
                     checkRepeat = true;
-                    imgRepeat.setImageResource(R.mipmap.repeat_black_icon_for_float);
+                    imgRepeat.setImageResource(R.mipmap.repeat_black_icon_for_float2);
                     MSettings.currentVideoId = MSettings.nextVideoId;
                     MSettings.setVideoTitle(MSettings.nextVideoTitle);
                     Toast.makeText(ChannelVideoList.this, getString(R.string.repeatMessageOff), Toast.LENGTH_SHORT).show();
@@ -237,11 +237,11 @@ public class ChannelVideoList extends AppCompatActivity implements OnScrollListe
                     MSettings.currentVideoId = similarVideosList.get(CounterForSimilarVideos).getId();
                     MSettings.setVideoTitle(similarVideosList.get(CounterForSimilarVideos).getTitle());
                     Toast.makeText(MSettings.activeActivity, String.valueOf(CounterForSimilarVideos), Toast.LENGTH_SHORT).show();
-                    imgRepeat.setImageResource(R.mipmap.repeat_icon_for_float);
+                    imgRepeat.setImageResource(R.mipmap.repeat_icon_for_float2);
                     Toast.makeText(ChannelVideoList.this, getString(R.string.repeatMessageOn), Toast.LENGTH_SHORT).show();
                 }
                 checkSuffle = false;
-                imgSuffle.setImageResource(R.mipmap.suffle_icon_for_float);
+                imgSuffle.setImageResource(R.mipmap.suffle_icon_for_float2);
             }
         });
         imgSuffle.setOnClickListener(new View.OnClickListener() {
@@ -249,16 +249,16 @@ public class ChannelVideoList extends AppCompatActivity implements OnScrollListe
             public void onClick(View view) {
                 if (!checkSuffle) {
                     checkSuffle = true;
-                    imgSuffle.setImageResource(R.mipmap.suffle_black_icon_for_float);
+                    imgSuffle.setImageResource(R.mipmap.suffle_black_icon_for_float2);
                     MSettings.suffleVideo();
                     Toast.makeText(ChannelVideoList.this, getString(R.string.repeatMessageOff), Toast.LENGTH_SHORT).show();
                 } else {
                     checkSuffle = false;
-                    imgSuffle.setImageResource(R.mipmap.suffle_icon_for_float);
+                    imgSuffle.setImageResource(R.mipmap.suffle_icon_for_float2);
                     Toast.makeText(ChannelVideoList.this, getString(R.string.repeatMessageOn), Toast.LENGTH_SHORT).show();
                 }
                 checkRepeat = false;
-                imgRepeat.setImageResource(R.mipmap.repeat_icon_for_float);
+                imgRepeat.setImageResource(R.mipmap.repeat_icon_for_float2);
             }
         });
         imageViewStopFinishVideo.setOnClickListener(new View.OnClickListener() {
@@ -266,11 +266,11 @@ public class ChannelVideoList extends AppCompatActivity implements OnScrollListe
             public void onClick(View view) {
                 if (!MSettings.videoFinishStopVideo) {
                     MSettings.videoFinishStopVideo = true;
-                    imageViewStopFinishVideo.setImageResource(R.mipmap.autoplay_off);
+                    imageViewStopFinishVideo.setImageResource(R.mipmap.autoplay_off2);
                     Toast.makeText(ChannelVideoList.this, getString(R.string.stopfinishvideoOff), Toast.LENGTH_SHORT).show();
                 } else {
                     MSettings.videoFinishStopVideo = false;
-                    imageViewStopFinishVideo.setImageResource(R.mipmap.autoplay_on);
+                    imageViewStopFinishVideo.setImageResource(R.mipmap.autoplay_on2);
                     Toast.makeText(ChannelVideoList.this, getString(R.string.stopfinishvideoOn), Toast.LENGTH_SHORT).show();
                 }
             }
