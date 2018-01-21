@@ -64,7 +64,7 @@ public class JSInterface {
             public void run() {
                 if (Integer.valueOf(android.os.Build.VERSION.SDK) < 21 && !MSettings.isFirstOpenApp) {
                     MSettings.isFirstOpenApp = true;
-                    MSettings.clickableRelative.setVisibility(View.VISIBLE);
+//                    MSettings.clickableRelative.setVisibility(View.VISIBLE);
                 }
             }
         });
