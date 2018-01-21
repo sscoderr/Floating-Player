@@ -451,19 +451,6 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
 
         ServiceSearch();
 
-
-//        MSettings.clickableRelative = (RelativeLayout) MSettings.body.findViewById(R.id.clickRelative);
-//        if (Integer.valueOf(android.os.Build.VERSION.SDK) >= 21 && !MSettings.isFirstOpenApp) {
-//            MSettings.clickableRelative.setVisibility(View.VISIBLE);
-//        }
-//        MSettings.clickableRelative.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                MSettings.webView.loadUrl(String.format("javascript:playPause();"));
-//            }
-//        });
-
-
         MSettings.floaty = Floaty.createInstance(this, MSettings.head, MSettings.body, NOTIFICATION_ID, notification);
         MSettings.mHandler = new Handler();
         MSettings.webView = (WebView) MSettings.body.findViewById(R.id.mWebView);

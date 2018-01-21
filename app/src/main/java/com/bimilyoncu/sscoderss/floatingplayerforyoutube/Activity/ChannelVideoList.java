@@ -277,18 +277,6 @@ public class ChannelVideoList extends AppCompatActivity implements OnScrollListe
         });
 
 
-        /*MSettings.clickableRelative = (RelativeLayout) MSettings.body.findViewById(R.id.clickRelative);
-        if (Integer.valueOf(android.os.Build.VERSION.SDK) >= 21 && !MSettings.isFirstOpenApp) {
-            MSettings.clickableRelative.setVisibility(View.VISIBLE);
-        }
-        MSettings.clickableRelative.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MSettings.webView.loadUrl(String.format("javascript:playPause();"));
-            }
-        });*/
-
-
         MSettings.floaty = Floaty.createInstance(this, MSettings.head, MSettings.body, NOTIFICATION_ID, notification);
         MSettings.mHandler = new Handler();
         MSettings.webView = (WebView) MSettings.body.findViewById(R.id.mWebView);
@@ -337,7 +325,13 @@ public class ChannelVideoList extends AppCompatActivity implements OnScrollListe
         wv.getSettings().setSupportZoom(false);
         wv.setHorizontalScrollBarEnabled(false);
         wv.setVerticalScrollBarEnabled(false);
-        wv.setWebViewClient(new WebViewClient());
+        wv.setWebViewClient(new WebViewClient() {
+                                @Override
+                                public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                                    return true;
+                                }
+                            }
+        );
         //wv.getSettings().setUserAgentString("Mozilla/5.0 (Linux; Android 4.4; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36");
         wv.getSettings().setUserAgentString("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.117 Safari/537.36");
         wv.addJavascriptInterface(new JSInterface(wv), "WebPlayerInterface");
