@@ -277,7 +277,7 @@ public class ChannelVideoList extends AppCompatActivity implements OnScrollListe
         });
 
 
-        MSettings.clickableRelative = (RelativeLayout) MSettings.body.findViewById(R.id.clickRelative);
+        /*MSettings.clickableRelative = (RelativeLayout) MSettings.body.findViewById(R.id.clickRelative);
         if (Integer.valueOf(android.os.Build.VERSION.SDK) >= 21 && !MSettings.isFirstOpenApp) {
             MSettings.clickableRelative.setVisibility(View.VISIBLE);
         }
@@ -286,7 +286,7 @@ public class ChannelVideoList extends AppCompatActivity implements OnScrollListe
             public void onClick(View view) {
                 MSettings.webView.loadUrl(String.format("javascript:playPause();"));
             }
-        });
+        });*/
 
 
         MSettings.floaty = Floaty.createInstance(this, MSettings.head, MSettings.body, NOTIFICATION_ID, notification);

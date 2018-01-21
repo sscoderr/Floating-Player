@@ -4,8 +4,10 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
@@ -366,14 +368,13 @@ public class Floaty {
             windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
             metrics = new DisplayMetrics();
             windowManager.getDefaultDisplay().getMetrics(metrics);
-            params = new WindowManager.LayoutParams(
+            params=new WindowManager.LayoutParams(
                     WindowManager.LayoutParams.WRAP_CONTENT,
                     WindowManager.LayoutParams.WRAP_CONTENT,
                     WindowManager.LayoutParams.TYPE_PHONE,
                     WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                     PixelFormat.TRANSLUCENT);
             params.gravity = Gravity.TOP | Gravity.LEFT;
-
             if (floaty.confChange) {
                 floaty.confChange = false;
                 if (floaty.oldX < (floaty.oldWidth / 2)) {
@@ -441,8 +442,67 @@ public class Floaty {
             floaty.head.getLocationOnScreen(clickLocation);
             floaty.body.setVisibility(View.VISIBLE);
             mLinearLayout.setBackgroundColor(Color.argb(0, 0, 0, 0));
-
             windowManager.updateViewLayout(mLinearLayout, params);
         }
+
+       /* new WindowManager.LayoutParams(
+        ViewGroup.LayoutParams.WRAP_CONTENT,
+        ViewGroup.LayoutParams.WRAP_CONTENT, 0, 0,
+        WindowManager.LayoutParams.TYPE_SYSTEM_ERROR,
+        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                            | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+                            | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+                            | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
+                            | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON ,
+        PixelFormat.RGBA_8888);*/   /**kilit ekranina alma TYPE_SYSTEM_ERROR **/
+       /* private BroadcastReceiver overlayReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String action = intent.getAction();
+                Log.d("TAG", "[onReceive]" + action);
+                if (action.equals(Intent.ACTION_SCREEN_ON)) {
+                    params=new WindowManager.LayoutParams(
+                            WindowManager.LayoutParams.WRAP_CONTENT,
+                            WindowManager.LayoutParams.WRAP_CONTENT,
+                            WindowManager.LayoutParams.TYPE_PHONE,
+                            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                            PixelFormat.TRANSLUCENT);
+                    windowManager.updateViewLayout(mLinearLayout, params);
+                }
+                else if (action.equals(Intent.ACTION_USER_PRESENT)) {
+                    params=new WindowManager.LayoutParams(
+                            WindowManager.LayoutParams.WRAP_CONTENT,
+                            WindowManager.LayoutParams.WRAP_CONTENT,
+                            WindowManager.LayoutParams.TYPE_PHONE,
+                            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                            PixelFormat.TRANSLUCENT);
+                    windowManager.updateViewLayout(mLinearLayout, params);
+                }
+                else if (action.equals(Intent.ACTION_SCREEN_OFF)) {
+                    params= new WindowManager.LayoutParams(
+                            ViewGroup.LayoutParams.WRAP_CONTENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT, 0, 0,
+                            WindowManager.LayoutParams.TYPE_SYSTEM_ERROR,
+                            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                                    | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+                                    | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+                                    | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
+                                    | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON ,
+                            PixelFormat.RGBA_8888);
+                    windowManager.updateViewLayout(mLinearLayout, params);
+                }
+            }
+        };
+        private void registerOverlayReceiver() {
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(Intent.ACTION_SCREEN_ON);
+            filter.addAction(Intent.ACTION_SCREEN_OFF);
+            filter.addAction(Intent.ACTION_USER_PRESENT);
+            registerReceiver(overlayReceiver, filter);
+        }
+
+        private void unregisterOverlayReceiver() {
+            unregisterReceiver(overlayReceiver);
+        }*/
     }
 }

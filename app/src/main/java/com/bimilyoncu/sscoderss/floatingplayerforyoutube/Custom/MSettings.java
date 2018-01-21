@@ -149,7 +149,7 @@ public class MSettings {
                             mHandler = new Handler();
                             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activeActivity);
                             if (preferences.getBoolean("isHighQuality", false)) {
-                                webView.loadUrl(String.format("javascript:loadVideoById(\"%s\");", new Object[]{currentVideoId}));
+                                webView.loadUrl(String.format("javascript:loadVideoById(\"%s\",\"highres\");", new Object[]{currentVideoId}));
                             } else
                                 webView.loadUrl(String.format("javascript:loadVideoById(\"%s\",\"small\");", new Object[]{currentVideoId}));
 

@@ -85,13 +85,7 @@
 
         </WebView>
 
-        <RelativeLayout
-            android:id="@+id/clickRelative"
-            android:layout_width="fill_parent"
-            android:layout_height="140dp"
-            android:visibility="invisible">
 
-        </RelativeLayout>
     </RelativeLayout>
 
     <!--<include

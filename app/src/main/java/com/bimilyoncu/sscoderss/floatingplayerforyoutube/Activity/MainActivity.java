@@ -404,7 +404,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
         ServiceSearch();
 
 
-        MSettings.clickableRelative = (RelativeLayout) MSettings.body.findViewById(R.id.clickRelative);
+        /*MSettings.clickableRelative = (RelativeLayout) MSettings.body.findViewById(R.id.clickRelative);
         if (Integer.valueOf(android.os.Build.VERSION.SDK) >= 21 && !MSettings.isFirstOpenApp) {
             MSettings.clickableRelative.setVisibility(View.VISIBLE);
         }
@@ -413,7 +413,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
             public void onClick(View view) {
                 MSettings.webView.loadUrl(String.format("javascript:playPause();"));
             }
-        });
+        });*/
 
 
         MSettings.floaty = Floaty.createInstance(this, MSettings.head, MSettings.body, NOTIFICATION_ID, notification);
@@ -565,7 +565,13 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
         wv.getSettings().setSupportZoom(false);
         wv.setHorizontalScrollBarEnabled(false);
         wv.setVerticalScrollBarEnabled(false);
-        wv.setWebViewClient(new WebViewClient());
+        wv.setWebViewClient(new WebViewClient() {
+                                    @Override
+                                    public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                                        return true;
+                                    }
+                                }
+        );
         //wv.getSettings().setUserAgentString("Mozilla/5.0 (Linux; Android 4.4; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36");
         wv.getSettings().setUserAgentString("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.117 Safari/537.36");
         wv.addJavascriptInterface(new JSInterface(wv), "WebPlayerInterface");
@@ -792,8 +798,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
 
     private void LoadFullScreenAds() {
         MobileAds.initialize(MainActivity.this, "ca-app-pub-5808367634056272~8476127349");
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice("6AFA29CB9314195950E590C9BEACC344").build();/*778ADE18482DD7E44193371217202427 Device Id*/
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice("6EE0EC7A08848B41A3A8B3C52624F39A").addTestDevice("D840C07DDBAA5E0897B010411FABE6AC").addTestDevice("778ADE18482DD7E44193371217202427").build();/*778ADE18482DD7E44193371217202427 Device Id*/
         final InterstitialAd interstitial = new InterstitialAd(MainActivity.this);
         interstitial.setAdUnitId(getString(R.string.admob_interstitial_id_close_service));
         interstitial.loadAd(adRequest);

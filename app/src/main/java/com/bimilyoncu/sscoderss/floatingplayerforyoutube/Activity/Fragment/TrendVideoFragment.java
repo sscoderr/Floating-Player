@@ -59,8 +59,7 @@ public class TrendVideoFragment extends Fragment implements OnScrollListener  {
         netControl = new NetControl(getActivity());
 
         AdView mAdView = (AdView)v.findViewById(R.id.adViewTrendVideo);
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice("6AFA29CB9314195950E590C9BEACC344").build();
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice("6EE0EC7A08848B41A3A8B3C52624F39A").addTestDevice("D840C07DDBAA5E0897B010411FABE6AC").addTestDevice("778ADE18482DD7E44193371217202427").build();
         mAdView.loadAd(adRequest);
 
         myView = li.inflate(R.layout.loading_result, null);
