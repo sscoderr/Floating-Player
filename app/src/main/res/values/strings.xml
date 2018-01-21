@@ -13,6 +13,7 @@
     <string name="title_activity_main">Floating Player</string>
     <string name="filter">Filter</string>
     <string name="search">Search</string>
+    <string name="bigSearch">SEARCH</string>
     <string name="optionMenuItemOne">Add Favorites</string>
     <string name="optionMenuItemTwo">Share</string>
     <string name="optionMenuItemDelete">Delete</string>
@@ -41,8 +42,8 @@
     <string name="suffleMessageOff">Suffle Mode Off</string>
     <string name="repeatMessageOn">Repeat Mode On</string>
     <string name="repeatMessageOff">Repeat Mode Off</string>
-    <string name="stopfinishvideoOn" translatable="false">Auto Play:ON</string>
-    <string name="stopfinishvideoOff" translatable="false">Auto Play:OFF</string>
+    <string name="stopfinishvideoOn">Auto Play:ON</string>
+    <string name="stopfinishvideoOff">Auto Play:OFF</string>
 
 
     <!-- TODO: internetConnection Toast Message -->
@@ -76,12 +77,6 @@
     <string name="recommented_list_is_empty">Recommented List Is Empty!</string>
 
 
-
-
-
-
-
-    <string name="dialog_default_title">Here\'s a message!</string>
     <string name="dialog_ok">OK</string>
     <string name="dialog_cancel">Cancel</string>
     <string name="LOADING">Loading...</string>

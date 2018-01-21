@@ -14,6 +14,7 @@
     <string name="title_activity_main">Floating Player</string>
     <string name="filter">Filter</string>
     <string name="search">Arama</string>
+    <string name="bigSearch">ARAMA</string>
     <string name="optionMenuItemOne">Favorilere Ekle</string>
     <string name="optionMenuItemTwo">Paylaş</string>
     <string name="optionMenuItemDelete">Sil</string>
@@ -64,4 +65,14 @@
     <string name="favorites_list_is_empty">Favoriler Listesi Boş!</string>
     <string name="history_list_is_empty">Geçmiş Listesi Boş!</string>
     <string name="recommented_list_is_empty">Önerilen Listesi Boş!</string>
+    <string name="AreYouSure">Emin misiniz?</string>
+    <string name="Deleted">Silindi!</string>
+    <string name="DeleteThisHistory">Geçmişi Sil!</string>
+    <string name="dialog_cancel">Vazgeç</string>
+    <string name="dialog_ok">Tamam</string>
+    <string name="LOADING">Yükleniyor...</string>
+    <string name="YesDeleteIt">Evet, sil!</string>
+    <string name="YourHistoryHasBeenDeleted">Geçmiş silindi!</string>
+    <string name="stopfinishvideoOff">Auto Play:Kapalı</string>
+    <string name="stopfinishvideoOn">Auto Play:Açık</string>
 </resources>
