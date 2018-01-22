@@ -42,41 +42,43 @@ public class ConnectorForUserVideo {
                 request.getHeaders().set("X-Android-Cert", SHA1);
             }
         }).setApplicationName(ct.getString(R.string.app_name)).build();
-        try {
+        try{
             myQuery = youtube.videos().list("snippet,contentDetails,statistics");
             myQuery.setKey(YoutubeConnector.KEY);
-        } catch (IOException e) {
-            Log.d("YC", "Could not initialize: " + e);
+        }catch(IOException e){
+            Log.d("YC", "Could not initialize: "+e);
         }
     }
 
     private ArrayList<VideoItem> items = new ArrayList<>();
 
-    public ArrayList<VideoItem> getVideoItems(String[] videoIds) {
+    public ArrayList<VideoItem> getVideoItems(final String videoIds) {
         try {
-            for (int j = 0; j < videoIds.length; j++) {
-                if (videoIds[j] != null) {
-                    myQuery.setId(videoIds[j].toString());
+                if (videoIds != null) {
+                    myQuery.setId(videoIds.toString());
                     VideoListResponse response = myQuery.execute();
                     List<Video> results = response.getItems();
-                    try {
-                        VideoItem item = new VideoItem();
-                        item.setTitle(results.get(0).getSnippet().getTitle());
-                        item.setThumbnailURL(results.get(0).getSnippet().getThumbnails().getMedium().getUrl());
-                        if (results.get(0).getId() != null) {
-                            item.setChanelTitle(results.get(0).getSnippet().getChannelTitle(), false);
-                            item.setViewCount(results.get(0).getStatistics().getViewCount().toString(), Byte.parseByte(String.valueOf("0")));
-                            item.setDuration(results.get(0).getContentDetails().getDuration());
-                            item.setId(results.get(0).getId());
-                            item.setPublishedAt(results.get(0).getSnippet().getPublishedAt().toString());
+                    for (Video result : results) {
+                        try {
+                            if (result.getId()!= null) {
+                                VideoItem item = new VideoItem();
+                                item.setTitle(result.getSnippet().getTitle());
+                                item.setThumbnailURL(result.getSnippet().getThumbnails().getMedium().getUrl());
+                                if (result.getId() != null) {
+                                    item.setChanelTitle(result.getSnippet().getChannelTitle(), false);
+                                    item.setViewCount(result.getStatistics().getViewCount().toString(), Byte.parseByte(String.valueOf("0")));
+                                    item.setDuration(result.getContentDetails().getDuration());
+                                    item.setId(result.getId());
+                                    item.setPublishedAt(result.getSnippet().getPublishedAt().toString());
+                                }
+                                items.add(item);
+                            }
+                        } catch (final Exception e) {
                         }
-                        items.add(item);
-                    } catch (Exception e) {
                     }
-                } else break;
-            }
+                }
             return items;
-        } catch (IOException e) {
+        } catch (final IOException e) {
             return null;
         }
     }
