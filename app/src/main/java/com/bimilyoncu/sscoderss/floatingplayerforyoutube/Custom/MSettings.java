@@ -393,7 +393,20 @@ public class MSettings {
         }
     }
 
+    private static Typeface pragatinarrow, VarelaRound_Regular;
     public static Typeface getFont(){
-        return Typeface.createFromAsset(MSettings.activeActivity.getAssets(), "pragatinarrow.ttf");
+        if (pragatinarrow == null) {
+            pragatinarrow = Typeface.createFromAsset(MSettings.activeActivity.getAssets(), "pragatinarrow.ttf");
+        }
+
+        return pragatinarrow;
+    }
+
+    public static Typeface getFontVarelaRound(){
+        if (VarelaRound_Regular == null) {
+            VarelaRound_Regular = Typeface.createFromAsset(MSettings.activeActivity.getAssets(), "VarelaRound-Regular.ttf");
+        }
+
+        return VarelaRound_Regular;
     }
 }

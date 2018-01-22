@@ -83,8 +83,9 @@
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="MyMaterialTheme.NoActionBar">
+    <style name="MyMaterialTheme.NoActionBar" parent="MyMaterialTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 </resources>
+<!---->

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.SlideOnboardingActivity"
+    android:orientation="vertical">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/slide_viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/material_blue_grey_95">
+
+    </android.support.v4.view.ViewPager>
+
+    <LinearLayout
+        android:id="@+id/slide_linearTab"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/material_blue_grey_80"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/activitySlide_buttonBack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/material_blue_grey_80"
+                android:text="@string/back"
+                android:textSize="13sp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/slide_linearDot"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/activitySlide_buttonNext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/material_blue_grey_80"
+                android:text="@string/next"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

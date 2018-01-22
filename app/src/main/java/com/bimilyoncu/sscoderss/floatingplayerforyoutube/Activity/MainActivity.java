@@ -64,6 +64,8 @@ import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Connector.ServiceSearch
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Connector.YoutubeConnector;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.NetControl;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Database.Item.dbFirstLoading;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Database.Usingdb;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Floaties.Floaty;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Floaties.JSInterface;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Item.VideoItem;
@@ -298,7 +300,14 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
         MSettings.mListForFloat.setOnScrollListener(this);
         addClickListener();
 
-        startActivity(new Intent(MainActivity.this, IntroActivity.class));
+        Usingdb usingdb = new Usingdb(this);
+        if (usingdb.FirstLoading() == null) {// Sonraki girişlerde girmeyecek sadece ilk giriş için burası
+            dbFirstLoading firstLoading = new dbFirstLoading();
+            firstLoading.setFirstLoading(1); // True yap
+            usingdb.addFirstLoading(firstLoading);
+
+            startActivity(new Intent(MainActivity.this, SlideOnboardingActivity.class));
+        }
     }
 
     private void loadFloatWindow() {

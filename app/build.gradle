@@ -27,6 +27,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     //compile 'com.github.ksoichiro:android-observablescrollview:1.6.0'
     //compile 'com.nineoldandroids:library:2.4.0'
@@ -49,6 +50,7 @@ dependencies {
     compile 'com.github.apl-devs:appintro:v4.2.2'
     testCompile 'junit:junit:4.12'
 }
+
 
 
 

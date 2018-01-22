@@ -79,4 +79,8 @@
     <string name="thisIsThePlayerScreen">Burası player ekranı!</string>
     <string name="videoControlPanel">Video Kontrol Paneli</string>
     <string name="homeAndBackButtonFunction">Ev ve Geri tuşlarının görevleri</string>
+
+    <string name="next">İleri</string>
+    <string name="back">Geri</string>
+    <string name="finish">Bitir</string>
 </resources>
