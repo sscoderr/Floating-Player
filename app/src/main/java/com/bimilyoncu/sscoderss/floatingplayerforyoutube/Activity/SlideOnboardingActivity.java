@@ -41,6 +41,7 @@ public class SlideOnboardingActivity extends AppCompatActivity {
         linearLayoutSlideDot = (LinearLayout) findViewById(R.id.slide_linearDot);
 
         adapterSlider = new AdapterSlider(this);
+        viewPager.setOffscreenPageLimit(3);
         viewPager.setAdapter(adapterSlider);
 
 //        textViewBack = (TextView) findViewById(R.id.activitySlide_textBack);
