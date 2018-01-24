@@ -732,7 +732,6 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
         });
     }
 
-
     private void pickAccount() {
         String[] accountTypes = new String[]{"com.google"};
         Intent intent = AccountPicker.newChooseAccountIntent(null, null, accountTypes, false, null, null, null, null);

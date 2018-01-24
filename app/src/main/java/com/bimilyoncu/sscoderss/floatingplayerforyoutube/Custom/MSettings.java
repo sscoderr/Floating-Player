@@ -81,6 +81,8 @@ public class MSettings {
     public static String nextVideoId;
     public static String currentVideoTitle;
     public static String nextVideoTitle;
+
+
     public static Floaty floaty;
     public static View head;
     public static WebView webView;
@@ -93,7 +95,7 @@ public class MSettings {
     public static Boolean isPlayedVideo = false;
     public static Integer CounterForSimilarVideos = 2;
     public static boolean checkRepeat = false;
-    public static boolean checkSuffle = false;
+    public static boolean checkSuffle = true;
     public static boolean videoFinishStopVideo = false;
     public static ArrayList<Integer> playedPoss = new ArrayList<>();
     private static int counterForSuffle = 0;
@@ -134,6 +136,7 @@ public class MSettings {
                             getVideoTitle();
                             webView.onResume();
                             webView.resumeTimers();
+
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                                 if (!Settings.canDrawOverlays(activeActivity)) {
                                     Toast.makeText(activeActivity, activeActivity.getString(R.string.permissionMessage), Toast.LENGTH_LONG).show();
@@ -143,14 +146,18 @@ public class MSettings {
                                     activeActivity.startActivity(i);
                                 } else
                                     floaty.startService();
-                            } else
+                            } else {
                                 floaty.startService();
+                            }
+
                             mHandler = new Handler();
                             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activeActivity);
+
                             if (preferences.getBoolean("isHighQuality", false)) {
                                 webView.loadUrl(String.format("javascript:loadVideoById(\"%s\",\"highres\");", new Object[]{currentVideoId}));
-                            } else
+                            } else {
                                 webView.loadUrl(String.format("javascript:loadVideoById(\"%s\",\"small\");", new Object[]{currentVideoId}));
+                            }
 
                             DatabaseForPlaylists db = new DatabaseForPlaylists(activeActivity);
                             db.addVideoHistory(currentVideoId, activeActivity);
@@ -165,8 +172,9 @@ public class MSettings {
                                 setVideoTitle(similarVideosList.get(CounterForSimilarVideos).getTitle());
                                 CounterForSimilarVideos += 1;
                                 //Toast.makeText(activeActivity,"Girdi", Toast.LENGTH_LONG).show();
-                            } else if (checkSuffle)
+                            } else if (checkSuffle) {
                                 suffleVideo();
+                            }
                             //webView.loadUrl("https://www.youtube.com/embed/" + currentVideoId + "?autoplay=1;rel=0&amp;showinfo=0&?Version=3&loop=1&playlist=" + currentVideoId);
                         } else {
                             Toast.makeText(activeActivity, activeActivity.getString(R.string.internetConnectionMessage), Toast.LENGTH_LONG).show();

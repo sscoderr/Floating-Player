@@ -89,11 +89,11 @@
     <string name="thisIsThePlayerScreen">This is the player screen!</string>
     <string name="videoControlPanel">Video Control Panel</string>
     <string name="homeAndBackButtonFunction">Home and Back button function</string>
-    <string name="title_activity_slide_onboarding">SlideOnboardingActivity</string>
 
     <string name="next">Next</string>
     <string name="back">Back</string>
     <string name="finish">Finish</string>
+    <string name="help">Help</string>
 
 </resources>
 

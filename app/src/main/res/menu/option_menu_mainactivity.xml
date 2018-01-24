@@ -25,4 +25,9 @@
         app:showAsAction="never|withText">
     </item>
 
+    <item android:id="@+id/help_button"
+        android:title="@string/help"
+        app:showAsAction="never"
+        android:layout_width="wrap_content" />
+
 </menu>

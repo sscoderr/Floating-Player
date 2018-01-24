@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.bimilyoncu.sscoderss.floatingplayerforyoutube"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 27
         versionCode 7
         versionName "1.6"

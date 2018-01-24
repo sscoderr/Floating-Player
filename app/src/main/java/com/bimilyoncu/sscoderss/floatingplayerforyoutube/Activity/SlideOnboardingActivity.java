@@ -2,6 +2,7 @@ package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.AdapterSlider;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings;
@@ -129,4 +131,9 @@ public class SlideOnboardingActivity extends AppCompatActivity {
 
         }
     };
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }
