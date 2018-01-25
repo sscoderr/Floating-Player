@@ -49,9 +49,7 @@ public class JSInterface {
     public void onPlayerReady(int paramInt1, int paramInt2) {
         this.wv.post(new Runnable() {
             public void run() {
-                MSettings.currentVideoId = MSettings.nextVideoId;
-                if (MSettings.nextVideoTitle != null)
-                    MSettings.currentVideoTitle = MSettings.nextVideoTitle;
+                MSettings.currentVItem=MSettings.similarVideosList.get(MSettings.CounterForSimilarVideos-1);
                 MSettings.LoadVideo();
             }
         });

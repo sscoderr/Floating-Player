@@ -110,11 +110,9 @@ public class TrendVideoFragment extends Fragment implements OnScrollListener  {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> av, View v, int pos, long id) {
-                MSettings.CounterForSimilarVideos=2;
+                MSettings.CounterForSimilarVideos=1;
                 playedPoss=new ArrayList<Integer>();
-                MSettings.currentVideoId = searchResults.get(pos).getId();
-                MSettings.playedVideoPos=pos;
-                MSettings.setVideoTitle(searchResults.get(pos).getTitle());
+                MSettings.currentVItem = searchResults.get(pos);
                 MSettings.activeActivity = getActivity();
                 MainActivity mainActivity = new MainActivity();
                 mainActivity.getSimilarVideos(String.valueOf(searchResults.get(pos).getId()),false,false,false,new String[]{});

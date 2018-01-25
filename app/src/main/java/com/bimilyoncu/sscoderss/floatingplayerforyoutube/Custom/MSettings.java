@@ -77,11 +77,6 @@ public class MSettings {
 
     public static String countryCode;
 
-    public static String currentVideoId;
-    public static String nextVideoId;
-    public static String currentVideoTitle;
-    public static String nextVideoTitle;
-
 
     public static Floaty floaty;
     public static View head;
@@ -91,11 +86,10 @@ public class MSettings {
     public static Activity activeActivity;
     public static CustomAdapter mAdapter;
     public static List<VideoItem> similarVideosList;
-    public static Integer playedVideoPos;
     public static Boolean isPlayedVideo = false;
-    public static Integer CounterForSimilarVideos = 2;
+    public static Integer CounterForSimilarVideos = 1;
     public static boolean checkRepeat = false;
-    public static boolean checkSuffle = true;
+    public static boolean checkSuffle = false;
     public static boolean videoFinishStopVideo = false;
     public static ArrayList<Integer> playedPoss = new ArrayList<>();
     private static int counterForSuffle = 0;
@@ -108,6 +102,9 @@ public class MSettings {
     public static byte adsCounter = 0;
     public static InterstitialAd interstitial;
     public static Token token = new Token();
+    public static VideoItem currentVItem;
+    public static boolean isDontLoadingVideo=false;
+    public static boolean similarVideosIsLoaded=false;
 
     public static void LoadVideo() {
         activeActivity.runOnUiThread(new Runnable() {
@@ -117,65 +114,71 @@ public class MSettings {
                     if (!videoFinishStopVideo) {
                         NetControl netControl = new NetControl(activeActivity);
                         if (netControl.isOnline()) {
+                            if (checkRepeat)
+                                webView.loadUrl(String.format("javascript:seekTo(\"%s\");", new Object[]{0}));
+                            else {
+                                if (floaty.notification != null) {
+                                    if (currentVItem.getTitle() != null) {
+                                        String Title = currentVItem.getTitle();
+                                        if (Title.length() > 25) {
+                                            Title = Title.substring(0, 25) + "...";
+                                        }
 
-                            if (floaty.notification != null) {
-                                if (currentVideoTitle != null) {
-                                    String Title = currentVideoTitle;
-                                    if (Title.length() > 25) {
-                                        Title = Title.substring(0, 25) + "...";
+                                        floaty.notification.getRemoteViews().setTextViewText(R.id.textview_notificatilon_music, Title);
+                                    } else {
+                                        floaty.notification.getRemoteViews().setTextViewText(R.id.textview_notificatilon_music, "??");
                                     }
+                                }
+                                getVideoTitle();
+                                webView.onResume();
+                                webView.resumeTimers();
 
-                                    floaty.notification.getRemoteViews().setTextViewText(R.id.textview_notificatilon_music, Title);
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                    if (!Settings.canDrawOverlays(activeActivity)) {
+                                        Toast.makeText(activeActivity, activeActivity.getString(R.string.permissionMessage), Toast.LENGTH_LONG).show();
+                                        Intent i = activeActivity.getBaseContext().getPackageManager()
+                                                .getLaunchIntentForPackage(activeActivity.getBaseContext().getPackageName());
+                                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        activeActivity.startActivity(i);
+                                    } else
+                                        floaty.startService();
                                 } else {
-                                    floaty.notification.getRemoteViews().setTextViewText(R.id.textview_notificatilon_music, "??");
-                                }
-                            }
-
-                            nextVideoId = currentVideoId;
-                            nextVideoTitle = currentVideoTitle;
-                            getVideoTitle();
-                            webView.onResume();
-                            webView.resumeTimers();
-
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                if (!Settings.canDrawOverlays(activeActivity)) {
-                                    Toast.makeText(activeActivity, activeActivity.getString(R.string.permissionMessage), Toast.LENGTH_LONG).show();
-                                    Intent i = activeActivity.getBaseContext().getPackageManager()
-                                            .getLaunchIntentForPackage(activeActivity.getBaseContext().getPackageName());
-                                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    activeActivity.startActivity(i);
-                                } else
                                     floaty.startService();
-                            } else {
-                                floaty.startService();
-                            }
-
-                            mHandler = new Handler();
-                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activeActivity);
-
-                            if (preferences.getBoolean("isHighQuality", false)) {
-                                webView.loadUrl(String.format("javascript:loadVideoById(\"%s\",\"highres\");", new Object[]{currentVideoId}));
-                            } else {
-                                webView.loadUrl(String.format("javascript:loadVideoById(\"%s\",\"small\");", new Object[]{currentVideoId}));
-                            }
-
-                            DatabaseForPlaylists db = new DatabaseForPlaylists(activeActivity);
-                            db.addVideoHistory(currentVideoId, activeActivity);
-                            MyDateFragment.isHaveUpdate = true;
-
-                            if (!checkRepeat && !checkSuffle) {
-                                if (isLaterRepeate) {
-                                    CounterForSimilarVideos += 1;
-                                    isLaterRepeate = false;
                                 }
-                                currentVideoId = similarVideosList.get(CounterForSimilarVideos).getId();
-                                setVideoTitle(similarVideosList.get(CounterForSimilarVideos).getTitle());
-                                CounterForSimilarVideos += 1;
-                                //Toast.makeText(activeActivity,"Girdi", Toast.LENGTH_LONG).show();
-                            } else if (checkSuffle) {
-                                suffleVideo();
+
+                                mHandler = new Handler();
+                                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activeActivity);
+
+                                if (preferences.getBoolean("isHighQuality", false)) {
+                                    webView.loadUrl(String.format("javascript:loadVideoById(\"%s\",\"highres\");", new Object[]{currentVItem.getId()}));
+                                } else {
+                                    webView.loadUrl(String.format("javascript:loadVideoById(\"%s\",\"small\");", new Object[]{currentVItem.getId()}));
+                                }
+
+                                DatabaseForPlaylists db = new DatabaseForPlaylists(activeActivity);
+                                db.addVideoHistory(currentVItem.getId(), activeActivity);
+                                MyDateFragment.isHaveUpdate = true;
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            while (!similarVideosIsLoaded);
+                                            if (!checkRepeat && !checkSuffle) {
+                                                currentVItem=similarVideosList.get(CounterForSimilarVideos);
+                                                CounterForSimilarVideos += 1;
+                                            } else if (checkSuffle)
+                                                currentVItem=similarVideosList.get(suffleVideo());
+                                        }
+                                        catch (Exception e){
+                                            if (CounterForSimilarVideos>=similarVideosList.size())
+                                                CounterForSimilarVideos=0;
+                                        }
+                                    }
+                                }).start();
+                                /**Bir tane thread ekleyip benzer videolar listesi doluncaya kadar kontrol etsin dolduktan sonra bir
+                                 * sonraki videou aktar**/
+                                //webView.loadUrl("https://www.youtube.com/embed/" + currentVideoId + "?autoplay=1;rel=0&amp;showinfo=0&?Version=3&loop=1&playlist=" + currentVideoId);
                             }
-                            //webView.loadUrl("https://www.youtube.com/embed/" + currentVideoId + "?autoplay=1;rel=0&amp;showinfo=0&?Version=3&loop=1&playlist=" + currentVideoId);
                         } else {
                             Toast.makeText(activeActivity, activeActivity.getString(R.string.internetConnectionMessage), Toast.LENGTH_LONG).show();
                         }
@@ -187,7 +190,7 @@ public class MSettings {
         });
     }
 
-    public static void suffleVideo() {
+    public static int suffleVideo() {
         try {
             Random rand = new Random();
             int randValue = rand.nextInt(similarVideosList.size());
@@ -195,29 +198,24 @@ public class MSettings {
                 randValue = rand.nextInt(similarVideosList.size());
                 counterForSuffle += 1;
             }
-            currentVideoId = similarVideosList.get(randValue).getId();
-            setVideoTitle(similarVideosList.get(randValue).getTitle());
             playedPoss.add(randValue);
             counterForSuffle = 0;
+            return  randValue;
         } catch (Exception e) {
+            return 0;
         }
     }
-
-    public static void setVideoTitle(String videoTitle) {
-        currentVideoTitle = videoTitle;
-    }
-
     public static void getVideoTitle() {
         me.grantland.widget.AutofitTextView txtVideoTitle = (me.grantland.widget.AutofitTextView) MSettings.body.findViewById(R.id.txtVideoTitle);
         txtVideoTitle.setTypeface(Typeface.createFromAsset(MSettings.activeActivity.getAssets(), "VarelaRound-Regular.ttf"));
         try {
-            if (currentVideoTitle.length() > 45) {
-                txtVideoTitle.setText(currentVideoTitle.substring(0, 45) + " ...");
+            if (currentVItem.getTitle().length() > 45) {
+                txtVideoTitle.setText(currentVItem.getTitle().substring(0, 45) + " ...");
             } else {
-                txtVideoTitle.setText(currentVideoTitle);
+                txtVideoTitle.setText(currentVItem.getTitle());
             }
         } catch (Exception e) {
-            txtVideoTitle.setText(currentVideoTitle);
+            txtVideoTitle.setText(currentVItem.getTitle());
         }
     }
 
@@ -353,15 +351,12 @@ public class MSettings {
                             listViewVideo.setVisibility(View.GONE);
                             searchListView.setVisibility(View.GONE);
                             progressBar.setVisibility(View.VISIBLE);
-
                             listViewVideo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                                     if (searchResults.get(i).getId() != null) {
-                                        MSettings.CounterForSimilarVideos = 2;
-                                        playedPoss = new ArrayList<Integer>();
-                                        MSettings.currentVideoId = searchResults.get(i).getId();
-                                        MSettings.setVideoTitle(searchResults.get(i).getTitle());
+                                        MSettings.CounterForSimilarVideos = 1;
+                                        MSettings.currentVItem = searchResults.get(i);
                                         MainActivity mainActivity = new MainActivity();
                                         mainActivity.getSimilarVideos(String.valueOf(searchResults.get(i).getId()), false, false, false, new String[]{});
                                         MSettings.LoadVideo();

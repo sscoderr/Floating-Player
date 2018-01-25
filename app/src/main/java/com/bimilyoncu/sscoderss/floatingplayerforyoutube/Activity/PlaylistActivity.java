@@ -55,8 +55,7 @@ public class PlaylistActivity extends AppCompatActivity implements OnScrollListe
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MSettings.currentVideoId = searchResultsForPlaylist.get(0).getId();
-                MSettings.setVideoTitle(searchResultsForPlaylist.get(0).getTitle());
+                MSettings.currentVItem = searchResultsForPlaylist.get(0);
                 MSettings.activeActivity = PlaylistActivity.this;
                 MSettings.LoadVideo();
             }
@@ -105,10 +104,9 @@ public class PlaylistActivity extends AppCompatActivity implements OnScrollListe
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> av, View v, int pos, long id) {
-                MSettings.CounterForSimilarVideos=2;
+                MSettings.CounterForSimilarVideos=1;
                 playedPoss=new ArrayList<Integer>();
-                MSettings.currentVideoId = searchResultsForPlaylist.get(pos).getId();
-                MSettings.setVideoTitle(searchResultsForPlaylist.get(pos).getTitle());
+                MSettings.currentVItem = searchResultsForPlaylist.get(pos);
                 MSettings.activeActivity = PlaylistActivity.this;
                 MainActivity mainActivity = new MainActivity();
                 mainActivity.getSimilarVideos(String.valueOf(searchResultsForPlaylist.get(pos).getId()),true,false,false,new String[]{});

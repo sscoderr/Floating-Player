@@ -267,10 +267,9 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
             public void onItemClick(AdapterView<?> av, View v, int pos, long id) {
                 Intent intent = null;
                 if (searchResults.get(pos).getId().length() == 11) {
-                    MSettings.CounterForSimilarVideos = 2;
+                    MSettings.CounterForSimilarVideos = 1;
                     playedPoss = new ArrayList<Integer>();
-                    MSettings.currentVideoId = searchResults.get(pos).getId();
-                    MSettings.setVideoTitle(searchResults.get(pos).getTitle());
+                    MSettings.currentVItem = searchResults.get(pos);
                     MSettings.activeActivity = SearchActivity.this;
                     MainActivity mainActivity = new MainActivity();
                     mainActivity.getSimilarVideos(String.valueOf(searchResults.get(pos).getId()), false, false, false, new String[]{});

@@ -24,13 +24,6 @@ public class ButtonNextMusic extends BroadcastReceiver {
     public void onReceive(final Context context, Intent intent) {
         if (MSettings.similarVideosList != null) {
             if (MSettings.similarVideosList.size() > 0) {
-                MSettings.CounterForSimilarVideos=2;
-                playedPoss=new ArrayList<>();
-                MSettings.currentVideoId = MSettings.similarVideosList.get(1).getId();
-                MSettings.playedVideoPos=1;
-                MSettings.setVideoTitle(MSettings.similarVideosList.get(1).getTitle());
-                MainActivity mainActivity = new MainActivity();
-                mainActivity.getSimilarVideos(String.valueOf(MSettings.currentVideoId),false,false,false,new String[]{});
                 MSettings.LoadVideo();
                 MSettings.LoadSixTapAds();
             }

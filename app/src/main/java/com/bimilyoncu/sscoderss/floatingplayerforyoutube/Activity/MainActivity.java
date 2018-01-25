@@ -370,32 +370,32 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
         final ImageView imgRepeat = (ImageView) MSettings.body.findViewById(R.id.img_repeat);
         final ImageView imgSuffle = (ImageView) MSettings.body.findViewById(R.id.img_suffle);
         final ImageView imageViewStopFinishVideo = (ImageView) MSettings.body.findViewById(R.id.img_stopingfinishvideo);
-        imgRepeat.setImageResource(R.mipmap.repeat_black_icon_for_float2);
+        imgRepeat.setImageResource(R.mipmap.repeat_icon_for_float2);
         imgRepeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!checkRepeat) {
                     checkRepeat = true;
 
-                    MSettings.currentVideoId = MSettings.nextVideoId;
-                    MSettings.setVideoTitle(MSettings.nextVideoTitle);
+                    /*MSettings.currentVideoId = MSettings.nextVideoId;
+                    MSettings.setVideoTitle(MSettings.nextVideoTitle);*/
 
-                    imgRepeat.setImageResource(R.mipmap.repeat_icon_for_float2);
+                    imgRepeat.setImageResource(R.mipmap.repeat_black_icon_for_float2);
                     Toast.makeText(MainActivity.this, getString(R.string.repeatMessageOn), Toast.LENGTH_SHORT).show();
                 } else {
                     checkRepeat = false;
                     MSettings.isLaterRepeate = true;
 
-                    CounterForSimilarVideos += 1;
+                    /*CounterForSimilarVideos += 1;
                     MSettings.currentVideoId = similarVideosList.get(CounterForSimilarVideos).getId();
-                    MSettings.setVideoTitle(similarVideosList.get(CounterForSimilarVideos).getTitle());
+                    MSettings.setVideoTitle(similarVideosList.get(CounterForSimilarVideos).getTitle());*/
 
-                    imgRepeat.setImageResource(R.mipmap.repeat_black_icon_for_float2);
+                    imgRepeat.setImageResource(R.mipmap.repeat_icon_for_float2);
                     Toast.makeText(MainActivity.this, getString(R.string.repeatMessageOff), Toast.LENGTH_SHORT).show();
                 }
 
                 checkSuffle = false;
-                imgSuffle.setImageResource(R.mipmap.suffle_black_icon_for_float2);
+                imgSuffle.setImageResource(R.mipmap.suffle_icon_for_float2);
             }
         });
         imgSuffle.setOnClickListener(new View.OnClickListener() {
@@ -405,17 +405,17 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
                     checkSuffle = true;
                     MSettings.suffleVideo();
 
-                    imgSuffle.setImageResource(R.mipmap.suffle_icon_for_float2);
+                    imgSuffle.setImageResource(R.mipmap.suffle_black_icon_for_float2);
                     Toast.makeText(MainActivity.this, getString(R.string.suffleMessageOn), Toast.LENGTH_SHORT).show();
                 } else {
                     checkSuffle = false;
 
-                    imgSuffle.setImageResource(R.mipmap.suffle_black_icon_for_float2);
+                    imgSuffle.setImageResource(R.mipmap.suffle_icon_for_float2);
                     Toast.makeText(MainActivity.this, getString(R.string.suffleMessageOff), Toast.LENGTH_SHORT).show();
                 }
 
                 checkRepeat = false;
-                imgRepeat.setImageResource(R.mipmap.repeat_black_icon_for_float2);
+                imgRepeat.setImageResource(R.mipmap.repeat_icon_for_float2);
             }
         });
         imageViewStopFinishVideo.setOnClickListener(new View.OnClickListener() {
@@ -535,9 +535,8 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
                                 @Override
                                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                                     if (searchResults.get(i).getId() != null) {
-                                        MSettings.CounterForSimilarVideos = 2;
-                                        MSettings.currentVideoId = searchResults.get(i).getId();
-                                        MSettings.setVideoTitle(searchResults.get(i).getTitle());
+                                        MSettings.CounterForSimilarVideos = 1;
+                                        MSettings.currentVItem = searchResults.get(i);
                                         MainActivity mainActivity = new MainActivity();
                                         mainActivity.getSimilarVideos(String.valueOf(searchResults.get(i).getId()), false, false, false, new String[]{});
                                         MSettings.LoadVideo();
@@ -545,7 +544,6 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
                                     }
                                 }
                             });
-
                             new Thread() {
                                 public void run() {
                                     ServiceSearchConnector yc = new ServiceSearchConnector(MSettings.activeActivity, "relevance", "video", false, "", false, false);
@@ -687,7 +685,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
         public void run() {
             try {
                 mHandler.sendEmptyMessage(0);
-                YoutubeConnector yc = new YoutubeConnector(MSettings.activeActivity, MSettings.currentVideoId, "", false, "", true, false);
+                YoutubeConnector yc = new YoutubeConnector(MSettings.activeActivity, MSettings.currentVItem.getId(), "", false, "", true, false);
                 List<VideoItem> list = yc.search("", false, false, true);
                 sizeOfMoreData = list.size();
                 ArrayList<VideoItem> lstResult = (ArrayList<VideoItem>) list;
@@ -709,6 +707,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
 
     public void getSimilarVideos(final String vId, final boolean isPlaylist, final boolean isChannel, final boolean isYoutubeUserVideo, final String[] userYoutubeVideosId) {
         MSettings.isUserVideo = false;
+        MSettings.similarVideosIsLoaded=false;
         if (MSettings.mListForFloat != null) {
             MSettings.mListForFloat.setAdapter(null);
         }
@@ -739,31 +738,18 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
                     MSettings.isUserVideo = true;
                     similarVideosList.addAll(getVideoItems(userYoutubeVideosId));
                 } else {
-                    YoutubeConnector yc = new YoutubeConnector(MSettings.activeActivity, MSettings.currentVideoId, "", false, "", true, true);
+                    YoutubeConnector yc = new YoutubeConnector(MSettings.activeActivity, MSettings.currentVItem.getId(), "", false, "", true, true);
                     similarVideosList.addAll(yc.search("", true, false, true));
                 }
                 MSettings.mHandler.post(new Runnable() {
                     public void run() {
                         MSettings.mAdapter = new CustomAdapter(MSettings.activeActivity, similarVideosList, "");
-                        //-----------MSettings.isPlayedVideo=false;
                         MSettings.mListForFloat.setAdapter(null);
                         MSettings.mListForFloat.setAdapter(MSettings.mAdapter);
-                        MSettings.nextVideoId = MSettings.currentVideoId;
-                        MSettings.nextVideoTitle = MSettings.currentVideoTitle;
-                        if (similarVideosList.size() > 1) {
-                            MSettings.currentVideoId = similarVideosList.get(1).getId();
-                            MSettings.setVideoTitle(MSettings.similarVideosList.get(1).getTitle());
-                        }
-                        /*if (checkSuffle){
-                            suffleVideo();
-                        }
-                        else if (!checkRepeat&&!checkSuffle) {
-                            MSettings.currentVideoId = MSettings.similarVideosList.get(MSettings.CounterForSimilarVideos).getId();
-                            MSettings.setVideoTitle(MSettings.similarVideosList.get(MSettings.CounterForSimilarVideos).getTitle());
-                        }*/
                         myPg.setVisibility(View.INVISIBLE);
                     }
                 });
+                MSettings.similarVideosIsLoaded=true;
             }
         }.start();
     }
@@ -819,8 +805,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
             @Override
             public void onItemClick(AdapterView<?> av, View v, int pos, long id) {
                 if (similarVideosList.get(pos).getId().length() == 11) {
-                    MSettings.currentVideoId = similarVideosList.get(pos).getId();
-                    MSettings.setVideoTitle(similarVideosList.get(pos).getTitle());
+                    MSettings.currentVItem = searchResults.get(pos);
                     MSettings.getVideoTitle();
                     MSettings.LoadVideo();
                     MSettings.activeActivity = MainActivity.this;

@@ -447,10 +447,9 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> av, View v, int pos, long id) {
-                MSettings.CounterForSimilarVideos = 2;
+                MSettings.CounterForSimilarVideos = 1;
                 playedPoss = new ArrayList<Integer>();
-                MSettings.currentVideoId = response.get(pos).getId();
-                MSettings.setVideoTitle(response.get(pos).getTitle());
+                MSettings.currentVItem = response.get(pos);
                 MSettings.activeActivity = getActivity();
                 MainActivity mainActivity = new MainActivity();
                 mainActivity.getSimilarVideos(String.valueOf(response.get(pos).getId()), false, false, false, new String[]{});
@@ -465,10 +464,9 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
         expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, final int i, final int i1, long l) {
-                MSettings.CounterForSimilarVideos = 2;
+                MSettings.CounterForSimilarVideos = 1;
                 playedPoss = new ArrayList<Integer>();
-                MSettings.currentVideoId = expandListFullData.get(i).getvItems().get(i1).getId();
-                MSettings.setVideoTitle(expandListFullData.get(i).getvItems().get(i1).getTitle());
+                MSettings.currentVItem = expandListFullData.get(i).getvItems().get(i1);
                 MSettings.activeActivity = getActivity();
                 /*MainActivity mainActivity = new MainActivity();
                 mainActivity.getSimilarVideos(String.valueOf(expandListFullData.get(i).getvItems().get(i1).getId()),false,false);*/

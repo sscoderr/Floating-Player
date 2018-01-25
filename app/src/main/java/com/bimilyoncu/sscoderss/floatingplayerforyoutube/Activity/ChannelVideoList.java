@@ -108,8 +108,7 @@ public class ChannelVideoList extends AppCompatActivity implements OnScrollListe
             public void onItemClick(AdapterView<?> av, View v, int pos, long id) {
                 MSettings.CounterForSimilarVideos = 2;
                 playedPoss = new ArrayList<Integer>();
-                MSettings.currentVideoId = searchResultsForChannelList.get(pos).getId();
-                MSettings.setVideoTitle(searchResultsForChannelList.get(pos).getTitle());
+                MSettings.currentVItem = searchResultsForChannelList.get(pos);
                 MSettings.activeActivity = ChannelVideoList.this;
                 MainActivity mainActivity = new MainActivity();
                 mainActivity.getSimilarVideos(searchResultsForChannelList.get(pos).getId(), false, true, false, new String[]{});
