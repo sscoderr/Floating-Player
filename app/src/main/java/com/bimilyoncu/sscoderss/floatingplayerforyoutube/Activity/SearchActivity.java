@@ -326,7 +326,6 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
     public void onScrollStateChanged(AbsListView view, int scrollState) {
     }
 
-
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         if (view.getLastVisiblePosition() == totalItemCount - 1 && mList.getCount() >= 10 && isLoading == false && sizeOfMoreData != 0) {
@@ -383,12 +382,15 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.option_menu, menu);
+
         MenuItem item = menu.findItem(R.id.menuSearch);
         searchView = (SearchView) item.getActionView();
         searchView.setMaxWidth(Integer.MAX_VALUE);
         searchView.onActionViewExpanded();
+
         LayoutInflater inflator = LayoutInflater.from(this);
         viewForTitle = inflator.inflate(R.layout.title_view, null);
+
         (SearchActivity.this).getSupportActionBar().setCustomView(viewForTitle);
         (viewForTitle.findViewById(R.id.title)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -397,6 +399,7 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
                 searchView.setQuery(searchText, false);
             }
         });
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -450,12 +453,25 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
             case R.id.menuFilter:
                 LayoutInflater li = LayoutInflater.from(SearchActivity.this);
                 View view = li.inflate(R.layout.filter_dialog, null);
+
                 final Dialog save = new Dialog(SearchActivity.this);
                 save.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 save.setContentView(view);
+
+                TextView textViewHead = (TextView) save.findViewById(R.id.filterdialog_textview_head);
+                TextView textViewSiralama = (TextView) save.findViewById(R.id.filterdialog_textview_siralama);
+                TextView textViewIcerikTuru = (TextView) save.findViewById(R.id.filterdialog_textview_icerikTuru);
                 Button btnCancel = (Button) save.findViewById(R.id.btn_Cancel);
                 Button btnApply = (Button) save.findViewById(R.id.btn_Apply);
+
+                textViewHead.setTypeface(MSettings.getFontVarelaRound());
+                textViewSiralama.setTypeface(MSettings.getFontVarelaRound());
+                textViewIcerikTuru.setTypeface(MSettings.getFontVarelaRound());
+                btnCancel.setTypeface(MSettings.getFontVarelaRound());
+                btnApply.setTypeface(MSettings.getFontVarelaRound());
+
                 spinner = (Spinner) save.findViewById(R.id.spinnerSortBy);
+
                 spinner.setOnItemSelectedListener(new OnSpinnerItemClicked());
                 ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.sortby_array, android.R.layout.simple_spinner_item);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

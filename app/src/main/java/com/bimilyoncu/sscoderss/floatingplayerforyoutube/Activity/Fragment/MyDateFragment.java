@@ -275,6 +275,7 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
             @Override
             public void onClick(View view) {
                 if (myPg.getVisibility() == View.INVISIBLE) {
+                    linearLayoutFragmentWarning.setVisibility(View.GONE);
                     tblName = "tbl_fromyoutube_videos";
                     mList.setAdapter(null);
                     expListView.setVisibility(View.VISIBLE);
