@@ -48,9 +48,18 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/imageViewServiceHelp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/selector_for_moreoption_button"
+                android:scaleType="center"
+                android:src="@drawable/help" />
+
+            <ImageView
                 android:id="@+id/imageViewServiceMinimize"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_weight="1"
                 android:background="@drawable/selector_for_moreoption_button"
                 android:scaleType="center"
                 android:src="@drawable/minimize" />
@@ -61,7 +70,7 @@
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:background="@drawable/selector_for_moreoption_button"
-                android:padding="10dp"
+                android:padding="6dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/close" />
         </LinearLayout>

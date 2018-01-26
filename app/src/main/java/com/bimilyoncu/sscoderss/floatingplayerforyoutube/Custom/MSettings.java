@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -15,6 +16,7 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -157,6 +159,7 @@ public class MSettings {
                                 DatabaseForPlaylists db = new DatabaseForPlaylists(activeActivity);
                                 db.addVideoHistory(currentVItem.getId(), activeActivity);
                                 MyDateFragment.isHaveUpdate = true;
+
                                 new Thread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -402,5 +405,24 @@ public class MSettings {
         }
 
         return VarelaRound_Regular;
+    }
+
+    public static void MinimizePlayer(){
+        try {
+            if (MSettings.floaty.floaty.getBody().getVisibility() != View.GONE) {
+                MSettings.floaty.floaty.getBody().setVisibility(View.GONE);
+                MSettings.floaty.floaty.getHead().setVisibility(View.VISIBLE);
+                MSettings.floaty.params.x = MSettings.floaty.clickLocation[0];
+                MSettings.floaty.params.y = MSettings.floaty.clickLocation[1] - 36;
+                MSettings.floaty.params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                MSettings.floaty.params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                MSettings.floaty.params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+                MSettings.floaty.mLinearLayout.setBackgroundColor(Color.argb(0, 0, 0, 0));
+
+                MSettings.floaty.windowManager.updateViewLayout(MSettings.floaty.mLinearLayout, MSettings.floaty.params);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

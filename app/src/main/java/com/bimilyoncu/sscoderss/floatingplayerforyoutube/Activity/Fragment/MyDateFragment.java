@@ -218,6 +218,7 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
             @Override
             public void onClick(View view) {
                 if (myPg.getVisibility() == View.INVISIBLE) {
+                    linearLayoutFragmentWarning.setVisibility(View.GONE);
                     changeButtonColor(R.id.rel_favorite);
                     expListView.setVisibility(View.INVISIBLE);
                     mList.setVisibility(View.VISIBLE);
@@ -237,6 +238,7 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
             @Override
             public void onClick(View view) {
                 if (myPg.getVisibility() == View.INVISIBLE) {
+                    linearLayoutFragmentWarning.setVisibility(View.GONE);
                     changeButtonColor(R.id.rel_history);
                     expListView.setVisibility(View.INVISIBLE);
                     mList.setVisibility(View.VISIBLE);
@@ -256,6 +258,7 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
             @Override
             public void onClick(View view) {
                 if (myPg.getVisibility() == View.INVISIBLE) {
+                    linearLayoutFragmentWarning.setVisibility(View.GONE);
                     changeButtonColor(R.id.rel_recommented);
                     expListView.setVisibility(View.INVISIBLE);
                     mList.setVisibility(View.VISIBLE);
@@ -512,7 +515,6 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
                             myPg.setVisibility(View.INVISIBLE);
                             isLoadingForThread = false;
 
-                            linearLayoutFragmentWarning.setVisibility(View.GONE);
                             if (response.size() <= 0) {
                                 if (String.valueOf(tblName).equals("tbl_favorite")) {
                                     linearLayoutFragmentWarning.setVisibility(View.VISIBLE);

@@ -49,8 +49,17 @@ public class JSInterface {
     public void onPlayerReady(int paramInt1, int paramInt2) {
         /*this.wv.post(new Runnable() {
             public void run() {
-                MSettings.currentVItem=MSettings.similarVideosList.get(MSettings.CounterForSimilarVideos-1);
-                MSettings.LoadVideo();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (!MSettings.isPlayedVideo) {
+                            while (!MSettings.similarVideosIsLoaded) ;
+
+                            MSettings.currentVItem = MSettings.similarVideosList.get(MSettings.CounterForSimilarVideos - 1);
+                            MSettings.LoadVideo();
+                        }
+                    }
+                }).start();
             }
         });*/
     }

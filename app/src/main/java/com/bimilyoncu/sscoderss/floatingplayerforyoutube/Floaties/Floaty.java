@@ -423,6 +423,7 @@ public class Floaty {
             showBody();
         }
 
+        @Override
         public void onDestroy() {
             super.onDestroy();
             if (mLinearLayout != null) {
