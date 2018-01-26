@@ -1,8 +1,6 @@
 package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity;
 
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
@@ -11,24 +9,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.webkit.WebChromeClient;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AbsListView.OnScrollListener;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.CustomAdapter;
 
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Connector.YoutubeConnector;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings;
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Floaties.Floaty;
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Floaties.JSInterface;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Item.VideoItem;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.R;
 import com.google.android.gms.ads.AdListener;
@@ -39,11 +29,7 @@ import com.google.android.gms.ads.MobileAds;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings.CounterForSimilarVideos;
-import static com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings.checkRepeat;
-import static com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings.checkSuffle;
 import static com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings.playedPoss;
-import static com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings.similarVideosList;
 
 public class ChannelVideoList extends AppCompatActivity implements OnScrollListener {
     private List<VideoItem> searchResultsForChannelList;
@@ -106,7 +92,7 @@ public class ChannelVideoList extends AppCompatActivity implements OnScrollListe
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> av, View v, int pos, long id) {
-                MSettings.CounterForSimilarVideos = 2;
+                MSettings.CounterForSimilarVideos = 1;
                 playedPoss = new ArrayList<Integer>();
                 MSettings.currentVItem = searchResultsForChannelList.get(pos);
                 MSettings.activeActivity = ChannelVideoList.this;
@@ -158,28 +144,6 @@ public class ChannelVideoList extends AppCompatActivity implements OnScrollListe
             mHandler.sendMessage(msg);
 
         }
-    }
-    private void LoadFullScreenAds() {
-        MobileAds.initialize(ChannelVideoList.this, "ca-app-pub-5808367634056272~8476127349");
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("6EE0EC7A08848B41A3A8B3C52624F39A")
-                .addTestDevice("D840C07DDBAA5E0897B010411FABE6AC")
-                .addTestDevice("778ADE18482DD7E44193371217202427")
-                .addTestDevice("6AFA29CB9314195950E590C9BEACC344")
-                .addTestDevice("0CEA9CA5F2DAED70F0678D8F2D8669A3").build();
-        interstitial = new InterstitialAd(ChannelVideoList.this);
-        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id_close_service));
-        interstitial.loadAd(adRequest);
-        interstitial.setAdListener(new AdListener() {
-            public void onAdLoaded() {
-                if (interstitial.isLoaded())
-                    interstitial.show();
-            }
-
-            public void onAdClosed() {
-            }
-        });
     }
 
     @Override

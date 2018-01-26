@@ -103,7 +103,6 @@ public class MSettings {
     public static InterstitialAd interstitial;
     public static Token token = new Token();
     public static VideoItem currentVItem;
-    public static boolean isDontLoadingVideo=false;
     public static boolean similarVideosIsLoaded=false;
 
     public static void LoadVideo() {
@@ -175,8 +174,6 @@ public class MSettings {
                                         }
                                     }
                                 }).start();
-                                /**Bir tane thread ekleyip benzer videolar listesi doluncaya kadar kontrol etsin dolduktan sonra bir
-                                 * sonraki videou aktar**/
                                 //webView.loadUrl("https://www.youtube.com/embed/" + currentVideoId + "?autoplay=1;rel=0&amp;showinfo=0&?Version=3&loop=1&playlist=" + currentVideoId);
                             }
                         } else {
@@ -218,12 +215,6 @@ public class MSettings {
             txtVideoTitle.setText(currentVItem.getTitle());
         }
     }
-
-   /* public static boolean isHaveNetworkAccesQuickly(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        return cm.getActiveNetworkInfo() != null;
-    }*/
-
     public static String getSHA1(String packageName, Context ct) {
         try {
             Signature[] signatures = ct.getPackageManager().getPackageInfo(packageName, PackageManager.GET_SIGNATURES).signatures;

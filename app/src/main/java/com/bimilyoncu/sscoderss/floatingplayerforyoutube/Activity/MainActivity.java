@@ -805,7 +805,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
             @Override
             public void onItemClick(AdapterView<?> av, View v, int pos, long id) {
                 if (similarVideosList.get(pos).getId().length() == 11) {
-                    MSettings.currentVItem = searchResults.get(pos);
+                    MSettings.currentVItem = similarVideosList.get(pos);
                     MSettings.getVideoTitle();
                     MSettings.LoadVideo();
                     MSettings.activeActivity = MainActivity.this;
