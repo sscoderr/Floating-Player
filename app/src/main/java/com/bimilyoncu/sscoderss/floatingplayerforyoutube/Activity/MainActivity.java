@@ -815,7 +815,6 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
 
         });
     }
-    //
     public FragmentRefreshListenerForMusic getFragmentRefreshListener() {
         return fragmentRefreshListener;
     }
