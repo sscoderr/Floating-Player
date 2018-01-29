@@ -51,9 +51,8 @@
                 android:id="@+id/imageViewServiceHelp"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/selector_for_moreoption_button"
                 android:scaleType="center"
-                android:src="@drawable/help" />
+                android:src="@drawable/help2" />
 
             <ImageView
                 android:id="@+id/imageViewServiceMinimize"

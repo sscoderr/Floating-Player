@@ -36,7 +36,7 @@
         </RelativeLayout>
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="52dp"
             android:gravity="center">
 
                     <com.google.android.gms.ads.AdView

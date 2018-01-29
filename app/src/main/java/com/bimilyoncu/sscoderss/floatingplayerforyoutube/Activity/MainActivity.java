@@ -136,10 +136,6 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
         netControl = new NetControl(this);
         (MainActivity.this).getSupportActionBar().setElevation(0);
 
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.content_main_toolbar);
-//        toolbar.setTitle("");
-//        setSupportActionBar(toolbar);
-
         AlertgetKeys();
     }
 
@@ -413,12 +409,11 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
                 if (!checkSuffle) {
                     checkSuffle = true;
                     MSettings.suffleVideo();
-
                     imgSuffle.setImageResource(R.mipmap.suffle_black_icon_for_float2);
                     Toast.makeText(MainActivity.this, getString(R.string.suffleMessageOn), Toast.LENGTH_SHORT).show();
                 } else {
                     checkSuffle = false;
-
+                    CounterForSimilarVideos = 0;
                     imgSuffle.setImageResource(R.mipmap.suffle_icon_for_float2);
                     Toast.makeText(MainActivity.this, getString(R.string.suffleMessageOff), Toast.LENGTH_SHORT).show();
                 }
@@ -851,12 +846,12 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
     private void LoadFullScreenAds() {
         MobileAds.initialize(MainActivity.this, "ca-app-pub-5808367634056272~8476127349");
         AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                /*.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .addTestDevice("6EE0EC7A08848B41A3A8B3C52624F39A")
                 .addTestDevice("D840C07DDBAA5E0897B010411FABE6AC")
                 .addTestDevice("778ADE18482DD7E44193371217202427")
                 .addTestDevice("6AFA29CB9314195950E590C9BEACC344")
-                .addTestDevice("0CEA9CA5F2DAED70F0678D8F2D8669A3").build();
+                .addTestDevice("0CEA9CA5F2DAED70F0678D8F2D8669A3")*/.build();
         final InterstitialAd interstitial = new InterstitialAd(MainActivity.this);
         interstitial.setAdUnitId(getString(R.string.admob_interstitial_id_close_service));
         interstitial.loadAd(adRequest);

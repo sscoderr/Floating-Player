@@ -22,7 +22,6 @@ public class VideoItem {
     private String id;
     private String duration;
     private String text;
-    private String channelImageURL;
     private Activity ac= MSettings.activeActivity;
 
     public String getId() {
@@ -242,13 +241,5 @@ public class VideoItem {
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public String getChannelImageURL() {
-        return channelImageURL;
-    }
-
-    public void setChannelImageURL(String channelImageURL) {
-        this.channelImageURL = channelImageURL;
     }
 }

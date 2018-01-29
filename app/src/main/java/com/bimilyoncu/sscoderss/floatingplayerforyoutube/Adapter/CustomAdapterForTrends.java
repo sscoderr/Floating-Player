@@ -59,7 +59,6 @@ public class CustomAdapterForTrends extends BaseAdapter {
             rowView = mInflater.inflate(R.layout.trend_activity_item, null);
             holder = new ViewHolder();
             holder.title = (TextView) rowView.findViewById(R.id.txtDescription);
-            holder.channelimage = (ImageView) rowView.findViewById(R.id.image_trendactivityitem_channelimage);
             holder.channelTitle = (TextView) rowView.findViewById(R.id.txtChannelName);
             holder.viewCount = (TextView) rowView.findViewById(R.id.txtViewCount);
             holder.publishAt = (TextView) rowView.findViewById(R.id.txtUploadDate);
@@ -67,19 +66,16 @@ public class CustomAdapterForTrends extends BaseAdapter {
             holder.image = (ImageView) rowView.findViewById(R.id.video_img);
             holder.moreOption = (ImageView) rowView.findViewById(R.id.img_more_item);
 
-            Typeface myTypeface = Typeface.createFromAsset(activity.getAssets(), "VarelaRound-Regular.ttf");
-            holder.title.setTypeface(myTypeface);
-            holder.channelTitle.setTypeface(myTypeface);
-            holder.viewCount.setTypeface(myTypeface);
-            holder.publishAt.setTypeface(myTypeface);
+            holder.title.setTypeface(MSettings.getFontVarelaRound());
+            holder.channelTitle.setTypeface(MSettings.getFontVarelaRound());
+            holder.viewCount.setTypeface(MSettings.getFontVarelaRound());
+            holder.publishAt.setTypeface(MSettings.getFontVarelaRound());
             rowView.setTag(holder);
         }
         else{
             holder = (ViewHolder) rowView.getTag();
         }
         Picasso.with(activity).load(searchResults.get(position).getThumbnailURL()).into(holder.image);
-        Picasso.with(activity).load(searchResults.get(position).getChannelImageURL())
-                .transform(new PicassoFrame(activity, R.drawable.radius_daire)).into(holder.channelimage);
         //Glide.with(ct).load(searchResults.get(position).getThumbnailURL()).into(holder.image);
         holder.title.setText(searchResults.get(position).getTitle());
         holder.channelTitle.setText(searchResults.get(position).getChannelTitle());
@@ -138,6 +134,6 @@ public class CustomAdapterForTrends extends BaseAdapter {
 
     private static class ViewHolder {
         TextView title, channelTitle, viewCount, publishAt, duration;
-        ImageView image,moreOption, channelimage;
+        ImageView image,moreOption;
     }
 }

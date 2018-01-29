@@ -84,7 +84,6 @@ public class ConnectorForTrends {
                             item.setDuration(result.getContentDetails().getDuration());
                             item.setId(result.getId());
                             item.setPublishedAt(result.getSnippet().getPublishedAt().toString());
-                            item.setChannelImageURL(MSettings.getChannelImage(youtubeTrend, YoutubeConnector.KEY, result.getSnippet().getChannelId()));
                         }
                         items.add(item);
                     } catch (Exception e) {

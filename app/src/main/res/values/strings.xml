@@ -13,7 +13,7 @@
     <string name="title_activity_main">Floating Player</string>
     <string name="filter">Filter</string>
     <string name="search">Search</string>
-    <string name="bigSearch">SEARCH</string>
+    <string name="bigSearch">QUICK SEARCH</string>
     <string name="optionMenuItemOne">Add Favorites</string>
     <string name="optionMenuItemTwo">Share</string>
     <string name="optionMenuItemDelete">Delete</string>
