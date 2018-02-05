@@ -47,34 +47,12 @@ public class JSInterface {
 
     @JavascriptInterface
     public void onPlayerReady(int paramInt1, int paramInt2) {
-        /*this.wv.post(new Runnable() {
-            public void run() {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (!MSettings.isPlayedVideo) {
-                            while (!MSettings.similarVideosIsLoaded) ;
-
-                            MSettings.currentVItem = MSettings.similarVideosList.get(MSettings.CounterForSimilarVideos - 1);
-                            MSettings.LoadVideo();
-                        }
-                    }
-                }).start();
-            }
-        });*/
+            MSettings.playerReady=true;
     }
 
     @JavascriptInterface
     public void onPlayerStateChangedToPlaying(int paramInt1, int paramInt2, final int paramInt3, final int paramInt4) {
         //Toast.makeText(MSettings.activeActivity,"sdfsdf",Toast.LENGTH_SHORT);
-        this.wv.post(new Runnable() {
-            public void run() {
-                if (Integer.valueOf(android.os.Build.VERSION.SDK) < 21 && !MSettings.isFirstOpenApp) {
-                    MSettings.isFirstOpenApp = true;
-//                    MSettings.clickableRelative.setVisibility(View.VISIBLE);
-                }
-            }
-        });
 
         /*if (Build.VERSION.SDK_INT <= 20)
             wv.postDelayed(new Runnable() {

@@ -446,7 +446,6 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
                 break;
         }
     }
-
     private void addClickListener() {
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -99,13 +99,13 @@ public class MSettings {
     public static String activePlaylistId = "";
     public static boolean isUserVideo = false;
     public static boolean isLaterRepeate = false;
-    public static boolean isFirstOpenApp = false;
     public static final String URL = "http://bimilyoncu.us/player.html";
     public static byte adsCounter = 0;
     public static InterstitialAd interstitial;
     public static Token token = new Token();
     public static VideoItem currentVItem;
     public static boolean similarVideosIsLoaded=false;
+    public static boolean playerReady=false;
 
     public static void LoadVideo() {
         activeActivity.runOnUiThread(new Runnable() {
@@ -149,7 +149,7 @@ public class MSettings {
 
                                 mHandler = new Handler();
                                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activeActivity);
-
+                                while (!playerReady);
                                 if (preferences.getBoolean("isHighQuality", false)) {
                                     webView.loadUrl(String.format("javascript:loadVideoById(\"%s\",\"highres\");", new Object[]{currentVItem.getId()}));
                                 } else {
