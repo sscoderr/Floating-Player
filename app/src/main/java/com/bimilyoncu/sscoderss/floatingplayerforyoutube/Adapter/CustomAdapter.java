@@ -63,6 +63,7 @@ public class CustomAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View rowView, ViewGroup parent) {
         final ViewHolder holder;
+
         if (rowView == null) {
             rowView = mInflater.inflate(R.layout.video_item, null);
             holder = new ViewHolder();
@@ -88,6 +89,7 @@ public class CustomAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) rowView.getTag();
         }
+
         holder.myRel.setVisibility(View.INVISIBLE);
         holder.myRelForDuration.setVisibility(View.VISIBLE);
 

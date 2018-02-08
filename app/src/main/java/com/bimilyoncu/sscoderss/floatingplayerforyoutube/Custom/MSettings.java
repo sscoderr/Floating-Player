@@ -184,7 +184,7 @@ public class MSettings {
                         }
                     }
                 } catch (Exception e) {
-                    //Toast.makeText(activeActivity, "hata:"+e, Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
                 }
             }
         });
@@ -264,36 +264,6 @@ public class MSettings {
             LoadFullScreenAds();
         else adsCounter += 1;
     }
-
-    public static String getChannelImage(YouTube youtube, String KEY, String channel_id) throws IOException {
-        String img_url = null;
-        YouTube.Channels.List channel_list = youtube.channels().list("snippet,contentDetails,statistics");
-        if (channel_list.size() > 0) {
-            channel_list.setKey(KEY);
-            channel_list.setId(channel_id);
-
-            ChannelListResponse response = channel_list.execute();
-            if (response.size() > 0) {
-                List<Channel> results = response.getItems();
-                if (response.size() > 0) {
-                    for (Channel result : results) {
-                        try {
-                            img_url = result.getSnippet().getThumbnails().getMedium().getUrl();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            img_url = null;
-                        }
-                    }
-                } else
-                    img_url = null;
-            } else
-                img_url = null;
-        } else
-            img_url = null;
-
-        return img_url;
-    }
-
 
     public static String serviceSearchKey;
     public static class threadSearchKey extends AsyncTask<Void, Void, JSONArray> {
@@ -394,6 +364,8 @@ public class MSettings {
     public static Typeface getFont(){
         if (pragatinarrow == null) {
             pragatinarrow = Typeface.createFromAsset(MSettings.activeActivity.getAssets(), "pragatinarrow.ttf");
+        } else if (pragatinarrow.equals(null)) {
+            pragatinarrow = Typeface.createFromAsset(MSettings.activeActivity.getAssets(), "pragatinarrow.ttf");
         }
 
         return pragatinarrow;
@@ -401,6 +373,8 @@ public class MSettings {
 
     public static Typeface getFontVarelaRound(){
         if (VarelaRound_Regular == null) {
+            VarelaRound_Regular = Typeface.createFromAsset(MSettings.activeActivity.getAssets(), "VarelaRound-Regular.ttf");
+        } else if (VarelaRound_Regular.equals(null)) {
             VarelaRound_Regular = Typeface.createFromAsset(MSettings.activeActivity.getAssets(), "VarelaRound-Regular.ttf");
         }
 

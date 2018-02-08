@@ -127,6 +127,7 @@ public class Floaty {
         if (MSettings.floaty.notification != null) {
             if (MSettings.floaty.notification.getNotificationManager() != null) {
                 MSettings.floaty.notification.getNotificationManager().cancelAll();
+                MSettings.floaty.notification = null;
             }
         }
 
@@ -135,14 +136,14 @@ public class Floaty {
     }
 
     public static com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.Notification.Notification notification;
+
     /**
      * Helper method for notification creation.
      *
-     * @param context
-    //     * @param contentTitle
-    //     * @param contentText
-    //     * @param notificationIcon
-    //     * @param contentIntent
+     * @param context //     * @param contentTitle
+     *                //     * @param contentText
+     *                //     * @param notificationIcon
+     *                //     * @param contentIntent
      * @return Notification for the Service
      */
     public static com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.Notification.Notification createNotification(Context context, int notificationId) {
@@ -240,8 +241,6 @@ public class Floaty {
             return START_STICKY;
         }
 
-
-
         @Override
         public void onCreate() {
             super.onCreate();
@@ -278,13 +277,18 @@ public class Floaty {
                 public boolean onDown(MotionEvent event) {
                     try {
                         Log.d(LOG_TAG, "onDown");
+
                         initialX = params.x;
                         initialY = params.y;
+
                         initialTouchX = event.getRawX();
                         initialTouchY = event.getRawY();
+
                         didFling = false;
-                    } catch (Exception ex) {
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
+
                     return false;
                 }
 
@@ -292,8 +296,10 @@ public class Floaty {
                 public void onShowPress(MotionEvent e) {
                     try {
                         Log.d(LOG_TAG, "onShowPress");
+
                         floaty.head.setAlpha(0.8f);
                     } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
                 }
 
@@ -307,10 +313,13 @@ public class Floaty {
                             params.height = WindowManager.LayoutParams.WRAP_CONTENT;
                             mLinearLayout.setBackgroundColor(Color.argb(0, 0, 0, 0));
                         }
+
                         params.x = (initialX + (int) ((e2.getRawX() - initialTouchX)));
                         params.y = (initialY + (int) ((e2.getRawY() - initialTouchY)));
+
                         windowManager.updateViewLayout(mLinearLayout, params);
                     } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
                     return false;
                 }
@@ -341,9 +350,12 @@ public class Floaty {
 
                             floaty.head.setVisibility(View.VISIBLE);
                         }
+
                         windowManager.updateViewLayout(mLinearLayout, params);
                     } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
+
                     return false;
                 }
 
@@ -351,15 +363,21 @@ public class Floaty {
                 public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
                     try {
                         Log.d(LOG_TAG, "onFling");
+
                         didFling = true;
                         int newX = params.x;
-                        if (newX > (metrics.widthPixels / 2))
+
+                        if (newX > (metrics.widthPixels / 2)) {
                             params.x = metrics.widthPixels;
-                        else
+                        } else {
                             params.x = 0;
+                        }
+
                         windowManager.updateViewLayout(mLinearLayout, params);
                     } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
+
                     return false;
                 }
             });
@@ -368,58 +386,93 @@ public class Floaty {
             windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
             metrics = new DisplayMetrics();
             windowManager.getDefaultDisplay().getMetrics(metrics);
-            params=new WindowManager.LayoutParams(
+
+            params = new WindowManager.LayoutParams(
                     WindowManager.LayoutParams.WRAP_CONTENT,
                     WindowManager.LayoutParams.WRAP_CONTENT,
                     WindowManager.LayoutParams.TYPE_PHONE,
                     WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                     PixelFormat.TRANSLUCENT);
             params.gravity = Gravity.TOP | Gravity.LEFT;
-            if (floaty.confChange) {
-                floaty.confChange = false;
-                if (floaty.oldX < (floaty.oldWidth / 2)) {
-                    params.x = 0;
+
+            if (!String.valueOf(floaty.confChange).equals(null)) {
+                if (floaty.confChange) {
+                    floaty.confChange = false;
+                    if (floaty.oldX < (floaty.oldWidth / 2)) {
+                        params.x = 0;
+                    } else {
+                        params.x = metrics.widthPixels;
+                    }
+                    params.y = (int) (metrics.heightPixels * floaty.ratioY);
                 } else {
                     params.x = metrics.widthPixels;
+                    params.y = 0;
                 }
-                params.y = (int) (metrics.heightPixels * floaty.ratioY);
-            } else {
-                params.x = metrics.widthPixels;
-                params.y = 0;
             }
-            floaty.body.setVisibility(View.GONE);
-            floaty.head.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    gestureDetectorCompat.onTouchEvent(event);
-                    if (event.getAction() == MotionEvent.ACTION_UP) {
-                        floaty.head.setAlpha(1.0f);
-                        if (!didFling) {
-                            Log.e(LOG_TAG, "ACTION_UP");
-                            int newX = params.x;
-                            if (newX > (metrics.widthPixels / 2))
-                                params.x = metrics.widthPixels;
-                            else
-                                params.x = 0;
-                            windowManager.updateViewLayout(mLinearLayout, params);
+
+            if (floaty.body != null) {
+                floaty.body.setVisibility(View.GONE);
+            }
+
+            if (floaty.head != null) {
+                floaty.head.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        gestureDetectorCompat.onTouchEvent(event);
+
+                        if (event.getAction() == MotionEvent.ACTION_UP) {
+                            floaty.head.setAlpha(1.0f);
+
+                            if (!didFling) {
+                                Log.e(LOG_TAG, "ACTION_UP");
+
+                                int newX = params.x;
+                                if (newX > (metrics.widthPixels / 2)) {
+                                    params.x = metrics.widthPixels;
+                                } else {
+                                    params.x = 0;
+                                }
+
+                                windowManager.updateViewLayout(mLinearLayout, params);
+                            }
                         }
+                        return true;
                     }
-                    return true;
-                }
-            });
-            windowManager.addView(mLinearLayout, params);
-            if (floaty.body.getParent() != null) {
-                ((ViewGroup) floaty.body.getParent()).removeView(floaty.body);
+                });
             }
-            mLinearLayout.setFocusable(true);
+
+            if (windowManager != null) {
+                windowManager.addView(mLinearLayout, params);
+            }
+
+            if (floaty.body != null) {
+                if (floaty.body.getParent() != null) {
+                    ((ViewGroup) floaty.body.getParent()).removeView(floaty.body);
+                }
+            }
+
+            if (mLinearLayout != null) {
+                mLinearLayout.setFocusable(true);
+            }
+
             LinearLayout.LayoutParams headParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             LinearLayout.LayoutParams bodyParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+
             headParams.gravity = Gravity.TOP | Gravity.RIGHT;
             bodyParams.gravity = Gravity.TOP;
-            mLinearLayout.addView(floaty.head, headParams);
-            mLinearLayout.addView(floaty.body, bodyParams);
-            floaty.body.setVisibility(View.VISIBLE);
-            floaty.head.setVisibility(View.GONE);
+
+            if (mLinearLayout != null) {
+                mLinearLayout.addView(floaty.head, headParams);
+                mLinearLayout.addView(floaty.body, bodyParams);
+            }
+
+            if (floaty.body != null) {
+                floaty.body.setVisibility(View.VISIBLE);
+            }
+            if (floaty != null) {
+                floaty.head.setVisibility(View.GONE);
+            }
+
             showBody();
         }
 
@@ -437,12 +490,16 @@ public class Floaty {
         private void showBody() {
             params.x = metrics.widthPixels;
             params.y = 0;
+
             params.flags = params.flags & ~WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
             params.width = WindowManager.LayoutParams.MATCH_PARENT;
             params.height = WindowManager.LayoutParams.MATCH_PARENT;
+
             floaty.head.getLocationOnScreen(clickLocation);
             floaty.body.setVisibility(View.VISIBLE);
+
             mLinearLayout.setBackgroundColor(Color.argb(0, 0, 0, 0));
+
             windowManager.updateViewLayout(mLinearLayout, params);
         }
     }
