@@ -78,6 +78,7 @@ public class CustomAdapter extends BaseAdapter {
             holder.playedVideoRel = (RelativeLayout) rowView.findViewById(R.id.relative_play_video_color);
             holder.myRel = (RelativeLayout) rowView.findViewById(R.id.semiTransBGRelativeBig);
             holder.videoCount = (TextView) rowView.findViewById(R.id.video_Count);
+
             Typeface myTypeface = Typeface.createFromAsset(activity.getAssets(), "VarelaRound-Regular.ttf");
             holder.title.setTypeface(myTypeface);
             holder.channelTitle.setTypeface(myTypeface);

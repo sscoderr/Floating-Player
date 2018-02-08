@@ -36,13 +36,13 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
     private ArrayList<GetterSetterForExpandable> userDataAll;
     private LayoutInflater mInflater;
     private String tableName;
-    private int pos=-1;
+    private int pos = -1;
 
     public ExpandAdapter(Activity activity, ArrayList<GetterSetterForExpandable> list, String tblName) {
         this.mInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.userDataAll=list;
+        this.userDataAll = list;
         this.ct = activity;
-        this.tableName=tblName;
+        this.tableName = tblName;
     }
 
     @Override
@@ -60,10 +60,10 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(final int groupPosition, final int position, boolean isLastChild, View rowView, ViewGroup parent) {
-        final VideoItem vItem=(VideoItem)getChild(groupPosition,position);
+        final VideoItem vItem = (VideoItem) getChild(groupPosition, position);
 
         final ExpandAdapter.ViewHolder holder;
-        if(rowView==null) {
+        if (rowView == null) {
             rowView = mInflater.inflate(R.layout.video_item, null);
             holder = new ExpandAdapter.ViewHolder();
             holder.title = (TextView) rowView.findViewById(R.id.video_title);
@@ -72,34 +72,33 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
             holder.publishAt = (TextView) rowView.findViewById(R.id.video_publishAt);
             holder.duration = (TextView) rowView.findViewById(R.id.video_duration);
             holder.image = (ImageView) rowView.findViewById(R.id.video_thumbnail);
-            holder.imgMoreItemSearch=(ImageView)rowView.findViewById(R.id.img_more_item_search);
-            holder.myRelForDuration=(RelativeLayout)rowView.findViewById(R.id.semiTransBGRelative);
-            holder.myRel=(RelativeLayout)rowView.findViewById(R.id.semiTransBGRelativeBig);
-            holder.videoCount=(TextView) rowView.findViewById(R.id.video_Count);
+            holder.imgMoreItemSearch = (ImageView) rowView.findViewById(R.id.img_more_item_search);
+            holder.myRelForDuration = (RelativeLayout) rowView.findViewById(R.id.semiTransBGRelative);
+            holder.myRel = (RelativeLayout) rowView.findViewById(R.id.semiTransBGRelativeBig);
+            holder.videoCount = (TextView) rowView.findViewById(R.id.video_Count);
             Typeface myTypeface = Typeface.createFromAsset(ct.getAssets(), "VarelaRound-Regular.ttf");
             holder.title.setTypeface(myTypeface);
             holder.channelTitle.setTypeface(myTypeface);
             holder.viewCount.setTypeface(myTypeface);
             holder.publishAt.setTypeface(myTypeface);
             rowView.setTag(holder);
-        }
-        else{
+        } else {
             holder = (ExpandAdapter.ViewHolder) rowView.getTag();
         }
         holder.myRel.setVisibility(View.INVISIBLE);
-        String templateViewCount=vItem.getViewCount();
+        String templateViewCount = vItem.getViewCount();
         holder.myRelForDuration.setVisibility(View.VISIBLE);
-        if(vItem.getDuration()==null&&templateViewCount.substring(templateViewCount.indexOf(" "), templateViewCount.length()).equals(SearchActivity.myCt.getResources().getString(R.string.videoCountName))) {
+        if (vItem.getDuration() == null && templateViewCount.substring(templateViewCount.indexOf(" "), templateViewCount.length()).equals(SearchActivity.myCt.getResources().getString(R.string.videoCountName))) {
             holder.myRel.setVisibility(View.VISIBLE);//PlayList;
             holder.videoCount.setText(vItem.getViewCount().substring(0, vItem.getViewCount().indexOf(" ")));
             Picasso.with(ct).load(vItem.getThumbnailURL()).into(holder.image);
             holder.myRelForDuration.setVisibility(View.INVISIBLE);
-        }
-        else if (vItem.getDuration()==null&&templateViewCount.substring(templateViewCount.indexOf(" "), templateViewCount.length()).equals(SearchActivity.myCt.getResources().getString(R.string.subscriberName))) {
+        } else if (vItem.getDuration() == null && templateViewCount.substring(templateViewCount.indexOf(" "), templateViewCount.length()).equals(SearchActivity.myCt.getResources().getString(R.string.subscriberName))) {
             Picasso.with(ct).load(vItem.getThumbnailURL()).transform(new RoundedImage()).into(holder.image);
             holder.myRelForDuration.setVisibility(View.INVISIBLE);
+        } else {
+            Picasso.with(ct).load(vItem.getThumbnailURL()).into(holder.image);
         }
-        else { Picasso.with(ct).load(vItem.getThumbnailURL()).into(holder.image);}
 
 
         holder.title.setText(vItem.getTitle());
@@ -107,25 +106,28 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
         holder.viewCount.setText(vItem.getViewCount());
         holder.publishAt.setText(vItem.getPublishedAt());
         holder.duration.setText(vItem.getDuration());
-        ChannelVideoList.channelName=vItem.getChannelTitle();
+        ChannelVideoList.channelName = vItem.getChannelTitle();
         holder.imgMoreItemSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (tableName.equals(""))
-                    loadMoreOption(vItem,v);
-                else loadMoreOptionForFavorite(vItem,v,userDataAll.get(groupPosition).getplaylistHeader(),groupPosition);
+                    loadMoreOption(vItem, v);
+                else
+                    loadMoreOptionForFavorite(vItem, v, userDataAll.get(groupPosition).getplaylistHeader(), groupPosition);
 
             }
         });
         return rowView;
     }
+
     private static class ViewHolder {
-        TextView title, channelTitle, viewCount, publishAt, duration,videoCount;
-        ImageView image,imgMoreItemSearch;
-        RelativeLayout myRel,myRelForDuration;
+        TextView title, channelTitle, viewCount, publishAt, duration, videoCount;
+        ImageView image, imgMoreItemSearch;
+        RelativeLayout myRel, myRelForDuration;
     }
-    private void loadMoreOption(final VideoItem vItem,View v){
-        PopupMenu ppMenu=new PopupMenu(ct,v);
+
+    private void loadMoreOption(final VideoItem vItem, View v) {
+        PopupMenu ppMenu = new PopupMenu(ct, v);
         ppMenu.getMenuInflater().inflate(R.menu.more_option_for_trendnoshare, ppMenu.getMenu());
         ppMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
@@ -134,14 +136,14 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
                 switch (item.getItemId()) {
                     case R.id.addFavorite:
                         try {
-                            if (vItem.getId().length()==11) {
+                            if (vItem.getId().length() == 11) {
                                 DatabaseForPlaylists db = new DatabaseForPlaylists(ct);
                                 db.addVideoFavorites(vItem.getId(), ct);
                                 Toast.makeText(ct, "Favorilere Ekendi", Toast.LENGTH_SHORT).show();
-                                MyDateFragment.isHaveUpdate=true;
-                            }
-                            else Toast.makeText(ct, "Lutfen Kanal Veya Playlist Secmeyin", Toast.LENGTH_SHORT).show();
-                        }catch(Exception e){
+                                MyDateFragment.isHaveUpdate = true;
+                            } else
+                                Toast.makeText(ct, "Lutfen Kanal Veya Playlist Secmeyin", Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
                             Toast.makeText(ct, "Bir Hata Oluştu", Toast.LENGTH_SHORT).show();
                         }
                         break;
@@ -152,8 +154,9 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
         });
         ppMenu.show();
     }
-    private void loadMoreOptionForFavorite(final VideoItem vItem,View v,final String playlistName,final int pos){
-        PopupMenu ppMenu=new PopupMenu(ct,v);
+
+    private void loadMoreOptionForFavorite(final VideoItem vItem, View v, final String playlistName, final int pos) {
+        PopupMenu ppMenu = new PopupMenu(ct, v);
         ppMenu.getMenuInflater().inflate(R.menu.more_option_for_favnoshare, ppMenu.getMenu());
         ppMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
@@ -179,12 +182,13 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
         });
         ppMenu.show();
     }
-    private void removeItem(VideoItem vItem,int pos){
+
+    private void removeItem(VideoItem vItem, int pos) {
         userDataAll.get(pos).getvItems().remove(vItem);
-        this.pos=pos;
+        this.pos = pos;
         GetterSetterForExpandable headerRow = (GetterSetterForExpandable) getGroup(pos);
-        headerRow.setvideoCount(String.valueOf(Integer.parseInt(headerRow.getvideoCount())-1));
-        if (Integer.parseInt(headerRow.getvideoCount().toString())<=0)
+        headerRow.setvideoCount(String.valueOf(Integer.parseInt(headerRow.getvideoCount()) - 1));
+        if (Integer.parseInt(headerRow.getvideoCount().toString()) <= 0)
             userDataAll.remove(pos);
         this.notifyDataSetChanged();
     }

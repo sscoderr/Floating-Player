@@ -1,5 +1,6 @@
 package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Handler;
@@ -41,6 +42,7 @@ public class SlideOnboardingActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.slide_viewPager);
         linearLayoutTab = (LinearLayout) findViewById(R.id.slide_linearTab);
         linearLayoutSlideDot = (LinearLayout) findViewById(R.id.slide_linearDot);
+        Typeface font1 = Typeface.createFromAsset(MSettings.activeActivity.getAssets(), "VarelaRound-Regular.ttf");
 
         adapterSlider = new AdapterSlider(this);
         viewPager.setOffscreenPageLimit(3);
@@ -54,8 +56,8 @@ public class SlideOnboardingActivity extends AppCompatActivity {
 
 //        textViewBack.setTypeface(MSettings.getFontVarelaRound());
 //        textViewNext.setTypeface(MSettings.getFontVarelaRound());
-        buttonBack.setTypeface(MSettings.getFontVarelaRound());
-        buttonNext.setTypeface(MSettings.getFontVarelaRound());
+        buttonBack.setTypeface(font1);
+        buttonNext.setTypeface(font1);
 
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
