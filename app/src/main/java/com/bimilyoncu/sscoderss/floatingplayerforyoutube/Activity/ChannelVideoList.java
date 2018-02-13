@@ -92,7 +92,7 @@ public class ChannelVideoList extends AppCompatActivity implements OnScrollListe
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> av, View v, int pos, long id) {
-                MSettings.CounterForSimilarVideos = 1;
+                MSettings.CounterForSimilarVideos = pos+1;
                 playedPoss = new ArrayList<Integer>();
                 MSettings.currentVItem = searchResultsForChannelList.get(pos);
                 MSettings.activeActivity = ChannelVideoList.this;

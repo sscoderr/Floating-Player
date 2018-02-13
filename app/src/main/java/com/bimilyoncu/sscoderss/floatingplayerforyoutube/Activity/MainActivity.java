@@ -810,9 +810,9 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
             public void onItemClick(AdapterView<?> av, View v, int pos, long id) {
                 if (similarVideosList.get(pos).getId().length() == 11) {
                     MSettings.currentVItem = similarVideosList.get(pos);
-                    MSettings.getVideoTitle();
                     MSettings.LoadVideo();
                     MSettings.activeActivity = MainActivity.this;
+                    MSettings.CounterForSimilarVideos=pos+1;
                 } else
                     Toast.makeText(MSettings.activeActivity, "Getting an Error", Toast.LENGTH_SHORT).show();
             }

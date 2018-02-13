@@ -104,7 +104,7 @@ public class PlaylistActivity extends AppCompatActivity implements OnScrollListe
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> av, View v, int pos, long id) {
-                MSettings.CounterForSimilarVideos=1;
+                MSettings.CounterForSimilarVideos=pos+1;
                 playedPoss=new ArrayList<Integer>();
                 MSettings.currentVItem = searchResultsForPlaylist.get(pos);
                 MSettings.activeActivity = PlaylistActivity.this;
