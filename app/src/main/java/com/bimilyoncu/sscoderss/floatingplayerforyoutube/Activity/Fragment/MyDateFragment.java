@@ -337,18 +337,26 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
                             final String playlistVideoCount = cur.getString(cur.getColumnIndex("videoCount"));
                             Cursor curTwo = readableDatabase.rawQuery("SELECT * FROM tbl_fromyoutube_videos where playlistId=" + playlistId + "", null);
                             String arrayString = "";
+                            ArrayList<String> idsArray=new ArrayList<>();
                             int i = 0;
                             if (curTwo != null) {
                                 if (curTwo.moveToFirst()) {
                                     do {
-                                        arrayString =arrayString+curTwo.getString(curTwo.getColumnIndex("videoId"))+",";
+                                        arrayString = arrayString+curTwo.getString(curTwo.getColumnIndex("videoId"))+",";
                                         i++;
+                                        if (i>=50){
+                                            arrayString=arrayString.toString().substring(0,arrayString.toString().length()-1).toString();
+                                            idsArray.add(arrayString);
+                                            i=0;
+                                            arrayString="";
+                                        }
                                     } while (curTwo.moveToNext());
                                 }
                             }
                             arrayString=arrayString.toString().substring(0,arrayString.toString().length()-1).toString();
-                            ConnectorForUserVideo userVideo = new ConnectorForUserVideo(getActivity());
-                            GetterSetterForExpandable gs = new GetterSetterForExpandable(playlistName, userVideo.getVideoItems(arrayString), playlistVideoCount);
+                            idsArray.add(arrayString);
+                            ConnectorForUserVideo userVideo = new ConnectorForUserVideo();
+                            GetterSetterForExpandable gs = new GetterSetterForExpandable(playlistName, userVideo.getVideoItems(idsArray,getActivity()), playlistVideoCount);
                             expandListFullData.add(gs);
 
                         } while (cur.moveToNext());

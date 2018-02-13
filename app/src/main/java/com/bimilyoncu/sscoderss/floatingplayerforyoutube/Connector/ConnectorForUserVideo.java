@@ -29,33 +29,32 @@ public class ConnectorForUserVideo {
     private YouTube.Videos.List myQuery;
     private Context ct;
 
-    public ConnectorForUserVideo(Context context) {
-        ct = context;
-
-        youtube = new YouTube.Builder(new NetHttpTransport(), new JacksonFactory(), new HttpRequestInitializer() {
-            @Override
-            public void initialize(HttpRequest request) throws IOException {
-                String packageName = ct.getPackageName();
-                String SHA1 = MSettings.getSHA1(packageName, ct);
-
-                request.getHeaders().set("X-Android-Package", packageName);
-                request.getHeaders().set("X-Android-Cert", SHA1);
-            }
-        }).setApplicationName(ct.getString(R.string.app_name)).build();
-        try{
-            myQuery = youtube.videos().list("snippet,contentDetails,statistics");
-            myQuery.setKey(YoutubeConnector.KEY);
-        }catch(IOException e){
-            Log.d("YC", "Could not initialize: "+e);
-        }
-    }
 
     private ArrayList<VideoItem> items = new ArrayList<>();
 
-    public ArrayList<VideoItem> getVideoItems(final String videoIds) {
+    public ArrayList<VideoItem> getVideoItems(final ArrayList<String> videoIds,final Context ct) {
         try {
-                if (videoIds != null) {
-                    myQuery.setId(videoIds.toString());
+            for(String ids : videoIds){
+
+                youtube = new YouTube.Builder(new NetHttpTransport(), new JacksonFactory(), new HttpRequestInitializer() {
+                    @Override
+                    public void initialize(HttpRequest request) throws IOException {
+                        String packageName = ct.getPackageName();
+                        String SHA1 = MSettings.getSHA1(packageName, ct);
+
+                        request.getHeaders().set("X-Android-Package", packageName);
+                        request.getHeaders().set("X-Android-Cert", SHA1);
+                    }
+                }).setApplicationName(ct.getString(R.string.app_name)).build();
+                try{
+                    myQuery = youtube.videos().list("snippet,contentDetails,statistics");
+                    myQuery.setKey(YoutubeConnector.KEY);
+                }catch(IOException e){
+                    Log.d("YC", "Could not initialize: "+e);
+                }
+
+                if (ids != null) {
+                    myQuery.setId(ids.toString());
                     VideoListResponse response = myQuery.execute();
                     List<Video> results = response.getItems();
                     for (Video result : results) {
@@ -77,7 +76,9 @@ public class ConnectorForUserVideo {
                         }
                     }
                 }
+            }
             return items;
+
         } catch (final IOException e) {
             return null;
         }
