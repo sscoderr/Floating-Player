@@ -147,7 +147,7 @@ public class YoutubeConnector {
             }
             query.setFields("items(id/videoId,id/channelId,id/playlistId,snippet/title,snippet/publishedAt,snippet/channelTitle,snippet/thumbnails/medium/url),nextPageToken");
         } catch (IOException e) {
-            Log.d("YC", "Could not initialize: " + e);
+            e.printStackTrace();
         }
     }
 
@@ -213,6 +213,7 @@ public class YoutubeConnector {
                                     item.setId(result.getId().getChannelId());
                                 }
                             } catch (Exception e) {
+                                e.printStackTrace();
                             }
                         } else if (result.getId().getPlaylistId() != null) {
                             item.setChanelTitle(result.getSnippet().getChannelTitle(), false);
@@ -231,10 +232,12 @@ public class YoutubeConnector {
                                     item.setId(result.getId().getPlaylistId());
                                 }
                             } catch (Exception e) {
+                                e.printStackTrace();
                             }
                         }
                         items.add(item);
                     } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
                 if (isSimilarVideos) {
@@ -247,6 +250,10 @@ public class YoutubeConnector {
             }
             return items;
         } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }

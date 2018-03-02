@@ -68,7 +68,9 @@ public class ServiceSearchConnector {
             }
             query.setFields("items(id/videoId,id/channelId,id/playlistId,snippet/title,snippet/publishedAt,snippet/channelTitle,snippet/thumbnails/medium/url),nextPageToken");
         } catch (IOException e) {
-            Log.d("YC", "Could not initialize: " + e);
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -100,6 +102,7 @@ public class ServiceSearchConnector {
                             items.add(item);
                         }
                     } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
                 if (isSimilarVideos) {
@@ -112,6 +115,10 @@ public class ServiceSearchConnector {
             }
             return items;
         } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }

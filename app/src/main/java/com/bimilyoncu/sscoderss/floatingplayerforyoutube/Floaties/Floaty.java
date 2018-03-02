@@ -31,6 +31,10 @@ import android.widget.RemoteViews;
 
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.R;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
@@ -114,6 +118,7 @@ public class Floaty {
      */
     public void startService() {
         MSettings.CheckService = true;
+
         Intent intent = new Intent(context, FloatHeadService.class);
         context.startService(intent);
     }
@@ -192,7 +197,6 @@ public class Floaty {
                 .setContentIntent(contentIntent).build();*/
     }
 
-
     public static class FloatHeadService extends Service {
         GestureDetectorCompat gestureDetectorCompat;
         DisplayMetrics metrics;
@@ -230,7 +234,7 @@ public class Floaty {
             Log.d(LOG_TAG, "onStartCommand");
             metrics = new DisplayMetrics();
             windowManager.getDefaultDisplay().getMetrics(metrics);
-//            startForeground(floaty.notificationId, floaty.notification);
+//            startForeground(floaty.notificationId, notification);
 
             if (MSettings.floaty.notification != null) {
                 if (MSettings.floaty.notification.getNotificationManager() != null) {
@@ -251,6 +255,7 @@ public class Floaty {
                 public boolean dispatchKeyEvent(KeyEvent event) {
                     if (event.getKeyCode() == KeyEvent.KEYCODE_BACK || event.getKeyCode() == KeyEvent.KEYCODE_HOME) {
                         Log.e(LOG_TAG, "dispatchKeyEvent");
+
                         floaty.body.setVisibility(View.GONE);
                         params.x = clickLocation[0];
                         params.y = clickLocation[1] - 36;
@@ -476,7 +481,6 @@ public class Floaty {
             showBody();
         }
 
-        @Override
         public void onDestroy() {
             super.onDestroy();
             if (mLinearLayout != null) {
@@ -484,6 +488,29 @@ public class Floaty {
                 windowManager.removeView(mLinearLayout);
             }
 
+            MobileAds.initialize(MSettings.activeActivity, "ca-app-pub-5808367634056272~8476127349");
+            AdRequest adRequest = new AdRequest.Builder()
+                    /*.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                    .addTestDevice("6EE0EC7A08848B41A3A8B3C52624F39A")
+                    .addTestDevice("D840C07DDBAA5E0897B010411FABE6AC")
+                    .addTestDevice("778ADE18482DD7E44193371217202427")
+                    .addTestDevice("6AFA29CB9314195950E590C9BEACC344")
+                    .addTestDevice("0CEA9CA5F2DAED70F0678D8F2D8669A3")*/.build();
+            final InterstitialAd interstitial = new InterstitialAd(MSettings.activeActivity);
+            interstitial.setAdUnitId(MSettings.activeActivity.getString(R.string.admob_interstitial_id_close_service));
+            interstitial.loadAd(adRequest);
+            interstitial.setAdListener(new AdListener() {
+                public void onAdLoaded() {
+                    if (interstitial.isLoaded())
+                        interstitial.show();
+                }
+
+                public void onAdClosed() {
+
+                }
+            });
+
+            MSettings.floaty.stopService();
             stopForeground(true);
         }
 

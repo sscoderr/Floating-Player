@@ -143,7 +143,8 @@ public class TrendVideoFragment extends Fragment implements OnScrollListener  {
                     item.setId("ZxT0576FTsk");
                     item.setPublishedAt("2011-10-20T19:59:56.000Z");
                     items.add(item);
-                }catch (Exception e){}
+                }catch (Exception e){
+                e.printStackTrace();}
                 searchResults=items;*/
 
                 ConnectorForTrends connectorForTrends = new ConnectorForTrends(getContext(),false);
@@ -160,6 +161,7 @@ public class TrendVideoFragment extends Fragment implements OnScrollListener  {
                             }
                             myPg.setVisibility(View.INVISIBLE);
                         } catch (Exception e) {
+                            e.printStackTrace();
                             if (!netControl.isOnline())
                                 Toast.makeText(getActivity(), getActivity().getString(R.string.internetConnectionMessage), Toast.LENGTH_LONG).show();
                         }
@@ -215,6 +217,7 @@ public class TrendVideoFragment extends Fragment implements OnScrollListener  {
                 Message msg = mHandler.obtainMessage(1, lstResult);
                 mHandler.sendMessage(msg);
             } catch (Exception e) {
+                e.printStackTrace();
                 if (!netControl.isOnline())
                     getActivity().runOnUiThread(new Runnable() {
                         @Override

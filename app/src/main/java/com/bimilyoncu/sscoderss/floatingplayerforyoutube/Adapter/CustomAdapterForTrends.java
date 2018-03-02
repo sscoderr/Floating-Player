@@ -102,6 +102,7 @@ public class CustomAdapterForTrends extends BaseAdapter {
                                     } else
                                         Toast.makeText(activity, "Lutfen Kanal Veya Playlist Secmeyin", Toast.LENGTH_SHORT).show();
                                 } catch (Exception e) {
+                                    e.printStackTrace();
                                     Toast.makeText(activity, "Bir Hata Oluştu", Toast.LENGTH_SHORT).show();
                                 }
                                 break;

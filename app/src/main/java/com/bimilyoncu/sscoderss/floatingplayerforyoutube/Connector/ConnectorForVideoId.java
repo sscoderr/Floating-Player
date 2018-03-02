@@ -41,7 +41,7 @@ public class ConnectorForVideoId {
             query = youtube.videos().list("snippet,contentDetails,statistics");
             query.setKey(YoutubeConnector.KEY);
         } catch (IOException e) {
-            Log.d("YC", "Could not initialize: " + e);
+            e.printStackTrace();
         }
     }
 
@@ -68,6 +68,7 @@ public class ConnectorForVideoId {
                             }
                             items.add(item);
                         } catch (Exception e) {
+                            e.printStackTrace();
                         }
                     } else break;
                 else break;
@@ -76,6 +77,10 @@ public class ConnectorForVideoId {
             }
             return items;
         } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }

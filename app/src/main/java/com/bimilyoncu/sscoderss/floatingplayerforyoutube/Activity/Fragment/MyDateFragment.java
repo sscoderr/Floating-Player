@@ -535,6 +535,7 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
                                 }
                             }
                         } catch (Exception e) {
+                            e.printStackTrace();
                         }
                     }
                 });
@@ -622,6 +623,8 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
                 Message msg = mHandler.obtainMessage(1, lstResult);
                 mHandler.sendMessage(msg);
             } catch (Exception e) {
+                e.printStackTrace();
+
                 if (netControl.isOnline()) {
                     Toast.makeText(getActivity(), getActivity().getString(R.string.internetConnectionMessage), Toast.LENGTH_LONG).show();
                 }
@@ -713,6 +716,8 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
                     });
                     builderSingle.show();
                 } catch (final GooglePlayServicesAvailabilityIOException availabilityException) {
+                    availabilityException.printStackTrace();
+
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -720,6 +725,7 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
                         }
                     });
                 } catch (UserRecoverableAuthIOException userRecoverableException) {
+                    userRecoverableException.printStackTrace();
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -728,6 +734,17 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
                     });
                     startActivityForResult(userRecoverableException.getIntent(), REQUEST_CODE_NOHAVEACCOUNT);
                 } catch (IOException e) {
+                    e.printStackTrace();
+
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialogProgress.dismiss();
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {

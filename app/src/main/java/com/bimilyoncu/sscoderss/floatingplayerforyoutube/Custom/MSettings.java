@@ -172,6 +172,8 @@ public class MSettings {
                                                 currentVItem=similarVideosList.get(suffleVideo());
                                         }
                                         catch (Exception e){
+                                            e.printStackTrace();
+
                                             if (CounterForSimilarVideos>=similarVideosList.size())
                                                 CounterForSimilarVideos=0;
                                         }
@@ -202,6 +204,7 @@ public class MSettings {
             counterForSuffle = 0;
             return  randValue;
         } catch (Exception e) {
+            e.printStackTrace();
             return 0;
         }
     }
@@ -215,6 +218,7 @@ public class MSettings {
                 txtVideoTitle.setText(currentVItem.getTitle());
             }
         } catch (Exception e) {
+            e.printStackTrace();
             txtVideoTitle.setText(currentVItem.getTitle());
         }
     }
@@ -230,6 +234,8 @@ public class MSettings {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -284,6 +290,8 @@ public class MSettings {
                     } catch (ExecutionException e) {
                         e.printStackTrace();
                     } catch (TimeoutException e) {
+                        e.printStackTrace();
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
@@ -343,6 +351,8 @@ public class MSettings {
                                                 searchListView.setVisibility(View.GONE);
                                                 listViewVideo.setVisibility(View.VISIBLE);
                                             } catch (Exception e) {
+                                                e.printStackTrace();
+
                                                 if (!(new NetControl(MSettings.activeActivity)).isOnline()) {
                                                     Toast.makeText(MSettings.activeActivity, MSettings.activeActivity.getString(R.string.internetConnectionMessage), Toast.LENGTH_LONG).show();
                                                 }

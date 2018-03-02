@@ -147,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
             Log.d(".. MainActivity ..", "CasheClear Successful!!! ...");
         } catch (Exception e) {
             Log.e(".. MainActivity ..", "CasheClear Catch!!! ...");
+            e.printStackTrace();
         }
     }
 
@@ -235,6 +236,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
             try {
                 startActivity(goToMarket);
             } catch (ActivityNotFoundException e) {
+                e.printStackTrace();
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse("http://play.google.com/store/apps/details?id=" + getApplicationContext().getPackageName())));
             }
@@ -285,12 +287,13 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
         });
 
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!Settings.canDrawOverlays(MainActivity.this)) {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                         Uri.parse("package:" + MainActivity.this.getPackageName()));
                 startActivityForResult(intent, PERMISSION_REQUEST_CODE);
             }
+        }
         if (!MSettings.CheckService) {
             loadFloatWindow();
         }
@@ -319,6 +322,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
             MSettings.head = LayoutInflater.from(this).inflate(R.layout.float_head, null);
         if (MSettings.body == null)
             MSettings.body = LayoutInflater.from(this).inflate(R.layout.float_body, null);
+
         ImageView imgForClose = (ImageView) MSettings.head.findViewById(R.id.imageViewForClose);
         imgForClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -490,7 +494,8 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
     }
 
     List<VideoItem> searchResults;
-    private void ServiceSearch(){
+
+    private void ServiceSearch() {
         final EditText searchText = (EditText) MSettings.body.findViewById(R.id.editText_searchservice);
         final ListView listViewKey = (ListView) MSettings.body.findViewById(R.id.service_search_listview);
         final ListView listViewVideo = (ListView) MSettings.body.findViewById(R.id.service_searchvideo_listview);
@@ -562,6 +567,8 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
                                                 listViewKey.setVisibility(View.GONE);
                                                 listViewVideo.setVisibility(View.VISIBLE);
                                             } catch (Exception e) {
+                                                e.printStackTrace();
+
                                                 if (!(new NetControl(MSettings.activeActivity)).isOnline()) {
                                                     Toast.makeText(MSettings.activeActivity, MSettings.activeActivity.getString(R.string.internetConnectionMessage), Toast.LENGTH_LONG).show();
                                                 }
@@ -711,7 +718,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
 
     public void getSimilarVideos(final String vId, final boolean isPlaylist, final boolean isChannel, final boolean isYoutubeUserVideo, final String[] userYoutubeVideosId) {
         MSettings.isUserVideo = false;
-        MSettings.similarVideosIsLoaded=false;
+        MSettings.similarVideosIsLoaded = false;
         if (MSettings.mListForFloat != null) {
             MSettings.mListForFloat.setAdapter(null);
         }
@@ -753,7 +760,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
                         myPg.setVisibility(View.INVISIBLE);
                     }
                 });
-                MSettings.similarVideosIsLoaded=true;
+                MSettings.similarVideosIsLoaded = true;
             }
         }.start();
     }
@@ -773,7 +780,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
             queryTwo = youtube.videos().list("snippet,contentDetails,statistics");
             queryTwo.setKey(YoutubeConnector.KEY);
         } catch (IOException e) {
-            Log.d("YC", "Could not initialize: " + e);
+            e.printStackTrace();
         }
 
         try {
@@ -795,11 +802,16 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
                         }
                         items.add(item);
                     } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
             }
             return items;
         } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -812,13 +824,14 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
                     MSettings.currentVItem = similarVideosList.get(pos);
                     MSettings.LoadVideo();
                     MSettings.activeActivity = MainActivity.this;
-                    MSettings.CounterForSimilarVideos=pos+1;
+                    MSettings.CounterForSimilarVideos = pos + 1;
                 } else
                     Toast.makeText(MSettings.activeActivity, "Getting an Error", Toast.LENGTH_SHORT).show();
             }
 
         });
     }
+
     public FragmentRefreshListenerForMusic getFragmentRefreshListener() {
         return fragmentRefreshListener;
     }
@@ -876,6 +889,27 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        MobileAds.initialize(MSettings.activeActivity, "ca-app-pub-5808367634056272~8476127349");
+        AdRequest adRequest = new AdRequest.Builder()
+                    /*.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                    .addTestDevice("6EE0EC7A08848B41A3A8B3C52624F39A")
+                    .addTestDevice("D840C07DDBAA5E0897B010411FABE6AC")
+                    .addTestDevice("778ADE18482DD7E44193371217202427")
+                    .addTestDevice("6AFA29CB9314195950E590C9BEACC344")
+                    .addTestDevice("0CEA9CA5F2DAED70F0678D8F2D8669A3")*/.build();
+        final InterstitialAd interstitial = new InterstitialAd(MSettings.activeActivity);
+        interstitial.setAdUnitId(MSettings.activeActivity.getString(R.string.admob_interstitial_id_close_service));
+        interstitial.loadAd(adRequest);
+        interstitial.setAdListener(new AdListener() {
+            public void onAdLoaded() {
+                if (interstitial.isLoaded())
+                    interstitial.show();
+            }
+
+            public void onAdClosed() {
+
+            }
+        });
 
         MSettings.floaty.stopService();
     }

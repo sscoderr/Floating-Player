@@ -52,7 +52,9 @@ public class ConnectorForTrends {
             if (isMusic)
                 query.setVideoCategoryId("10");
         } catch (IOException e) {
-            Log.d("YC", "Could not initialize: " + e);
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -87,6 +89,7 @@ public class ConnectorForTrends {
                         }
                         items.add(item);
                     } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
                 if (!isMusic) {
@@ -97,7 +100,10 @@ public class ConnectorForTrends {
             }
             return items;
         } catch (IOException e) {
-            Log.e("Hata", "Sebebi: " + e);
+            e.printStackTrace();
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }

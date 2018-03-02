@@ -45,7 +45,7 @@ public class GetUserVideos {
             query.setPlaylistId(Id);
             query.setFields("items(contentDetails/videoId,contentDetails/videoPublishedAt),nextPageToken");
         } catch (IOException e) {
-            Log.d("YC", "Could not initialize: " + e);
+            e.printStackTrace();
         }
     }
 
@@ -64,6 +64,7 @@ public class GetUserVideos {
                 nextToken = response.getNextPageToken();
             }while (nextToken!=null);
         } catch (Exception sa) {
+            sa.printStackTrace();
             return null;
         }
         return items;

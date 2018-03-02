@@ -144,6 +144,7 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
                             } else
                                 Toast.makeText(ct, "Lutfen Kanal Veya Playlist Secmeyin", Toast.LENGTH_SHORT).show();
                         } catch (Exception e) {
+                            e.printStackTrace();
                             Toast.makeText(ct, "Bir Hata Oluştu", Toast.LENGTH_SHORT).show();
                         }
                         break;
@@ -172,6 +173,7 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
                             removeItem(vItem, pos);
                             Toast.makeText(ct, "Silindi", Toast.LENGTH_SHORT).show();
                         } catch (Exception e) {
+                            e.printStackTrace();
                             Toast.makeText(ct, "Bir Hata Oluştu", Toast.LENGTH_SHORT).show();
                         }
                         break;

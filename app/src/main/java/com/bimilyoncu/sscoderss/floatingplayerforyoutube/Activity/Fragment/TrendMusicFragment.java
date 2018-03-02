@@ -123,6 +123,7 @@ public class TrendMusicFragment extends Fragment implements OnScrollListener  {
                             }
                             myPg.setVisibility(View.INVISIBLE);
                         } catch (Exception e) {
+                            e.printStackTrace();
                             if (!netControl.isOnline())
                                 Toast.makeText(getActivity(), getActivity().getString(R.string.internetConnectionMessage), Toast.LENGTH_LONG).show();
                         }
@@ -185,6 +186,7 @@ public class TrendMusicFragment extends Fragment implements OnScrollListener  {
                 Message msg = mHandler.obtainMessage(1, lstResult);
                 mHandler.sendMessage(msg);
             } catch (Exception e) {
+                e.printStackTrace();
                 if (!netControl.isOnline()) {
                     Toast.makeText(getActivity(), getActivity().getString(R.string.internetConnectionMessage), Toast.LENGTH_LONG).show();
                 }

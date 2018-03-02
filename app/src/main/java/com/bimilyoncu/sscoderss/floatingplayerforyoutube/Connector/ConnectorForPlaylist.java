@@ -51,7 +51,7 @@ public class ConnectorForPlaylist {
             query.setPlaylistId(Id);
             query.setFields("items(contentDetails/videoId,snippet/title,snippet/channelTitle,snippet/publishedAt,snippet/thumbnails/medium/url),nextPageToken,pageInfo");
         } catch (IOException e) {
-            Log.d("YC", "Could not initialize: " + e);
+            e.printStackTrace();
         }
     }
 
@@ -85,12 +85,14 @@ public class ConnectorForPlaylist {
                         item.setDuration(duration);
                         items.add(item);
                     } catch (Exception e) {
+                        e.printStackTrace();
                     }
 
                 }
                 MSettings.token.setNextTokenForPlayList(response.getNextPageToken());
             }
         } catch (Exception sa) {
+            sa.printStackTrace();
             return null;
         }
         return items;

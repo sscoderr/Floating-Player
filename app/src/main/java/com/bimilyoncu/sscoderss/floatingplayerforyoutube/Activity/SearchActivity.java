@@ -304,6 +304,8 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
                             mList.setAdapter(adapter);
                             myPg.setVisibility(View.INVISIBLE);
                         } catch (Exception e) {
+                            e.printStackTrace();
+
                             if (!netControl.isOnline()) {
                                 Toast.makeText(SearchActivity.this, SearchActivity.this.getString(R.string.internetConnectionMessage), Toast.LENGTH_LONG).show();
                             }
@@ -366,6 +368,8 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
                 Message msg = mHandler.obtainMessage(1, lstResult);
                 mHandler.sendMessage(msg);
             } catch (Exception e) {
+                e.printStackTrace();
+
                 if (!netControl.isOnline())
                     SearchActivity.this.runOnUiThread(new Runnable() {
                         @Override
@@ -428,7 +432,9 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
             spinner.setSelection(0);
             spinnerTwo.setSelection(0);
         } catch (Exception e) {
+            e.printStackTrace();
         }
+
         try {
             mList.setAdapter(null);
             historyList.setAdapter(null);
@@ -442,6 +448,8 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
             linearAutoComplate.setVisibility(View.INVISIBLE);
             mList.setVisibility(View.VISIBLE);
         } catch (Exception e) {
+            e.printStackTrace();
+
             if (!netControl.isOnline())
                 Toast.makeText(SearchActivity.this, SearchActivity.this.getString(R.string.internetConnectionMessage), Toast.LENGTH_LONG).show();
         }
@@ -602,6 +610,8 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
                     e.printStackTrace();
                 } catch (TimeoutException e) {
                     e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -624,6 +634,7 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
             try {
                 filterData(filterText);
             } catch (Exception e) {
+                e.printStackTrace();
                 if (!netControl.isOnline()) {
                     Toast.makeText(SearchActivity.this, SearchActivity.this.getString(R.string.internetConnectionMessage), Toast.LENGTH_LONG).show();
                 }

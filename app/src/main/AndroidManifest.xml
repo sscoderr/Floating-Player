@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.CLEAR_APP_CACHE" />
-    <!-- <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="27"/> -->
+
     <application
         android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="true"
@@ -20,6 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme"
         tools:replace="android:icon">
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -27,52 +28,50 @@
         <activity
             android:name=".Activity.SearchActivity"
             android:label="@string/app_name" />
+
         <activity
             android:name=".Activity.PlaylistActivity"
             android:label="@string/title_activity_playlist" />
+
         <activity
             android:name=".Activity.MainActivity"
             android:label="@string/title_activity_main">
-
-            <!-- android:theme="@style/MyMaterialTheme.NoActionBar" -->
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".Activity.ChannelVideoList" />
+
+        <activity android:name=".Activity.SlideOnboardingActivity" />
 
         <service android:name=".Floaties.Floaty$FloatHeadService" />
 
-        <receiver
-            android:name=".Receiver.ConnectivityReceiver"
+        <receiver android:name=".Receiver.ConnectivityReceiver"
             android:enabled="true">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".Custom.Notification.ButtonPlayPause">
+        <receiver android:name=".Custom.Notification.ButtonPlayPause"
+            android:enabled="true">
             <intent-filter>
                 <action android:name="PlayPauseClicked" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".Custom.Notification.ButtonClose">
+        <receiver android:name=".Custom.Notification.ButtonClose"
+            android:enabled="true">
             <intent-filter>
                 <action android:name="Close" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".Custom.Notification.ButtonNextMusic">
+        <receiver android:name=".Custom.Notification.ButtonNextMusic"
+            android:enabled="true">
             <intent-filter>
                 <action android:name="NextMusic" />
             </intent-filter>
         </receiver>
-
-        <activity
-            android:name=".Activity.SlideOnboardingActivity" >
-
-        </activity>
     </application>
-
 </manifest>

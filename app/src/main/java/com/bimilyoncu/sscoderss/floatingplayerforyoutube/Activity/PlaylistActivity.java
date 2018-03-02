@@ -128,6 +128,8 @@ public class PlaylistActivity extends AppCompatActivity implements OnScrollListe
                         mList.removeFooterView(myView);
                         isLoading = false;
                     } catch (Exception e) {
+                        e.printStackTrace();
+
                         if (!netControl.isOnline())
                             PlaylistActivity.this.runOnUiThread(new Runnable() {
                                 @Override
