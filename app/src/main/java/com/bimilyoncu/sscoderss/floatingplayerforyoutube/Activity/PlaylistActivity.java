@@ -57,6 +57,8 @@ public class PlaylistActivity extends AppCompatActivity implements OnScrollListe
             public void onClick(View view) {
                 MSettings.currentVItem = searchResultsForPlaylist.get(0);
                 MSettings.activeActivity = PlaylistActivity.this;
+                MSettings.IsRetry = false;
+                MSettings.videoFinishStopVideoClicked = true;
                 MSettings.LoadVideo();
             }
         });
@@ -110,6 +112,8 @@ public class PlaylistActivity extends AppCompatActivity implements OnScrollListe
                 MSettings.activeActivity = PlaylistActivity.this;
                 MainActivity mainActivity = new MainActivity();
                 mainActivity.getSimilarVideos(String.valueOf(searchResultsForPlaylist.get(pos).getId()),true,false,false,new String[]{});
+                MSettings.IsRetry = false;
+                MSettings.videoFinishStopVideoClicked = true;
                 MSettings.LoadVideo();
                 MSettings.LoadSixTapAds();
             }

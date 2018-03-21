@@ -464,6 +464,8 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
                 MSettings.activeActivity = getActivity();
                 MainActivity mainActivity = new MainActivity();
                 mainActivity.getSimilarVideos(String.valueOf(response.get(pos).getId()), false, false, false, new String[]{});
+                MSettings.IsRetry = false;
+                MSettings.videoFinishStopVideoClicked = true;
                 MSettings.LoadVideo();
                 MSettings.LoadSixTapAds();
             }
@@ -492,6 +494,7 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
                 mainActivity.getSimilarVideos("", false, false, true, userYoutubeVideosId);
                     /*}
                 });*/
+                MSettings.videoFinishStopVideoClicked = true;
                 MSettings.LoadVideo();
                 MSettings.LoadSixTapAds();
                 return true;

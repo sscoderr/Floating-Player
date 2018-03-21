@@ -1,6 +1,7 @@
 package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom;
 
 import android.app.Activity;
+import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +16,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebView;
@@ -106,28 +108,30 @@ public class MSettings {
     public static VideoItem currentVItem;
     public static boolean similarVideosIsLoaded=false;
     public static boolean playerReady=false;
+    public static boolean IsRetry = false;
+    public static boolean IsonPlayerNext = false;
+    public static boolean videoFinishStopVideoClicked = false;
 
     public static void LoadVideo() {
         activeActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    if (!videoFinishStopVideo) {
+                    if (!videoFinishStopVideo || videoFinishStopVideoClicked) {
                         NetControl netControl = new NetControl(activeActivity);
                         if (netControl.isOnline()) {
-                            if (checkRepeat)
+
+                            MSettings.videoFinishStopVideoClicked = false;
+                            if ((IsonPlayerNext && checkRepeat) || (checkRepeat && IsRetry)) {
+                                IsonPlayerNext = false;
                                 webView.loadUrl(String.format("javascript:seekTo(\"%s\");", new Object[]{0}));
-                            else {
+                            } else {
                                 if (floaty.notification != null) {
                                     if (currentVItem.getTitle() != null) {
                                         String Title = currentVItem.getTitle();
                                         if (Title.length() > 25) {
                                             Title = Title.substring(0, 25) + "...";
                                         }
-
-                                        floaty.notification.getRemoteViews().setTextViewText(R.id.textview_notificatilon_music, Title);
-                                    } else {
-                                        floaty.notification.getRemoteViews().setTextViewText(R.id.textview_notificatilon_music, "??");
                                     }
                                 }
                                 getVideoTitle();
@@ -141,8 +145,9 @@ public class MSettings {
                                                 .getLaunchIntentForPackage(activeActivity.getBaseContext().getPackageName());
                                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         activeActivity.startActivity(i);
-                                    } else
+                                    } else {
                                         floaty.startService();
+                                    }
                                 } else {
                                     floaty.startService();
                                 }
@@ -180,6 +185,8 @@ public class MSettings {
                                     }
                                 }).start();
                                 //webView.loadUrl("https://www.youtube.com/embed/" + currentVideoId + "?autoplay=1;rel=0&amp;showinfo=0&?Version=3&loop=1&playlist=" + currentVideoId);
+
+                                MSettings.IsRetry = true;
                             }
                         } else {
                             Toast.makeText(activeActivity, activeActivity.getString(R.string.internetConnectionMessage), Toast.LENGTH_LONG).show();
@@ -331,6 +338,8 @@ public class MSettings {
                                         MSettings.currentVItem = searchResults.get(i);
                                         MainActivity mainActivity = new MainActivity();
                                         mainActivity.getSimilarVideos(String.valueOf(searchResults.get(i).getId()), false, false, false, new String[]{});
+                                        MSettings.IsRetry = false;
+                                        MSettings.videoFinishStopVideoClicked = true;
                                         MSettings.LoadVideo();
                                         MSettings.LoadSixTapAds();
                                     }

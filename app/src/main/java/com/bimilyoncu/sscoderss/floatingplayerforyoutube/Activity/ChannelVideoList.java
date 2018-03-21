@@ -98,6 +98,8 @@ public class ChannelVideoList extends AppCompatActivity implements OnScrollListe
                 MSettings.activeActivity = ChannelVideoList.this;
                 MainActivity mainActivity = new MainActivity();
                 mainActivity.getSimilarVideos(searchResultsForChannelList.get(pos).getId(), false, true, false, new String[]{});
+                MSettings.IsRetry = false;
+                MSettings.videoFinishStopVideoClicked = true;
                 MSettings.LoadVideo();
                 MSettings.LoadSixTapAds();
             }

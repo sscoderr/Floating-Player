@@ -273,6 +273,8 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
                     MSettings.activeActivity = SearchActivity.this;
                     MainActivity mainActivity = new MainActivity();
                     mainActivity.getSimilarVideos(String.valueOf(searchResults.get(pos).getId()), false, false, false, new String[]{});
+                    MSettings.IsRetry = false;
+                    MSettings.videoFinishStopVideoClicked = true;
                     MSettings.LoadVideo();
                     MSettings.LoadSixTapAds();
                 } else if (searchResults.get(pos).getId().length() == 24) {

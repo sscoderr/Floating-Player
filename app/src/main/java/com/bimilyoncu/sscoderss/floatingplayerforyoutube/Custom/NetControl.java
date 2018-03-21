@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 
 /**
  * Created by Furkann on 27.11.2016.
@@ -23,6 +24,7 @@ public class NetControl {
             if (netInfo != null && netInfo.isConnectedOrConnecting())
                 return true;
 
+            Log.e("NetControl!", "27.. isOnline return false");
             return false;
         } catch (Exception e) {
             e.printStackTrace();

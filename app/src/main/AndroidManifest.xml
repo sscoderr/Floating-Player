@@ -49,12 +49,7 @@
 
         <service android:name=".Floaties.Floaty$FloatHeadService" />
 
-        <receiver android:name=".Receiver.ConnectivityReceiver"
-            android:enabled="true">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-        </receiver>
+<!--
         <receiver android:name=".Custom.Notification.ButtonPlayPause"
             android:enabled="true">
             <intent-filter>
@@ -72,6 +67,6 @@
             <intent-filter>
                 <action android:name="NextMusic" />
             </intent-filter>
-        </receiver>
+        </receiver>-->
     </application>
 </manifest>

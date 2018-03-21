@@ -57,7 +57,7 @@ public class Floaty {
     private float ratioY = 0;
     private float oldWidth = 0;
     private float oldX = 0;
-    private boolean confChange = false;
+    private Boolean confChange = false;
 
     public static WindowManager.LayoutParams params;
     public static int[] clickLocation = new int[2];
@@ -87,7 +87,7 @@ public class Floaty {
      * @param notification   The notification which is displayed for the foreground player
      * @return A Floating Window
      */
-    public static synchronized Floaty createInstance(Context context, View head, View body, int notificationId, com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.Notification.Notification notification) {
+    public static synchronized Floaty createInstance(Context context, View head, View body, int notificationId, Notification notification) {
         if (floaty == null) {
             floaty = new Floaty(context, head, body, notificationId, notification, new FloatyOrientationListener() {
                 @Override
@@ -104,7 +104,17 @@ public class Floaty {
         return floaty;
     }
 
-    private Floaty(Context context, View head, View body, int notificationId, com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.Notification.Notification notification, FloatyOrientationListener floatyOrientationListener) {
+    /**
+     * @return The same instance of Floating Window, which has been created through {@link #createInstance}. Don't call this method before createInstance
+     */
+    public static synchronized Floaty getInstance() {
+        if (floaty == null) {
+            throw new NullPointerException("Floaty not initialized! First call createInstance method, then to access Floaty in any other class call getInstance()");
+        }
+        return floaty;
+    }
+
+    private Floaty(Context context, View head, View body, int notificationId, Notification notification, FloatyOrientationListener floatyOrientationListener) {
         this.head = head;
         this.body = body;
         this.context = context;
@@ -117,6 +127,7 @@ public class Floaty {
      * Starts the player and adds it to the screen
      */
     public void startService() {
+        Log.e(LOG_TAG, "startService");
         MSettings.CheckService = true;
 
         Intent intent = new Intent(context, FloatHeadService.class);
@@ -127,20 +138,14 @@ public class Floaty {
      * Stops the player and removes it from the screen
      */
     public void stopService() {
+        Log.e(LOG_TAG, "stopService");
         MSettings.CheckService = false;
-
-        if (MSettings.floaty.notification != null) {
-            if (MSettings.floaty.notification.getNotificationManager() != null) {
-                MSettings.floaty.notification.getNotificationManager().cancelAll();
-                MSettings.floaty.notification = null;
-            }
-        }
 
         Intent intent = new Intent(context, FloatHeadService.class);
         context.stopService(intent);
     }
 
-    public static com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.Notification.Notification notification;
+    public static Notification notification;
 
     /**
      * Helper method for notification creation.
@@ -151,50 +156,12 @@ public class Floaty {
      *                //     * @param contentIntent
      * @return Notification for the Service
      */
-    public static com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.Notification.Notification createNotification(Context context, int notificationId) {
-
-        /* ----- NOTIFICATION ----- */
-        notification = new com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.Notification.Notification(context
-                , (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE)
-                , new RemoteViews(context.getPackageName(), R.layout.notification_player)
-                , notificationId
-                , new NotificationCompat.Builder(context));
-
-        notification.getRemoteViews().setImageViewResource(R.id.image_notification_icon, R.drawable.play_icon_for_float);
-
-        Intent button_intent = new Intent("PlayPauseClicked");
-        button_intent.putExtra("id", notification.getNotification_id());
-        PendingIntent p_button_intent = PendingIntent.getBroadcast(context, 123, button_intent, 0);
-        notification.getRemoteViews().setOnClickPendingIntent(R.id.image_notification_playpause, p_button_intent);
-
-        Intent ButtonClose = new Intent("Close");
-        ButtonClose.putExtra("id", notification.getNotification_id());
-        PendingIntent PendingClose = PendingIntent.getBroadcast(context, 1023, ButtonClose, 0);
-        notification.getRemoteViews().setOnClickPendingIntent(R.id.image_notification_close, PendingClose);
-
-        Intent buttonNext = new Intent("NextMusic");
-        buttonNext.putExtra("id", notification.getNotification_id());
-        PendingIntent PendingNext = PendingIntent.getBroadcast(context, 1, buttonNext, 0);
-        notification.getRemoteViews().setOnClickPendingIntent(R.id.image_notification_nextmusic, PendingNext);
-
-        /*-- Create --*/
-        Intent inIntent = new Intent(context, Floaty.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, inIntent, 0);
-
-
-        notification.getBuilder().setSmallIcon(R.drawable.notification_icon)
-                .setAutoCancel(false)
-                .setCustomContentView(notification.getRemoteViews())
-                .setContentIntent(pendingIntent)
-                .setOngoing(true);
-
-        return notification;
-
-        /*   return new NotificationCompat.Builder(context)
+    public static Notification createNotification(Context context, String contentTitle, String contentText, int notificationIcon, PendingIntent contentIntent) {
+           return new NotificationCompat.Builder(context)
                 .setContentTitle(contentTitle)
                 .setContentText(contentText)
                 .setSmallIcon(notificationIcon)
-                .setContentIntent(contentIntent).build();*/
+                .setContentIntent(contentIntent).build();
     }
 
     public static class FloatHeadService extends Service {
@@ -231,16 +198,11 @@ public class Floaty {
         }
 
         public int onStartCommand(Intent intent, int flags, int startId) {
-            Log.d(LOG_TAG, "onStartCommand");
+            Log.e(LOG_TAG, "onStartCommand");
+
             metrics = new DisplayMetrics();
             windowManager.getDefaultDisplay().getMetrics(metrics);
-//            startForeground(floaty.notificationId, notification);
-
-            if (MSettings.floaty.notification != null) {
-                if (MSettings.floaty.notification.getNotificationManager() != null) {
-                    MSettings.floaty.notification.getNotificationManager().notify(MSettings.floaty.notification.getNotification_id(), MSettings.floaty.notification.getBuilder().build());
-                }
-            }
+            startForeground(floaty.notificationId, notification);
 
             return START_STICKY;
         }
@@ -248,7 +210,7 @@ public class Floaty {
         @Override
         public void onCreate() {
             super.onCreate();
-            Log.d(LOG_TAG, "onCreate");
+            Log.e(LOG_TAG, "onCreate");
 
             mLinearLayout = new LinearLayout(getApplicationContext()) {
                 @Override
@@ -271,7 +233,6 @@ public class Floaty {
                     return super.dispatchKeyEvent(event);
                 }
             };
-
             gestureDetectorCompat = new GestureDetectorCompat(getApplicationContext(), new GestureDetector.SimpleOnGestureListener() {
                 private int initialX;
                 private int initialY;
@@ -400,118 +361,100 @@ public class Floaty {
                     PixelFormat.TRANSLUCENT);
             params.gravity = Gravity.TOP | Gravity.LEFT;
 
-            if (!String.valueOf(floaty.confChange).equals(null)) {
-                if (floaty.confChange) {
-                    floaty.confChange = false;
-                    if (floaty.oldX < (floaty.oldWidth / 2)) {
-                        params.x = 0;
+            if (floaty != null) {
+                if (floaty.confChange != null) {
+                    if (floaty.confChange) {
+                        floaty.confChange = false;
+                        if (floaty.oldX < (floaty.oldWidth / 2)) {
+                            params.x = 0;
+                        } else {
+                            params.x = metrics.widthPixels;
+                        }
+                        params.y = (int) (metrics.heightPixels * floaty.ratioY);
                     } else {
                         params.x = metrics.widthPixels;
+                        params.y = 0;
                     }
-                    params.y = (int) (metrics.heightPixels * floaty.ratioY);
-                } else {
-                    params.x = metrics.widthPixels;
-                    params.y = 0;
                 }
-            }
 
-            if (floaty.body != null) {
-                floaty.body.setVisibility(View.GONE);
-            }
 
-            if (floaty.head != null) {
-                floaty.head.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        gestureDetectorCompat.onTouchEvent(event);
+                if (floaty.body != null) {
+                    floaty.body.setVisibility(View.GONE);
+                }
 
-                        if (event.getAction() == MotionEvent.ACTION_UP) {
-                            floaty.head.setAlpha(1.0f);
+                if (floaty.head != null) {
+                    floaty.head.setOnTouchListener(new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            gestureDetectorCompat.onTouchEvent(event);
 
-                            if (!didFling) {
-                                Log.e(LOG_TAG, "ACTION_UP");
+                            if (event.getAction() == MotionEvent.ACTION_UP) {
+                                floaty.head.setAlpha(1.0f);
 
-                                int newX = params.x;
-                                if (newX > (metrics.widthPixels / 2)) {
-                                    params.x = metrics.widthPixels;
-                                } else {
-                                    params.x = 0;
+                                if (!didFling) {
+                                    Log.e(LOG_TAG, "ACTION_UP");
+
+                                    int newX = params.x;
+                                    if (newX > (metrics.widthPixels / 2)) {
+                                        params.x = metrics.widthPixels;
+                                    } else {
+                                        params.x = 0;
+                                    }
+
+                                    windowManager.updateViewLayout(mLinearLayout, params);
                                 }
-
-                                windowManager.updateViewLayout(mLinearLayout, params);
                             }
+                            return true;
                         }
-                        return true;
-                    }
-                });
-            }
-
-            if (windowManager != null) {
-                windowManager.addView(mLinearLayout, params);
-            }
-
-            if (floaty.body != null) {
-                if (floaty.body.getParent() != null) {
-                    ((ViewGroup) floaty.body.getParent()).removeView(floaty.body);
+                    });
                 }
+
+                if (windowManager != null) {
+                    windowManager.addView(mLinearLayout, params);
+                }
+
+                if (floaty.body != null) {
+                    if (floaty.body.getParent() != null) {
+                        ((ViewGroup) floaty.body.getParent()).removeView(floaty.body);
+                    }
+                }
+
+                if (mLinearLayout != null) {
+                    mLinearLayout.setFocusable(true);
+                }
+
+                LinearLayout.LayoutParams headParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                LinearLayout.LayoutParams bodyParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+
+                headParams.gravity = Gravity.TOP | Gravity.RIGHT;
+                bodyParams.gravity = Gravity.TOP;
+
+                if (mLinearLayout != null) {
+                    mLinearLayout.addView(floaty.head, headParams);
+                    mLinearLayout.addView(floaty.body, bodyParams);
+                }
+
+                if (floaty.body != null) {
+                    floaty.body.setVisibility(View.VISIBLE);
+                }
+                if (floaty != null) {
+                    floaty.head.setVisibility(View.GONE);
+                }
+
+                showBody();
             }
-
-            if (mLinearLayout != null) {
-                mLinearLayout.setFocusable(true);
-            }
-
-            LinearLayout.LayoutParams headParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            LinearLayout.LayoutParams bodyParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-
-            headParams.gravity = Gravity.TOP | Gravity.RIGHT;
-            bodyParams.gravity = Gravity.TOP;
-
-            if (mLinearLayout != null) {
-                mLinearLayout.addView(floaty.head, headParams);
-                mLinearLayout.addView(floaty.body, bodyParams);
-            }
-
-            if (floaty.body != null) {
-                floaty.body.setVisibility(View.VISIBLE);
-            }
-            if (floaty != null) {
-                floaty.head.setVisibility(View.GONE);
-            }
-
-            showBody();
         }
 
         public void onDestroy() {
             super.onDestroy();
+            Log.e(LOG_TAG, "onDestroy");
+
             if (mLinearLayout != null) {
                 mLinearLayout.removeAllViews();
                 windowManager.removeView(mLinearLayout);
             }
 
-            MobileAds.initialize(MSettings.activeActivity, "ca-app-pub-5808367634056272~8476127349");
-            AdRequest adRequest = new AdRequest.Builder()
-                    /*.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                    .addTestDevice("6EE0EC7A08848B41A3A8B3C52624F39A")
-                    .addTestDevice("D840C07DDBAA5E0897B010411FABE6AC")
-                    .addTestDevice("778ADE18482DD7E44193371217202427")
-                    .addTestDevice("6AFA29CB9314195950E590C9BEACC344")
-                    .addTestDevice("0CEA9CA5F2DAED70F0678D8F2D8669A3")*/.build();
-            final InterstitialAd interstitial = new InterstitialAd(MSettings.activeActivity);
-            interstitial.setAdUnitId(MSettings.activeActivity.getString(R.string.admob_interstitial_id_close_service));
-            interstitial.loadAd(adRequest);
-            interstitial.setAdListener(new AdListener() {
-                public void onAdLoaded() {
-                    if (interstitial.isLoaded())
-                        interstitial.show();
-                }
-
-                public void onAdClosed() {
-
-                }
-            });
-
-            MSettings.floaty.stopService();
-            stopForeground(true);
+            stopForeground(false);
         }
 
         private void showBody() {

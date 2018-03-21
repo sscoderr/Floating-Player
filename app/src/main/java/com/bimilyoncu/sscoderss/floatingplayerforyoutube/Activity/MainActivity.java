@@ -1,6 +1,7 @@
 package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity;
 
 import android.annotation.TargetApi;
+import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -315,8 +316,9 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
         Intent intent = new Intent(this, MainActivity.class);
         //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
         PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.Notification.Notification notification =
-                Floaty.createNotification(this, NOTIFICATION_ID/*, "Floating Player", "", R.mipmap.play_icon_for_float,resultPendingIntent*/);
+        Notification notification = Floaty.createNotification(this,
+                "Floating Player For Youtube", "Music Player",
+                R.mipmap.play_icon_for_float, resultPendingIntent);
 
         if (MSettings.head == null)
             MSettings.head = LayoutInflater.from(this).inflate(R.layout.float_head, null);
@@ -403,6 +405,8 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
                     Toast.makeText(MainActivity.this, getString(R.string.repeatMessageOff), Toast.LENGTH_SHORT).show();
                 }
 
+
+                MSettings.IsRetry = true;
                 checkSuffle = false;
                 imgSuffle.setImageResource(R.mipmap.suffle_icon_for_float2);
             }
@@ -493,6 +497,8 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
 
     }
 
+    private boolean isFLoad = false;
+
     List<VideoItem> searchResults;
 
     private void ServiceSearch() {
@@ -548,6 +554,8 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
                                         MSettings.currentVItem = searchResults.get(i);
                                         MainActivity mainActivity = new MainActivity();
                                         mainActivity.getSimilarVideos(String.valueOf(searchResults.get(i).getId()), false, false, false, new String[]{});
+                                        MSettings.IsRetry = false;
+                                        MSettings.videoFinishStopVideoClicked = true;
                                         MSettings.LoadVideo();
                                         MSettings.LoadSixTapAds();
                                     }
@@ -822,6 +830,8 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
             public void onItemClick(AdapterView<?> av, View v, int pos, long id) {
                 if (similarVideosList.get(pos).getId().length() == 11) {
                     MSettings.currentVItem = similarVideosList.get(pos);
+                    MSettings.IsRetry = false;
+                    MSettings.videoFinishStopVideoClicked = true;
                     MSettings.LoadVideo();
                     MSettings.activeActivity = MainActivity.this;
                     MSettings.CounterForSimilarVideos = pos + 1;
@@ -889,14 +899,14 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        MobileAds.initialize(MSettings.activeActivity, "ca-app-pub-5808367634056272~8476127349");
+        /*MobileAds.initialize(MSettings.activeActivity, "ca-app-pub-5808367634056272~8476127349");
         AdRequest adRequest = new AdRequest.Builder()
-                    /*.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                    *//*.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                     .addTestDevice("6EE0EC7A08848B41A3A8B3C52624F39A")
                     .addTestDevice("D840C07DDBAA5E0897B010411FABE6AC")
                     .addTestDevice("778ADE18482DD7E44193371217202427")
                     .addTestDevice("6AFA29CB9314195950E590C9BEACC344")
-                    .addTestDevice("0CEA9CA5F2DAED70F0678D8F2D8669A3")*/.build();
+                    .addTestDevice("0CEA9CA5F2DAED70F0678D8F2D8669A3")*//*.build();
         final InterstitialAd interstitial = new InterstitialAd(MSettings.activeActivity);
         interstitial.setAdUnitId(MSettings.activeActivity.getString(R.string.admob_interstitial_id_close_service));
         interstitial.loadAd(adRequest);
@@ -909,9 +919,9 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
             public void onAdClosed() {
 
             }
-        });
+        });*/
 
-        MSettings.floaty.stopService();
+//        MSettings.floaty.stopService();
     }
 
     boolean doubleBackToExitPressedOnce = false;

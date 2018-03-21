@@ -5,7 +5,6 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings;
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.Notification.Notification;
 
 /**
  * Created by Sabahattin on 24.03.2017.
@@ -33,6 +32,9 @@ public class JSInterface {
     public void onPlayerNext() {
         this.wv.post(new Runnable() {
             public void run() {
+                MSettings.IsRetry = false;
+                MSettings.IsonPlayerNext = true;
+                MSettings.videoFinishStopVideoClicked = false;
                 MSettings.LoadVideo();
             }
         });
@@ -41,7 +43,7 @@ public class JSInterface {
     @JavascriptInterface
     public void playPauseReturn(boolean isPlay) {
         if (MSettings.webView != null) {
-            Notification.PlayOrPauseImage(isPlay);
+//            Notification.PlayOrPauseImage(isPlay);
         }
     }
 
