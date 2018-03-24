@@ -164,8 +164,13 @@ public class TrendVideoFragment extends Fragment implements OnScrollListener  {
                             myPg.setVisibility(View.INVISIBLE);
                         } catch (Exception e) {
                             e.printStackTrace();
-                            if (!netControl.isOnline())
-                                Toast.makeText(getActivity(), getActivity().getString(R.string.internetConnectionMessage), Toast.LENGTH_LONG).show();
+                            if (!netControl.isOnline()) {
+                                try {
+                                    Toast.makeText(getActivity(), getActivity().getString(R.string.internetConnectionMessage), Toast.LENGTH_LONG).show();
+                                } catch (Exception s) {
+                                    s.printStackTrace();
+                                }
+                            }
                         }
                     }
                 });

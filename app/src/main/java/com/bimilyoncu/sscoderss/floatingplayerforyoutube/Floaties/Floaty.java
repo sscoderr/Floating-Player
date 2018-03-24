@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.net.Uri;
+import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.view.GestureDetectorCompat;
@@ -202,7 +203,11 @@ public class Floaty {
 
             metrics = new DisplayMetrics();
             windowManager.getDefaultDisplay().getMetrics(metrics);
-            startForeground(floaty.notificationId, notification);
+            if (floaty != null) {
+                if (notification != null) {
+                    startForeground(floaty.notificationId, notification);
+                }
+            }
 
             return START_STICKY;
         }
@@ -353,10 +358,17 @@ public class Floaty {
             metrics = new DisplayMetrics();
             windowManager.getDefaultDisplay().getMetrics(metrics);
 
+            int LAYOUT_FLAG;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+            } else {
+                LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_PHONE;
+            }
+
             params = new WindowManager.LayoutParams(
                     WindowManager.LayoutParams.WRAP_CONTENT,
                     WindowManager.LayoutParams.WRAP_CONTENT,
-                    WindowManager.LayoutParams.TYPE_PHONE,
+                    LAYOUT_FLAG,
                     WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                     PixelFormat.TRANSLUCENT);
             params.gravity = Gravity.TOP | Gravity.LEFT;
