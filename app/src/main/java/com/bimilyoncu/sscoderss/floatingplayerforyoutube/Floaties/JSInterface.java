@@ -49,7 +49,6 @@ public class JSInterface {
 
     @JavascriptInterface
     public void onPlayerReady(int paramInt1, int paramInt2) {
-            MSettings.playerReady=true;
     }
 
     @JavascriptInterface

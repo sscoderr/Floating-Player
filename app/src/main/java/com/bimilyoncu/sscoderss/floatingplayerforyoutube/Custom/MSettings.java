@@ -107,7 +107,6 @@ public class MSettings {
     public static Token token = new Token();
     public static VideoItem currentVItem;
     public static boolean similarVideosIsLoaded=false;
-    public static boolean playerReady=false;
     public static boolean IsRetry = false;
     public static boolean IsonPlayerNext = false;
     public static boolean videoFinishStopVideoClicked = false;
@@ -151,16 +150,13 @@ public class MSettings {
                                 } else {
                                     floaty.startService();
                                 }
-
                                 mHandler = new Handler();
                                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activeActivity);
-                                while (!playerReady);
                                 if (preferences.getBoolean("isHighQuality", false)) {
                                     webView.loadUrl(String.format("javascript:loadVideoById(\"%s\",\"highres\");", new Object[]{currentVItem.getId()}));
                                 } else {
                                     webView.loadUrl(String.format("javascript:loadVideoById(\"%s\",\"small\");", new Object[]{currentVItem.getId()}));
                                 }
-
                                 DatabaseForPlaylists db = new DatabaseForPlaylists(activeActivity);
                                 db.addVideoHistory(currentVItem.getId(), activeActivity);
                                 MyDateFragment.isHaveUpdate = true;

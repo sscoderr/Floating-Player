@@ -290,6 +290,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!Settings.canDrawOverlays(MainActivity.this)) {
+                Toast.makeText(MSettings.activeActivity, MSettings.activeActivity.getString(R.string.permissionMessage), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                         Uri.parse("package:" + MainActivity.this.getPackageName()));
                 startActivityForResult(intent, PERMISSION_REQUEST_CODE);
