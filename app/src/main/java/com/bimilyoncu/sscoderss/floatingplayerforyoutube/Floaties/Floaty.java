@@ -1,21 +1,19 @@
 package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Floaties;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
-import android.graphics.Rect;
-import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.app.NotificationCompat;
 import android.util.DisplayMetrics;
@@ -28,16 +26,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
-import android.widget.RemoteViews;
 
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings;
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.R;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
-
-import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
  *
@@ -158,11 +148,31 @@ public class Floaty {
      * @return Notification for the Service
      */
     public static Notification createNotification(Context context, String contentTitle, String contentText, int notificationIcon, PendingIntent contentIntent) {
-           return new NotificationCompat.Builder(context)
-                .setContentTitle(contentTitle)
-                .setContentText(contentText)
-                .setSmallIcon(notificationIcon)
-                .setContentIntent(contentIntent).build();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createNotificationChannel();
+            return null;
+        } else {
+            return new NotificationCompat.Builder(context)
+                    .setContentTitle(contentTitle)
+                    .setContentText(contentText)
+                    .setSmallIcon(notificationIcon)
+                    .setContentIntent(contentIntent).build();
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private static void createNotificationChannel() {
+        NotificationManager notificationManager =
+                (NotificationManager) MSettings.activeActivity.getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+        NotificationChannel notificationChannel = new NotificationChannel("fp", "fp", 0);
+        notificationChannel.enableLights(true);
+        notificationChannel.setLightColor(Color.WHITE);
+        notificationChannel.enableVibration(true);
+        if (notificationManager != null) {
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
     }
 
     public static class FloatHeadService extends Service {
@@ -203,10 +213,14 @@ public class Floaty {
 
             metrics = new DisplayMetrics();
             windowManager.getDefaultDisplay().getMetrics(metrics);
-            if (floaty != null) {
-                if (notification != null) {
-                    startForeground(floaty.notificationId, notification);
+            try {
+                if (floaty != null) {
+                    if (notification != null) {
+                        startForeground(floaty.notificationId, notification);
+                    }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
             return START_STICKY;
