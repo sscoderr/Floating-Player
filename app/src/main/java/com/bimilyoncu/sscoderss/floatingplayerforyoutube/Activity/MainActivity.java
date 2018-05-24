@@ -107,6 +107,8 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
     private FragmentRefreshListenerForVideo fragmentRefreshListenerForVideo;
 
     private ProgressBar myPg;
+    
+    // mypg
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
