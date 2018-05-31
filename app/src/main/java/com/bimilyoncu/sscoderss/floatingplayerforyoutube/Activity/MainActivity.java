@@ -348,6 +348,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
         imageViewMinimize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MSettings.floaty.floaty.getHead().setVisibility(View.VISIBLE);
                 MSettings.floaty.floaty.getBody().setVisibility(View.GONE);
                 MSettings.floaty.params.x = MSettings.floaty.clickLocation[0];
                 MSettings.floaty.params.y = MSettings.floaty.clickLocation[1] - 36;
@@ -356,7 +357,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
                 MSettings.floaty.params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
                 MSettings.floaty.mLinearLayout.setBackgroundColor(Color.argb(0, 0, 0, 0));
 
-                MSettings.floaty.floaty.getHead().setVisibility(View.VISIBLE);
+
                 MSettings.floaty.windowManager.updateViewLayout(MSettings.floaty.mLinearLayout, MSettings.floaty.params);
             }
         });

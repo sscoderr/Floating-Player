@@ -216,7 +216,7 @@ public class Floaty {
                 public boolean dispatchKeyEvent(KeyEvent event) {
                     if (event.getKeyCode() == KeyEvent.KEYCODE_BACK || event.getKeyCode() == KeyEvent.KEYCODE_HOME) {
                         Log.e(LOG_TAG, "dispatchKeyEvent");
-
+                        floaty.getHead().setVisibility(View.VISIBLE);
                         floaty.body.setVisibility(View.GONE);
                         params.x = clickLocation[0];
                         params.y = clickLocation[1] - 36;
@@ -226,7 +226,7 @@ public class Floaty {
                         mLinearLayout.setBackgroundColor(Color.argb(0, 0, 0, 0));
                         windowManager.updateViewLayout(mLinearLayout, params);
 
-                        floaty.getHead().setVisibility(View.VISIBLE);
+
                         return true;
                     }
                     return super.dispatchKeyEvent(event);
@@ -273,6 +273,7 @@ public class Floaty {
                     try {
                         if (floaty.body.getVisibility() == View.VISIBLE) {
                             floaty.body.setVisibility(View.GONE);
+                            floaty.head.setVisibility(View.VISIBLE);
                             params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
                             params.width = WindowManager.LayoutParams.WRAP_CONTENT;
                             params.height = WindowManager.LayoutParams.WRAP_CONTENT;
@@ -305,6 +306,7 @@ public class Floaty {
 
                             floaty.head.setVisibility(View.GONE);
                         } else {
+                            floaty.head.setVisibility(View.VISIBLE);
                             floaty.body.setVisibility(View.GONE);
                             params.x = clickLocation[0];
                             params.y = clickLocation[1] - 36;
@@ -313,7 +315,7 @@ public class Floaty {
                             params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
                             mLinearLayout.setBackgroundColor(Color.argb(0, 0, 0, 0));
 
-                            floaty.head.setVisibility(View.VISIBLE);
+
                         }
 
                         windowManager.updateViewLayout(mLinearLayout, params);
@@ -436,9 +438,9 @@ public class Floaty {
                 if (floaty.body != null) {
                     floaty.body.setVisibility(View.VISIBLE);
                 }
-//                if (floaty != null) {
-//                    floaty.head.setVisibility(View.GONE);
-//                }
+                if (floaty != null) {
+                    floaty.head.setVisibility(View.GONE);
+                }
 
                 showBody();
             }

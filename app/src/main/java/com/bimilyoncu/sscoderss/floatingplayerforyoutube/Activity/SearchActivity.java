@@ -649,8 +649,8 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
     protected void onUserLeaveHint() {
         try {
             if (MSettings.floaty.floaty.getBody().getVisibility() != View.GONE) {
-                MSettings.floaty.floaty.getBody().setVisibility(View.GONE);
                 MSettings.floaty.floaty.getHead().setVisibility(View.VISIBLE);
+                MSettings.floaty.floaty.getBody().setVisibility(View.GONE);
                 MSettings.floaty.params.x = MSettings.floaty.clickLocation[0];
                 MSettings.floaty.params.y = MSettings.floaty.clickLocation[1] - 36;
                 MSettings.floaty.params.width = WindowManager.LayoutParams.WRAP_CONTENT;
