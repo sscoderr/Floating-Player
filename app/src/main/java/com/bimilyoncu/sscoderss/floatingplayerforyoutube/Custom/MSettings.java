@@ -125,14 +125,7 @@ public class MSettings {
                                 IsonPlayerNext = false;
                                 webView.loadUrl(String.format("javascript:seekTo(\"%s\");", new Object[]{0}));
                             } else {
-                                if (floaty.notification != null) {
-                                    if (currentVItem.getTitle() != null) {
-                                        String Title = currentVItem.getTitle();
-                                        if (Title.length() > 25) {
-                                            Title = Title.substring(0, 25) + "...";
-                                        }
-                                    }
-                                }
+
                                 getVideoTitle();
                                 webView.onResume();
                                 webView.resumeTimers();

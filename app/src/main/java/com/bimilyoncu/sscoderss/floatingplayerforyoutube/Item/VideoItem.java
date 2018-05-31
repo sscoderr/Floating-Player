@@ -38,7 +38,7 @@ public class VideoItem {
 
     public void setTitle(String title) {
         if(title.toString().length()>50)
-            title=title.toString().substring(0,50)+"...";
+            title=title.toString().substring(0,45)+"...";
         this.title = title;
     }
 

@@ -33,7 +33,12 @@ public class YoutubeConnector {
     private YouTube youtube;
     private YouTube.Search.List query;
     public static String KEY = "AIzaSyDzYXfEUkLxWCO4Ah6MM_5iF8yjwJDAbVA";
-    public static  final String[] myApiKeys={ //"AIzaSyDws4e3XqnRRnxjDq_jbnvqMqM2ynBITY0"
+    public static  final String[] myApiKeys={
+            // GUNCELLEME YAPILACAĞI ZAMAN BU KEY PASİF OLACAK...
+            "AIzaSyB1kAAfsJx_bc1lchJ64Y5VQ1jQckI7MlI"
+
+            // --------------------------------------------------
+//            "AIzaSyDws4e3XqnRRnxjDq_jbnvqMqM2ynBITY0"
 //            "AIzaSyDtDVfXOkttjFCcRA3Oz6stUk6wbsGwMI4",
 //            "AIzaSyB4oWW5ouoZDD9jRL2ec_iM57Lw43DJsSQ",
 //            "AIzaSyC3Px-30XphZKjNaFgQDNyxf4EZjNy-hIM",
@@ -82,33 +87,61 @@ public class YoutubeConnector {
 //            "AIzaSyAOTRbnVfyGQDoT2AY2XzQpNR7C7FFZ5Lc",
 //            "AIzaSyBOlFl7zLxKUR6s720oIbEejUfJGMI1ReM",
 
-            /** bimilyoncu.key1 **/
-            "AIzaSyDZGqUM8LH9qJJlZxe0Y1R5nzYArgSl3fY",
-            "AIzaSyA7bmZIhae_brqwcKcsAlcFPQlfhn0sPxs",
-            "AIzaSyDAo74EdwxU3zWlNaqjo5KcA0rRZ12RM-8",
-            "AIzaSyBkgYWHp4B9efB7o4AOoT55hC74CTjyKG4",
-            "AIzaSyBn5yQGp_0SWJfVxJYx3X7Rv_vZwHFdBbE",
-            "AIzaSyC7-aGJP1P8QPXSOV8uuxBdfCyx7-ajo40",
-            "AIzaSyC4DYyLFMnYpKLd60BPyb2KpmlsmqJn9Qc",
-            "AIzaSyDgEhyjkSLR8uRE9zDWh2rUxgo9IKnQYMg",
-            "AIzaSyDW26Z6m3voso85BFFcT78q-s0RXgS8dqA",
-            "AIzaSyDNAcfuvUAU0JuQgHPpPuQHa9w1P7h1vUE",
-            "AIzaSyDOMP97ui9CdoU5C9O9L8PWIuQMOTpl2Sk",
-            "AIzaSyCzeRLVQrRuJVbpAElABNOmp7u6_r60UUM",
-
-            /** bimilyoncu.key2 **/
-            "AIzaSyCF82_ZzsIEeYMkmOLGcMC9jD8v1-mrUEg",
-            "AIzaSyAr0M_WvUhGdydALe1yKNksylHrq_z7GkY",
-            "AIzaSyAxA98Itkb3YFm6mYv2Ly6bEdLP648BRVA",
-            "AIzaSyBYdQVecqsI0QhNlbwaT7FvV3igpc07LuQ",
-            "AIzaSyAAKErnGxztiqcrIWYCzICFmy97tRJzJWs",
-            "AIzaSyCdUChWR5sc6Bm87JFPurv7VI5AJOHjl5Q",
-            "AIzaSyD8XLFG1wY958XS0XuLpgLLrknWXDUDyNU",
-            "AIzaSyDstydLmMa4oBRPAAIYLdsRGHxjcmW9K_U",
-            "AIzaSyDdQbvo4ObmQJmkeunvw6ooU9e3cMKuP7s",
-            "AIzaSyBMpMvbUQD2Lhfj6PaIh0msAFRlhqDoq2g",
-            "AIzaSyDvmLrnuK97TTGXrtKmJ4AV90jwCHfa8ho",
-            "AIzaSyA0d-S7184LB4BsAGqGS2eoXLhp7cFJoGM"
+//            /** bimilyoncu.key1 **/
+//            "AIzaSyDZGqUM8LH9qJJlZxe0Y1R5nzYArgSl3fY",
+//            "AIzaSyA7bmZIhae_brqwcKcsAlcFPQlfhn0sPxs",
+//            "AIzaSyDAo74EdwxU3zWlNaqjo5KcA0rRZ12RM-8",
+//            "AIzaSyBkgYWHp4B9efB7o4AOoT55hC74CTjyKG4",
+//            "AIzaSyBn5yQGp_0SWJfVxJYx3X7Rv_vZwHFdBbE",
+//            "AIzaSyC7-aGJP1P8QPXSOV8uuxBdfCyx7-ajo40",
+//            "AIzaSyC4DYyLFMnYpKLd60BPyb2KpmlsmqJn9Qc",
+//            "AIzaSyDgEhyjkSLR8uRE9zDWh2rUxgo9IKnQYMg",
+//            "AIzaSyDW26Z6m3voso85BFFcT78q-s0RXgS8dqA",
+//            "AIzaSyDNAcfuvUAU0JuQgHPpPuQHa9w1P7h1vUE",
+//            "AIzaSyDOMP97ui9CdoU5C9O9L8PWIuQMOTpl2Sk",
+//            "AIzaSyCzeRLVQrRuJVbpAElABNOmp7u6_r60UUM",
+//
+//            /** bimilyoncu.key2 **/
+//            "AIzaSyCF82_ZzsIEeYMkmOLGcMC9jD8v1-mrUEg",
+//            "AIzaSyAr0M_WvUhGdydALe1yKNksylHrq_z7GkY",
+//            "AIzaSyAxA98Itkb3YFm6mYv2Ly6bEdLP648BRVA",
+//            "AIzaSyBYdQVecqsI0QhNlbwaT7FvV3igpc07LuQ",
+//            "AIzaSyAAKErnGxztiqcrIWYCzICFmy97tRJzJWs",
+//            "AIzaSyCdUChWR5sc6Bm87JFPurv7VI5AJOHjl5Q",
+//            "AIzaSyD8XLFG1wY958XS0XuLpgLLrknWXDUDyNU",
+//            "AIzaSyDstydLmMa4oBRPAAIYLdsRGHxjcmW9K_U",
+//            "AIzaSyDdQbvo4ObmQJmkeunvw6ooU9e3cMKuP7s",
+//            "AIzaSyBMpMvbUQD2Lhfj6PaIh0msAFRlhqDoq2g",
+//            "AIzaSyDvmLrnuK97TTGXrtKmJ4AV90jwCHfa8ho",
+//            "AIzaSyA0d-S7184LB4BsAGqGS2eoXLhp7cFJoGM"
+//
+//            /** bimilyoncu.key3 **/
+//            "AIzaSyDs1un9wS4SFcR5l5oi0mhz1mDpAx4bS7w",
+//            "AIzaSyABrqmaRQjgrB3lmMrW_u6K9zg_yifyrhI",
+//            "AIzaSyCG_DkUGAl1yXigUV9dbc2mkNm3RZomzr0",
+//            "AIzaSyDM0Ojy3NNejGDsgcKHFobb1YqUQcEGYbk",
+//            "AIzaSyCHtm0tBXFlehmOPxwXeGOJhP2-yz-hXfc",
+//            "AIzaSyAeifhtpRYwUleEi5cAU_ThmZoCxC93SA4",
+//            "AIzaSyAf-DAlbi7r4CgmXQIlKwraSCZDabZzX6o",
+//            "AIzaSyDk-N95N5NSVfd-kXa61Rn34gH1ZyMt3oM",
+//            "AIzaSyCoYuMDg0GEuPfFca5D2_oVjKiPp95arwQ",
+//            "AIzaSyBun1lUxHtlpeHP3qdi99y5n7JlfCNwUUk",
+//            "AIzaSyDqQVHDUj2SwYOSZ-cBDLFHTMpLSc7KjKQ",
+//            "AIzaSyBvgFDw3QF7fmIaGdlocnfqpvHpPPLS_0c",
+//
+//            /** bimilyoncu.key4 **/
+//            "AIzaSyC8O3YaLbdjH1y-jcunZYXChmcmN3go1fI",
+//            "AIzaSyAACPF44vpF_ZWs5cqv-iPkDn-HefI90Yo",
+//            "AIzaSyBQpiR0x7T6ZoFjxOVATpRB_Q9N6Uvr6Ao",
+//            "AIzaSyApqcmPef1p2dHtOlKfRYaUoeUsyyfmLhw",
+//            "AIzaSyD3IAOOEymDF9KokUoGk1W0szYlbrgSxhA",
+//            "AIzaSyClrSvhtSQCMUoa5uxVJOhNByUk2lzX2wc",
+//            "AIzaSyC0MyFVzICSYwqmcMWFRcwz56VcBcjhp6w",
+//            "AIzaSyDIhwEwFVHJK6Zoz4wpbiXQSNau8R6UgdI",
+//            "AIzaSyAnGLRKPhB-rEHh7zfaDCqbwWNjnRJXeto",
+//            "AIzaSyD_BV1lDMMYflcp2Lz20QhUEZ7qC5W2Xn8",
+//            "AIzaSyB5jcTvEmfKIEnNSncAaUJ4cIW3QzESScg",
+//            "AIzaSyB6sEnYpiSoyCyyrIknZbIXVun56FPfWIc"
         };
 
     public YoutubeConnector(final Context context, String sortBy, String contentType, boolean firstForFilter, String channelId, boolean isForFloat, boolean isForChannelPlayVideo) {

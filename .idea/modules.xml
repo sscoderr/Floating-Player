@@ -6,8 +6,8 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/floatingPlayerForYoutube.iml" filepath="$PROJECT_DIR$/floatingPlayerForYoutube.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../../../../Sabahattin/AndroidStudioProjects/FloatingPlayerForYoutubeTeamProject/floatingPlayerForYoutube.iml" filepath="$PROJECT_DIR$/../../../../Sabahattin/AndroidStudioProjects/FloatingPlayerForYoutubeTeamProject/floatingPlayerForYoutube.iml" />
       <module fileurl="file://$PROJECT_DIR$/floatingPlayerForYoutube.iml" filepath="$PROJECT_DIR$/floatingPlayerForYoutube.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../Sabahattin/AndroidStudioProjects/FloatingPlayerForYoutubeTeamProject/floatingPlayerForYoutube.iml" filepath="$PROJECT_DIR$/../../../../Sabahattin/AndroidStudioProjects/FloatingPlayerForYoutubeTeamProject/floatingPlayerForYoutube.iml" />
     </modules>
   </component>
 </project>

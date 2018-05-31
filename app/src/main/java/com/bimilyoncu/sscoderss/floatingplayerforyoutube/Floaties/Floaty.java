@@ -148,31 +148,11 @@ public class Floaty {
      * @return Notification for the Service
      */
     public static Notification createNotification(Context context, String contentTitle, String contentText, int notificationIcon, PendingIntent contentIntent) {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            createNotificationChannel();
-            return null;
-        } else {
             return new NotificationCompat.Builder(context)
                     .setContentTitle(contentTitle)
                     .setContentText(contentText)
                     .setSmallIcon(notificationIcon)
                     .setContentIntent(contentIntent).build();
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private static void createNotificationChannel() {
-        NotificationManager notificationManager =
-                (NotificationManager) MSettings.activeActivity.getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-
-        NotificationChannel notificationChannel = new NotificationChannel("fp", "fp", 0);
-        notificationChannel.enableLights(true);
-        notificationChannel.setLightColor(Color.WHITE);
-        notificationChannel.enableVibration(true);
-        if (notificationManager != null) {
-            notificationManager.createNotificationChannel(notificationChannel);
-        }
     }
 
     public static class FloatHeadService extends Service {
@@ -372,17 +352,10 @@ public class Floaty {
             metrics = new DisplayMetrics();
             windowManager.getDefaultDisplay().getMetrics(metrics);
 
-            int LAYOUT_FLAG;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
-            } else {
-                LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_PHONE;
-            }
-
             params = new WindowManager.LayoutParams(
                     WindowManager.LayoutParams.WRAP_CONTENT,
                     WindowManager.LayoutParams.WRAP_CONTENT,
-                    LAYOUT_FLAG,
+                    WindowManager.LayoutParams.TYPE_PHONE,
                     WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                     PixelFormat.TRANSLUCENT);
             params.gravity = Gravity.TOP | Gravity.LEFT;
@@ -463,9 +436,9 @@ public class Floaty {
                 if (floaty.body != null) {
                     floaty.body.setVisibility(View.VISIBLE);
                 }
-                if (floaty != null) {
-                    floaty.head.setVisibility(View.GONE);
-                }
+//                if (floaty != null) {
+//                    floaty.head.setVisibility(View.GONE);
+//                }
 
                 showBody();
             }
@@ -477,7 +450,9 @@ public class Floaty {
 
             if (mLinearLayout != null) {
                 mLinearLayout.removeAllViews();
-                windowManager.removeView(mLinearLayout);
+                if (windowManager != null) {
+                    windowManager.removeView(mLinearLayout);
+                }
             }
 
             stopForeground(false);
