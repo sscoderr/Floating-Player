@@ -95,5 +95,18 @@
     <string name="finish">Finish</string>
     <string name="help">Help</string>
 
+
+
+    <!-- Yeni Versiyon için oluşturulanlar -->
+    <string name="crash_SelectedPlaylistNotAvailable">Selected Playlist Not Available</string>
+    <string name="crash_SelectedPlaylistNameNotAvailable">Selected Playlist Name Not Available</string>
+    <string name="crash_PlaylistNameNotAvailable">Playlist Name Not Available</string>
+    <string name="crash_PlaylistIdNotAvailable">Playlist Id Not Available</string>
+    <string name="crash_PlaylistNotAvailable">Playlist Not Available</string>
+    <string name="crash_SelectedVideoNotAvailable">Selected Video Not Available</string>
+    <string name="crash_VideoNotAvailable">Video Not Available</string>
+
+
+
 </resources>
 
