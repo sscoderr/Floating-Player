@@ -43,6 +43,25 @@
             </intent-filter>
         </activity>
 
+        <!-- Trial Start -->
+
+        <!--<activity
+            android:name=".Trial.Activity.MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".Trial.Activity.SearchActivity"
+            android:label="@string/app_name" />-->
+
+        <!-- Trial Fnish -->
+
         <activity android:name=".Activity.ChannelVideoList" />
 
         <activity android:name=".Activity.SlideOnboardingActivity" />

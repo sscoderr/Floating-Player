@@ -8,6 +8,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,8 @@ import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings.playedPoss;
 
@@ -109,7 +112,7 @@ public class TrendVideoFragment extends Fragment implements OnScrollListener  {
     private void addClickListener() {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> av, View v, int pos, long id) {
+            public void onItemClick(AdapterView<?> av, View v, final int pos, long id) {
                 MSettings.CounterForSimilarVideos=1;
                 playedPoss=new ArrayList<Integer>();
                 MSettings.currentVItem = searchResults.get(pos);
@@ -123,6 +126,7 @@ public class TrendVideoFragment extends Fragment implements OnScrollListener  {
             }
         });
     }
+
     public boolean isSmallScreen(){
         int screenSize = getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK;
         if (Configuration.SCREENLAYOUT_SIZE_LARGE==screenSize||getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE)

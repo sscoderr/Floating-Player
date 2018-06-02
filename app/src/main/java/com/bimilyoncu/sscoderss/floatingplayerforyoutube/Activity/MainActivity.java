@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
@@ -649,6 +650,27 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
                                 @Override
                                 public boolean shouldOverrideUrlLoading(WebView view, String url) {
                                     return true;
+                                }
+
+                                @Override
+                                public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                                    super.onPageStarted(view, url, favicon);
+                                }
+
+                                @Override
+                                public void onPageFinished(WebView view, String url) {
+                                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MSettings.activeActivity);
+                                    if (preferences != null) {
+                                        if (MSettings.webView != null || MSettings.currentVItem != null) {
+                                            if (preferences.getBoolean("isHighQuality", false)) {
+                                                MSettings.webView.loadUrl(String.format("javascript:loadVideoById(\"%s\",\"highres\");", new Object[]{MSettings.currentVItem.getId()}));
+                                            } else {
+                                                MSettings.webView.loadUrl(String.format("javascript:loadVideoById(\"%s\",\"small\");", new Object[]{MSettings.currentVItem.getId()}));
+                                            }
+                                        }
+                                    }
+
+                                    super.onPageFinished(view, url);
                                 }
                             }
         );
