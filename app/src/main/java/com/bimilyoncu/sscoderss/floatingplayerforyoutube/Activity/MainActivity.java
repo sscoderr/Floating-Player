@@ -661,10 +661,12 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
                                 public void onPageFinished(WebView view, String url) {
                                     SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MSettings.activeActivity);
                                     if (preferences != null) {
-                                        if (MSettings.webView != null || MSettings.currentVItem != null) {
-                                            if (preferences.getBoolean("isHighQuality", false)) {
+                                        if (preferences.getBoolean("isHighQuality", false)) {
+                                            if (MSettings.webView != null && MSettings.currentVItem != null) {
                                                 MSettings.webView.loadUrl(String.format("javascript:loadVideoById(\"%s\",\"highres\");", new Object[]{MSettings.currentVItem.getId()}));
-                                            } else {
+                                            }
+                                        } else {
+                                            if (MSettings.webView != null && MSettings.currentVItem != null) {
                                                 MSettings.webView.loadUrl(String.format("javascript:loadVideoById(\"%s\",\"small\");", new Object[]{MSettings.currentVItem.getId()}));
                                             }
                                         }
