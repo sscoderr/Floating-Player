@@ -8,7 +8,10 @@
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
-        android:layout_height="60px"
+        android:layout_height="37dp"
         android:indeterminateDrawable="@drawable/progresbar"
-        android:padding="3dp" />
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"/>
 </LinearLayout>

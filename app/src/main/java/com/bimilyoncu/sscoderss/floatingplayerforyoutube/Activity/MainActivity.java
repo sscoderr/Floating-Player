@@ -10,9 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.graphics.Typeface;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,11 +20,9 @@ import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.design.widget.TabLayout;
 import android.support.multidex.MultiDex;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -36,14 +32,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -58,7 +52,7 @@ import android.widget.AbsListView.OnScrollListener;
 
 
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.AdapterServiceSearchVideo;
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.CustomAdapter;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.AdapterSearchVideo;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.CustomAdapterForFragments;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Connector.ConnectorForPlaylist;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Connector.ConnectorForVideoId;
@@ -72,7 +66,6 @@ import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Floaties.Floaty;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Floaties.JSInterface;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Item.VideoItem;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.R;
-import com.gigamole.navigationtabstrip.NavigationTabStrip;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -84,8 +77,6 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.Video;
 import com.google.api.services.youtube.model.VideoListResponse;
-
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.IOException;
@@ -156,18 +147,23 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
     }
 
     public static boolean deleteDir(File dir) {
-        if (dir != null && dir.isDirectory()) {
-            String[] children = dir.list();
-            for (int i = 0; i < children.length; i++) {
-                boolean success = deleteDir(new File(dir, children[i]));
-                if (!success) {
-                    return false;
+        try {
+            if (dir != null && dir.isDirectory()) {
+                String[] children = dir.list();
+                for (int i = 0; i < children.length; i++) {
+                    boolean success = deleteDir(new File(dir, children[i]));
+                    if (!success) {
+                        return false;
+                    }
                 }
+                return dir.delete();
+            } else if (dir != null && dir.isFile()) {
+                return dir.delete();
+            } else {
+                return false;
             }
-            return dir.delete();
-        } else if (dir != null && dir.isFile()) {
-            return dir.delete();
-        } else {
+        } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -790,7 +786,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
                 }
                 MSettings.mHandler.post(new Runnable() {
                     public void run() {
-                        MSettings.mAdapter = new CustomAdapter(MSettings.activeActivity, similarVideosList, "");
+                        MSettings.mAdapter = new AdapterSearchVideo(MSettings.activeActivity, similarVideosList, "");
                         MSettings.mListForFloat.setAdapter(null);
                         MSettings.mListForFloat.setAdapter(MSettings.mAdapter);
                         myPg.setVisibility(View.INVISIBLE);

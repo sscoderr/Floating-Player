@@ -15,16 +15,13 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.CustomAdapter;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.AdapterSearchVideo;
 
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Connector.YoutubeConnector;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Item.VideoItem;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.R;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +33,7 @@ public class ChannelVideoList extends AppCompatActivity implements OnScrollListe
     private ListView mList;
     private Handler handler;
     private View myView;
-    private CustomAdapter adapter;
+    private AdapterSearchVideo adapter;
     public Handler mHandler;
     private boolean isLoading = false;
     private ProgressBar myPg;
@@ -65,7 +62,7 @@ public class ChannelVideoList extends AppCompatActivity implements OnScrollListe
                 searchResultsForChannelList = yc.search("", true, true, false);
                 handler.post(new Runnable() {
                     public void run() {
-                        adapter = new CustomAdapter(ChannelVideoList.this, searchResultsForChannelList, "");
+                        adapter = new AdapterSearchVideo(ChannelVideoList.this, searchResultsForChannelList, "");
                         mList.setAdapter(adapter);
                         myPg.setVisibility(View.INVISIBLE);
                         (ChannelVideoList.this).getSupportActionBar().setTitle(channelName);

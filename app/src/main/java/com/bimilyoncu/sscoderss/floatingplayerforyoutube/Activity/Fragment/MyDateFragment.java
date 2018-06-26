@@ -39,7 +39,7 @@ import android.widget.Toast;
 
 
 //import com.github.ksoichiro.android.observablescrollview.ObservableListView;
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.CustomAdapter;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.AdapterSearchVideo;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.ExpandAdapter;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Connector.ConnectorForUserVideo;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Connector.ConnectorForVideoId;
@@ -96,7 +96,7 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
     private ProgressBar myPg;
     private Handler handler;
     private View myView;
-    private CustomAdapter adapter;
+    private AdapterSearchVideo adapter;
     private int order = 0;
     private int sizeOfMoreData = 1;
     private String tblName = "tbl_favorite";
@@ -520,7 +520,7 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
                 handler.post(new Runnable() {
                     public void run() {
                         try {
-                            adapter = new CustomAdapter(getActivity(), response, tblName);
+                            adapter = new AdapterSearchVideo(getActivity(), response, tblName);
                             mList.setAdapter(adapter);
                             myPg.setVisibility(View.INVISIBLE);
                             isLoadingForThread = false;
@@ -650,6 +650,10 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
                 httpRequest.getHeaders().set("X-Android-Cert", SHA1);
             }
         }).build();
+
+        //GoogleAccountCredential.usingOAuth2(getContext(), Arrays.asList(YouTubeScopes.YOUTUBE_READONLY)).setBackOff(new ExponentialBackOff()).setSelectedAccount(account)
+        //
+
         thread_Handler.post(new Runnable() {
             @Override
             public void run() {

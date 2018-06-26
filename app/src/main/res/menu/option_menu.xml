@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <item android:id="@+id/menuFilter"
-        android:title="Filter"
+    <item
+        android:id="@+id/menuFilter"
         android:icon="@mipmap/my_filter_icon"
-        app:showAsAction="always"
-        android:orderInCategory="2" />
+        android:orderInCategory="2"
+        android:title="Filter"
+        app:showAsAction="always" />
 
     <item android:id="@+id/menuSearch"
         android:title="@string/search"

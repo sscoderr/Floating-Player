@@ -18,7 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.CustomAdapter;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.AdapterSearchVideo;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Connector.ConnectorForPlaylist;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.NetControl;
@@ -35,7 +35,7 @@ public class PlaylistActivity extends AppCompatActivity implements OnScrollListe
     private ListView mList;
     private Handler handler;
     private View myView;
-    private CustomAdapter adapter;
+    private AdapterSearchVideo adapter;
     public Handler mHandler;
     private boolean isLoading=false;
     private ProgressBar myPg;
@@ -82,7 +82,7 @@ public class PlaylistActivity extends AppCompatActivity implements OnScrollListe
                 searchResultsForPlaylist = pc.search(true);
                 handler.post(new Runnable() {
                     public void run() {
-                        adapter = new CustomAdapter(PlaylistActivity.this, searchResultsForPlaylist, "");
+                        adapter = new AdapterSearchVideo(PlaylistActivity.this, searchResultsForPlaylist, "");
                         mList.setAdapter(adapter);
                         myPg.setVisibility(View.INVISIBLE);
                     }

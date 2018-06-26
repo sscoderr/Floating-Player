@@ -1,14 +1,11 @@
 package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom;
 
 import android.app.Activity;
-import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -16,16 +13,12 @@ import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -35,15 +28,11 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.Volley;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.MainActivity;
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.SearchActivity;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.AdapterServiceSearchKey;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.AdapterServiceSearchVideo;
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.CustomAdapter;
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.CustomAdapterAutoComplate;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.AdapterSearchVideo;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Connector.ServiceSearchConnector;
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Connector.YoutubeConnector;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Database.DatabaseForPlaylists;
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Database.DatabaseForSearchHistory;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Floaties.Floaty;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.Fragment.MyDateFragment;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.R;
@@ -52,15 +41,11 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
-import com.google.api.services.youtube.YouTube;
-import com.google.api.services.youtube.model.Channel;
-import com.google.api.services.youtube.model.ChannelListResponse;
 import com.google.common.io.BaseEncoding;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -88,7 +73,7 @@ public class MSettings {
     public static ListView mListForFloat;
     public static Handler mHandler;
     public static Activity activeActivity;
-    public static CustomAdapter mAdapter;
+    public static AdapterSearchVideo mAdapter;
     public static List<VideoItem> similarVideosList;
     public static Boolean isPlayedVideo = false;
     public static Integer CounterForSimilarVideos = 1;
@@ -241,12 +226,13 @@ public class MSettings {
         adsCounter = 0;
         MobileAds.initialize(activeActivity, "ca-app-pub-5808367634056272~8476127349");
         AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("6EE0EC7A08848B41A3A8B3C52624F39A")
-                .addTestDevice("D840C07DDBAA5E0897B010411FABE6AC")
-                .addTestDevice("778ADE18482DD7E44193371217202427")
-                .addTestDevice("6AFA29CB9314195950E590C9BEACC344")
-                .addTestDevice("0CEA9CA5F2DAED70F0678D8F2D8669A3").build();
+//                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+//                .addTestDevice("6EE0EC7A08848B41A3A8B3C52624F39A")
+//                .addTestDevice("D840C07DDBAA5E0897B010411FABE6AC")
+//                .addTestDevice("778ADE18482DD7E44193371217202427")
+//                .addTestDevice("6AFA29CB9314195950E590C9BEACC344")
+//                .addTestDevice("0CEA9CA5F2DAED70F0678D8F2D8669A3")
+                .build();
         interstitial = new InterstitialAd(activeActivity);
         interstitial.setAdUnitId(activeActivity.getString(R.string.admob_interstitial_six_tap));
         interstitial.loadAd(adRequest);

@@ -8,7 +8,6 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,7 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.Toast;
 
 
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.CustomAdapter;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.AdapterSearchVideo;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.CustomAdapterForTrends;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Connector.ConnectorForTrends;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings;
@@ -33,8 +32,6 @@ import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import static com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings.playedPoss;
 
@@ -45,7 +42,7 @@ public class TrendVideoFragment extends Fragment implements OnScrollListener  {
     private ProgressBar myPg;
     private View myView;
     private CustomAdapterForTrends adapterForSmallScreen;
-    private CustomAdapter adapterForLargeScreen;
+    private AdapterSearchVideo adapterForLargeScreen;
     private List<VideoItem> searchResults;
     private Handler handler;
     private ListView listView;
@@ -162,7 +159,7 @@ public class TrendVideoFragment extends Fragment implements OnScrollListener  {
                                 adapterForSmallScreen = new CustomAdapterForTrends(getActivity(), searchResults);
                                 listView.setAdapter(adapterForSmallScreen);
                             } else {
-                                adapterForLargeScreen = new CustomAdapter(getActivity(), searchResults, "");
+                                adapterForLargeScreen = new AdapterSearchVideo(getActivity(), searchResults, "");
                                 listView.setAdapter(adapterForLargeScreen);
                             }
                             myPg.setVisibility(View.INVISIBLE);

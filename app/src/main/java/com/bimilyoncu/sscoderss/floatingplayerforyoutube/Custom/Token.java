@@ -10,7 +10,9 @@ public class Token {
             , nextTokenForSimilarVideos
             , nextTokenForPlayList
             , nextTokenForChannel
-            , nextToken;
+            , nextTokenSearch
+            , nextTokenSearchChannelVideo
+            , nextTokenSearchPlaylistVideo;
 
     public static String getNextTokenForTrendVideos() {
         return nextTokenForTrendVideos;
@@ -52,11 +54,27 @@ public class Token {
         Token.nextTokenForChannel = nextTokenForChannel;
     }
 
-    public String getNextToken() {
-        return this.nextToken;
+    public static String getNextTokenSearch() {
+        return nextTokenSearch;
     }
 
-    public void setNextToken(String nextToken) {
-        this.nextToken = nextToken;
+    public static void setNextTokenSearch(String nextTokenSearch) {
+        Token.nextTokenSearch = nextTokenSearch;
+    }
+
+    public static String getNextTokenSearchChannelVideo() {
+        return nextTokenSearchChannelVideo;
+    }
+
+    public static void setNextTokenSearchChannelVideo(String nextTokenSearchChannelVideo) {
+        Token.nextTokenSearchChannelVideo = nextTokenSearchChannelVideo;
+    }
+
+    public static String getNextTokenSearchPlaylistVideo() {
+        return nextTokenSearchPlaylistVideo;
+    }
+
+    public static void setNextTokenSearchPlaylistVideo(String nextTokenSearchPlaylistVideo) {
+        Token.nextTokenSearchPlaylistVideo = nextTokenSearchPlaylistVideo;
     }
 }

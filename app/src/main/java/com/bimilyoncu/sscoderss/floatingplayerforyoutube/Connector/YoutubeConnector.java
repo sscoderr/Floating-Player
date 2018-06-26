@@ -32,10 +32,10 @@ import java.util.List;
 public class YoutubeConnector {
     private YouTube youtube;
     private YouTube.Search.List query;
-    public static String KEY = "AIzaSyDzYXfEUkLxWCO4Ah6MM_5iF8yjwJDAbVA";
+    public static String KEY = "AIzaSyB1kAAfsJx_bc1lchJ64Y5VQ1jQckI7MlI";
     public static  final String[] myApiKeys={
             // GUNCELLEME YAPILACAĞI ZAMAN BU KEY PASİF OLACAK...
-            "AIzaSyB1kAAfsJx_bc1lchJ64Y5VQ1jQckI7MlI"
+//            "AIzaSyB1kAAfsJx_bc1lchJ64Y5VQ1jQckI7MlI"
 
             // --------------------------------------------------
 //            "AIzaSyDws4e3XqnRRnxjDq_jbnvqMqM2ynBITY0",
@@ -87,47 +87,7 @@ public class YoutubeConnector {
 //            "AIzaSyAOTRbnVfyGQDoT2AY2XzQpNR7C7FFZ5Lc",
 //            "AIzaSyBOlFl7zLxKUR6s720oIbEejUfJGMI1ReM",
 //
-//            /** bimilyoncu.key1 **/
-//            "AIzaSyDZGqUM8LH9qJJlZxe0Y1R5nzYArgSl3fY",
-//            "AIzaSyA7bmZIhae_brqwcKcsAlcFPQlfhn0sPxs",
-//            "AIzaSyDAo74EdwxU3zWlNaqjo5KcA0rRZ12RM-8",
-//            "AIzaSyBkgYWHp4B9efB7o4AOoT55hC74CTjyKG4",
-//            "AIzaSyBn5yQGp_0SWJfVxJYx3X7Rv_vZwHFdBbE",
-//            "AIzaSyC7-aGJP1P8QPXSOV8uuxBdfCyx7-ajo40",
-//            "AIzaSyC4DYyLFMnYpKLd60BPyb2KpmlsmqJn9Qc",
-//            "AIzaSyDgEhyjkSLR8uRE9zDWh2rUxgo9IKnQYMg",
-//            "AIzaSyDW26Z6m3voso85BFFcT78q-s0RXgS8dqA",
-//            "AIzaSyDNAcfuvUAU0JuQgHPpPuQHa9w1P7h1vUE",
-//            "AIzaSyDOMP97ui9CdoU5C9O9L8PWIuQMOTpl2Sk",
-//            "AIzaSyCzeRLVQrRuJVbpAElABNOmp7u6_r60UUM",
 //
-//            /** bimilyoncu.key2 **/
-//            "AIzaSyCF82_ZzsIEeYMkmOLGcMC9jD8v1-mrUEg",
-//            "AIzaSyAr0M_WvUhGdydALe1yKNksylHrq_z7GkY",
-//            "AIzaSyAxA98Itkb3YFm6mYv2Ly6bEdLP648BRVA",
-//            "AIzaSyBYdQVecqsI0QhNlbwaT7FvV3igpc07LuQ",
-//            "AIzaSyAAKErnGxztiqcrIWYCzICFmy97tRJzJWs",
-//            "AIzaSyCdUChWR5sc6Bm87JFPurv7VI5AJOHjl5Q",
-//            "AIzaSyD8XLFG1wY958XS0XuLpgLLrknWXDUDyNU",
-//            "AIzaSyDstydLmMa4oBRPAAIYLdsRGHxjcmW9K_U",
-//            "AIzaSyDdQbvo4ObmQJmkeunvw6ooU9e3cMKuP7s",
-//            "AIzaSyBMpMvbUQD2Lhfj6PaIh0msAFRlhqDoq2g",
-//            "AIzaSyDvmLrnuK97TTGXrtKmJ4AV90jwCHfa8ho",
-//            "AIzaSyA0d-S7184LB4BsAGqGS2eoXLhp7cFJoGM",
-//
-//            /** bimilyoncu.key3 **/
-//            "AIzaSyDs1un9wS4SFcR5l5oi0mhz1mDpAx4bS7w",
-//            "AIzaSyABrqmaRQjgrB3lmMrW_u6K9zg_yifyrhI",
-//            "AIzaSyCG_DkUGAl1yXigUV9dbc2mkNm3RZomzr0",
-//            "AIzaSyDM0Ojy3NNejGDsgcKHFobb1YqUQcEGYbk",
-//            "AIzaSyCHtm0tBXFlehmOPxwXeGOJhP2-yz-hXfc",
-//            "AIzaSyAeifhtpRYwUleEi5cAU_ThmZoCxC93SA4",
-//            "AIzaSyAf-DAlbi7r4CgmXQIlKwraSCZDabZzX6o",
-//            "AIzaSyDk-N95N5NSVfd-kXa61Rn34gH1ZyMt3oM",
-//            "AIzaSyCoYuMDg0GEuPfFca5D2_oVjKiPp95arwQ",
-//            "AIzaSyBun1lUxHtlpeHP3qdi99y5n7JlfCNwUUk",
-//            "AIzaSyDqQVHDUj2SwYOSZ-cBDLFHTMpLSc7KjKQ",
-//            "AIzaSyBvgFDw3QF7fmIaGdlocnfqpvHpPPLS_0c",
 //
 //            /** bimilyoncu.key4 **/
 //            "AIzaSyC8O3YaLbdjH1y-jcunZYXChmcmN3go1fI",
@@ -141,7 +101,45 @@ public class YoutubeConnector {
 //            "AIzaSyAnGLRKPhB-rEHh7zfaDCqbwWNjnRJXeto",
 //            "AIzaSyD_BV1lDMMYflcp2Lz20QhUEZ7qC5W2Xn8",
 //            "AIzaSyB5jcTvEmfKIEnNSncAaUJ4cIW3QzESScg",
-//            "AIzaSyB6sEnYpiSoyCyyrIknZbIXVun56FPfWIc"
+//            "AIzaSyB6sEnYpiSoyCyyrIknZbIXVun56FPfWIc",
+
+
+            /** bimilyoncu.key5 **/
+            "AIzaSyCldG8UM5zdJ2Og18Ia4lFRJEFS2ay2R7c",
+            "AIzaSyCOgc6F80QVKkfBCq8L5kws3vZBOwQQm9c",
+            "AIzaSyC9AjFMoaZtHYRym9pwgXRt8xrxjB7QwvI",
+            "AIzaSyDkXJLXyBgK8OToczeMoA_cSI4ewg2_goY",
+            "AIzaSyDD506vdEgmnmaIE-k1uHy4cbOd7M2CEks",
+            "AIzaSyCoLa0s5a2MROfKrPV0RghudqaXSIgaGL4",
+            "AIzaSyDRtKa_KgE3BzaKim6YooBWrC_WixGjlak",
+            "AIzaSyB9nDhOdoJG7biXE0EcK15xwyNqVlIfk3g",
+            "AIzaSyBCvwkMDnEb4a_MSdTJWvFjkgjSVJstHKc",
+            "AIzaSyDxGlhPgeDmwJdLjAcoYwLDcCPTcoY4Shs",
+            "AIzaSyDubVaEaLQJspFPB33NfghCmnCgLeE48zc",
+            "AIzaSyBY1UCqwHSGF7EvYWYTO_wXXIB91eyshG4",
+
+
+            /** bimilyoncu.key6 **/
+            "AIzaSyD7pU3K5P6Nzlo_CtWrn0ZaTy0Cv2UG2HI",
+            "AIzaSyBknZYTpDIvNvY9RAz0LUSRI6r1UrrSFyw",
+            "AIzaSyB6I5ATDfDySonLbghCRZI5g_Ao9vNmlWM",
+            "AIzaSyBRo_mF5976lw5GPHkwjAbJQR7Uc3ISlTw",
+            "AIzaSyCLSvjvm_H5jG91uvjF6eZdFcQHAQPQT6Q",
+            "AIzaSyB-G7qYLuyKzgHQWJMPy7YpaudBF18UsoE",
+            "AIzaSyDSbP2V3Coo5FZ-ZQxZ1BqBajQt5g1shIs",
+            "AIzaSyD0R5jHgt2x-y3E02GxAZd2tqDLt_ZOw3E",
+            "AIzaSyCvWvFKvwsZM7rKfR6iYt7ljRPiLdIIYcU",
+            "AIzaSyByV4uc12MfB6KVBCCuoI0IxrvaBQMtHjo",
+            "AIzaSyDwYJkBVA5Y39Dv72thTGisppez-5CyKns",
+            "AIzaSyAqSO1978XBJDbLI3hmGn_B4AeIrELwoBo"
+
+
+
+
+
+
+
+
         };
 
     public YoutubeConnector(final Context context, String sortBy, String contentType, boolean firstForFilter, String channelId, boolean isForFloat, boolean isForChannelPlayVideo) {
@@ -189,15 +187,15 @@ public class YoutubeConnector {
         if (!isChannel)
             query.setQ(keywords);
         try {
-            if ((!isChannel && (MSettings.token.getNextToken() != null || first == true)) || (isChannel && (MSettings.token.getNextTokenForChannel() != null || first == true)) || isSimilarVideos) {
+            if ((!isChannel && (MSettings.token.getNextTokenSearch() != null || first == true)) || (isChannel && (MSettings.token.getNextTokenForChannel() != null || first == true)) || isSimilarVideos) {
                 if (!first && isSimilarVideos) {
                     query.setPageToken(MSettings.token.getNextTokenForSimilarVideos());
                 } else if (!first && !isChannel) {
-                    query.setPageToken(MSettings.token.getNextToken());
+                    query.setPageToken(MSettings.token.getNextTokenSearch());
                 } else if (!first && isChannel) {
                     query.setPageToken(MSettings.token.getNextTokenForChannel());
                 }
-                Log.e("Token2: ", String.valueOf(MSettings.token.getNextToken()));
+                Log.e("Token2: ", String.valueOf(MSettings.token.getNextTokenSearch()));
                 SearchListResponse response = query.execute();
                 List<SearchResult> results = response.getItems();
                 for (SearchResult result : results) {
@@ -275,7 +273,7 @@ public class YoutubeConnector {
                 if (isSimilarVideos) {
                     MSettings.token.setNextTokenForSimilarVideos(response.getNextPageToken());
                 } else if (!isChannel) {
-                    MSettings.token.setNextToken(response.getNextPageToken());
+                    MSettings.token.setNextTokenSearch(response.getNextPageToken());
                 } else if (isChannel) {
                     MSettings.token.setNextTokenForChannel(response.getNextPageToken());
                 }

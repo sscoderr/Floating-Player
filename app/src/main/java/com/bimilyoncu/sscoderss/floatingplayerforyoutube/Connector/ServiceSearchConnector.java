@@ -80,15 +80,15 @@ public class ServiceSearchConnector {
         if (!isChannel)
             query.setQ(keywords);
         try {
-            if ((!isChannel && (MSettings.token.getNextToken() != null || first == true)) || (isChannel && (MSettings.token.getNextTokenForChannel() != null || first == true)) || isSimilarVideos) {
+            if ((!isChannel && (MSettings.token.getNextTokenSearch() != null || first == true)) || (isChannel && (MSettings.token.getNextTokenForChannel() != null || first == true)) || isSimilarVideos) {
                 if (!first && isSimilarVideos) {
                     query.setPageToken(MSettings.token.getNextTokenForSimilarVideos());
                 } else if (!first && !isChannel) {
-                    query.setPageToken(MSettings.token.getNextToken());
+                    query.setPageToken(MSettings.token.getNextTokenSearch());
                 } else if (!first && isChannel) {
                     query.setPageToken(MSettings.token.getNextTokenForChannel());
                 }
-                Log.e("Token2: ", String.valueOf(MSettings.token.getNextToken()));
+                Log.e("Token2: ", String.valueOf(MSettings.token.getNextTokenSearch()));
                 SearchListResponse response = query.execute();
                 List<SearchResult> results = response.getItems();
                 for (SearchResult result : results) {
@@ -108,7 +108,7 @@ public class ServiceSearchConnector {
                 if (isSimilarVideos) {
                     MSettings.token.setNextTokenForSimilarVideos(response.getNextPageToken());
                 } else if (!isChannel) {
-                    MSettings.token.setNextToken(response.getNextPageToken());
+                    MSettings.token.setNextTokenSearch(response.getNextPageToken());
                 } else if (isChannel) {
                     MSettings.token.setNextTokenForChannel(response.getNextPageToken());
                 }

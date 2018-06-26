@@ -95,7 +95,8 @@
                     android:layout_marginLeft="@dimen/custom_button_spaces"
                     android:layout_weight="1"
                     android:background="@drawable/selector_my_custom_button"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/txtRecommentedButton"
@@ -123,7 +124,7 @@
             android:id="@+id/textView_mydata_warning"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="!!!" />
+            android:text="@string/ListIsEmpty" />
     </LinearLayout>
 
     <RelativeLayout

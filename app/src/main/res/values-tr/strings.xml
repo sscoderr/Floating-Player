@@ -18,6 +18,8 @@
     <string name="optionMenuItemOne">Favorilere Ekle</string>
     <string name="optionMenuItemTwo">Paylaş</string>
     <string name="optionMenuItemDelete">Sil</string>
+    <string name="optionMenuItemDeleteFavorite">Favorilerden Kaldır</string>
+    <string name="optionMenuItemDeleteHistory">Geçmişten Kaldır</string>
 
     <!-- TODO Filter Dialog -->
     <string name="titleForFilter">Sonuçları Filtrele</string>

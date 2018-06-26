@@ -30,14 +30,14 @@ import java.util.List;
 /**
  * Created by Sabahattin on 11/22/2016.
  */
-public class CustomAdapter extends BaseAdapter {
+public class AdapterSearchVideo extends BaseAdapter {
 
     private LayoutInflater mInflater;
     public List<VideoItem> searchResults;
     private Activity activity;
     private String tableName;
 
-    public CustomAdapter(Activity activity, List<VideoItem> list, String tableName) {
+    public AdapterSearchVideo(Activity activity, List<VideoItem> list, String tableName) {
         this.mInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.searchResults = list;
         this.activity = activity;
@@ -109,9 +109,9 @@ public class CustomAdapter extends BaseAdapter {
                 }
 
 
-                holder.title.setText(searchResults.get(position).getTitle());
-                holder.channelTitle.setText(searchResults.get(position).getChannelTitle());
-                holder.viewCount.setText(searchResults.get(position).getViewCount());
+                holder.title.setText(searchResults.get(position).getTitle());//
+                holder.channelTitle.setText(searchResults.get(position).getChannelTitle());// videoCount
+                holder.viewCount.setText(searchResults.get(position).getViewCount());// subscriberCount
                 holder.publishAt.setText(searchResults.get(position).getPublishedAt());
                 holder.duration.setText(searchResults.get(position).getDuration());
                 ChannelVideoList.channelName = searchResults.get(0).getChannelTitle();

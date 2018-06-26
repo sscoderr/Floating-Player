@@ -17,6 +17,8 @@
     <string name="optionMenuItemOne">Add Favorites</string>
     <string name="optionMenuItemTwo">Share</string>
     <string name="optionMenuItemDelete">Delete</string>
+    <string name="optionMenuItemDeleteFavorite">Delete Favorite</string>
+    <string name="optionMenuItemDeleteHistory">Delete History</string>
 
     <!-- TODO Filter Dialog -->
     <string name="titleForFilter">Filter Results</string>
@@ -105,8 +107,11 @@
     <string name="crash_PlaylistNotAvailable">Playlist Not Available</string>
     <string name="crash_SelectedVideoNotAvailable">Selected Video Not Available</string>
     <string name="crash_VideoNotAvailable">Video Not Available</string>
+    <string name="crash_keywordNotAdded">Keyword Not Added</string>
+    <string name="crash_keywordNotUpdated">Keyword Not Updated</string>
+    <string name="crash_keywordNotDeleted">Keyword Not Deleted</string>
 
-
+    <string name="ListIsEmpty">List Is Empty!</string>
 
 </resources>
 

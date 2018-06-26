@@ -3,7 +3,6 @@ package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity;
 import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,7 +12,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
@@ -53,8 +51,8 @@ import java.util.concurrent.TimeoutException;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.CustomAdapter;
-import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.CustomAdapterAutoComplate;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.AdapterSearchVideo;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.AdapterSearchKey;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Connector.YoutubeConnector;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.NetControl;
@@ -75,8 +73,8 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
     private List<VideoItem> historyComplateResults;
     private String searchText = "";
     private View myView;
-    private CustomAdapter adapter;
-    private CustomAdapterAutoComplate adapterAutoComplate;
+    private AdapterSearchVideo adapter;
+    private AdapterSearchKey adapterAutoComplate;
     public Handler mHandler;
     private boolean isLoading = false;
     private ProgressBar myPg;
@@ -201,7 +199,7 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
             }
         }
         db.close();
-        adapterAutoComplate = new CustomAdapterAutoComplate(SearchActivity.this, historyComplateResults, 0);
+        adapterAutoComplate = new AdapterSearchKey(SearchActivity.this, historyComplateResults, 0);
         historyList.setAdapter(adapterAutoComplate);
     }
 
@@ -257,7 +255,7 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
         if (!filterText.equals(""))
             count = historyComplateResults.size() - count;
         else count = 0;
-        adapterAutoComplate = new CustomAdapterAutoComplate(SearchActivity.this, historyComplateResults, count);
+        adapterAutoComplate = new AdapterSearchKey(SearchActivity.this, historyComplateResults, count);
         historyList.setAdapter(adapterAutoComplate);
     }
 
@@ -302,7 +300,7 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
                 handler.post(new Runnable() {
                     public void run() {
                         try {
-                            adapter = new CustomAdapter(SearchActivity.this, searchResults, "");
+                            adapter = new AdapterSearchVideo(SearchActivity.this, searchResults, "");
                             mList.setAdapter(adapter);
                             myPg.setVisibility(View.INVISIBLE);
                         } catch (Exception e) {
@@ -362,8 +360,8 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
         public void run() {
             try {
                 mHandler.sendEmptyMessage(0);
-                YoutubeConnector
-                        yc = new YoutubeConnector(SearchActivity.this, sortBy, contentType, true, "", false, false);
+                YoutubeConnector yc = new YoutubeConnector(SearchActivity.this,
+                        sortBy, contentType, true, "", false, false);
                 List<VideoItem> list = yc.search(searchText, false, false, false);
                 sizeOfMoreData = list.size();
                 ArrayList<VideoItem> lstResult = (ArrayList<VideoItem>) list;
