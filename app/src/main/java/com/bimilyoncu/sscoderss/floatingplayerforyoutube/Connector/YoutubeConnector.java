@@ -38,108 +38,91 @@ public class YoutubeConnector {
 //            "AIzaSyB1kAAfsJx_bc1lchJ64Y5VQ1jQckI7MlI"
 
             // --------------------------------------------------
-//            "AIzaSyDws4e3XqnRRnxjDq_jbnvqMqM2ynBITY0",
-//            "AIzaSyDtDVfXOkttjFCcRA3Oz6stUk6wbsGwMI4",
-//            "AIzaSyB4oWW5ouoZDD9jRL2ec_iM57Lw43DJsSQ",
-//            "AIzaSyC3Px-30XphZKjNaFgQDNyxf4EZjNy-hIM",
-//            "AIzaSyCrOmNyrJI_E1_FxPf7RJOJaYIiQA7jF0E",
-//            "AIzaSyApwUEthNBFN8nbT2Fpjm02ud0fgk7LPJA",
-//            "AIzaSyDC70HEYwod3Z1uo18E6_lsBdrxxSw9sI4",
-//            "AIzaSyDAvu0PNSWLiZtuTiG0Dy4uW24yVEpfMSo",
-//
-//            /** fs.bimilyoncu **/
-//            "AIzaSyDp2bMUPNAYuYbCO7qAKj1CWyzcB5dMibw",
-//            "AIzaSyCKzy1bjKgGsR9TTfbI4Ghr8lSqC_64K8k",
-//            "AIzaSyCpuhxQ6k3KMmaFluNDuHB9lB3isTa5DuM",
-//            "AIzaSyCvBZ5Rchyb0qqHI1Lq1GrVn8bhwnQQIhQ",
-//            "AIzaSyD_m3vrPzvLN2MQ_sPADj7FjEeTOEaHX0k",
-//            "AIzaSyAum5tEQy16LmoWUEMnmIf1NR8LJatx6sk",
-//            "AIzaSyCwO5Yw0BaAPmvF3zNUK9sBv1h-ZyhQ3Qo",
-//            "AIzaSyDHtIGNohuxRZAJVEkpFPBRX_W1gCgt4pg",
-//            "AIzaSyDrPz6H8HPSl_1O17Zz_m8kjVhZIChfxFU",
-//            "AIzaSyAN0_Ig6rXAZoau67VL35qKiVkKqnah_9k",
-//
-//            /** MYKEYMAILONE **/
-//            "AIzaSyB-HuJ6pMFse4QAEZcYXiai0LorMSlEpxc",
-//            "AIzaSyAyaur-mNdI1jofZyzewuJ17TzdZQG-rcQ",
-//            "AIzaSyDDk8MY7ZzP3efgseKYClUwMXJIOu5d0gg",
-//            "AIzaSyBaKtI9SvD62CtclLhDvS_h8LoBJm8g4Ag",
-//            "AIzaSyCxxANeHC3RW_wb4f8_V7BQu0atu6WvLmM",
-//            "AIzaSyDfGpq0Oi5bECUHHcDeRW0xyd-AOUT5u90",
-//            "AIzaSyBZ5za6scpolvFUmbRH6T4je0nJY28rKr4",
-//            "AIzaSyDeneY4NKefHwN3O6E4WJS-q57evknSLHI",
-//            "AIzaSyCwsaaEWyQQmvEzBT91adMrZxS3rr8J9Po",
-//            "AIzaSyB3g1RRW97xILp8831Lt4bad7K4m3r5mwY",
-//            "AIzaSyBMC8Y7nKChZptgFBv457HzVSWY-8Kn5Y8",
-//            "AIzaSyDM6vyUWghBImyZYlAZaI721A3PhztOnjc",
-//
-//            /** MYKEYMAILTWO **/
-//            "AIzaSyBhKko50a-UkZ1yK6c0vzTuERU1UR6iQmo",
-//            "AIzaSyCoiuJCSCIx67ltF1dXQ7wTjTUXE6P3Lnw",
-//            "AIzaSyAoSHRcL1A98X9keihyTh1PKQid9TiUYyo",
-//            "AIzaSyAplYxtQlPW513Bqyn7xG9kHLizq1c2F6c",
-//            "AIzaSyBC-b0zzzWbIP0eyxUbwUgVGhzDU1yRabA",
-//            "AIzaSyDzee0ryNLDdJYNQwyv1WHjl9sQjpRr4XI",
-//            "AIzaSyDRrpKtH7IrMq34Ag6w-bN-583QCEiaB5A",
-//            "AIzaSyBcXwzXsp1QhDDoSQrfHXvKOYSmUi8jWLM",
-//            "AIzaSyAS0gKGerEbLv-lnSkmhPmtONZm_qOa1pQ",
-//            "AIzaSyDvjYGQ2Yv0r-rZVMkU_pMr0PX0zCKGPjI",
-//            "AIzaSyAOTRbnVfyGQDoT2AY2XzQpNR7C7FFZ5Lc",
-//            "AIzaSyBOlFl7zLxKUR6s720oIbEejUfJGMI1ReM",
-//
-//
-//
-//            /** bimilyoncu.key4 **/
-//            "AIzaSyC8O3YaLbdjH1y-jcunZYXChmcmN3go1fI",
-//            "AIzaSyAACPF44vpF_ZWs5cqv-iPkDn-HefI90Yo",
-//            "AIzaSyBQpiR0x7T6ZoFjxOVATpRB_Q9N6Uvr6Ao",
-//            "AIzaSyApqcmPef1p2dHtOlKfRYaUoeUsyyfmLhw",
-//            "AIzaSyD3IAOOEymDF9KokUoGk1W0szYlbrgSxhA",
-//            "AIzaSyClrSvhtSQCMUoa5uxVJOhNByUk2lzX2wc",
-//            "AIzaSyC0MyFVzICSYwqmcMWFRcwz56VcBcjhp6w",
-//            "AIzaSyDIhwEwFVHJK6Zoz4wpbiXQSNau8R6UgdI",
-//            "AIzaSyAnGLRKPhB-rEHh7zfaDCqbwWNjnRJXeto",
-//            "AIzaSyD_BV1lDMMYflcp2Lz20QhUEZ7qC5W2Xn8",
-//            "AIzaSyB5jcTvEmfKIEnNSncAaUJ4cIW3QzESScg",
-//            "AIzaSyB6sEnYpiSoyCyyrIknZbIXVun56FPfWIc",
+            "AIzaSyDws4e3XqnRRnxjDq_jbnvqMqM2ynBITY0",
+            "AIzaSyDtDVfXOkttjFCcRA3Oz6stUk6wbsGwMI4",
+            "AIzaSyB4oWW5ouoZDD9jRL2ec_iM57Lw43DJsSQ",
+            "AIzaSyC3Px-30XphZKjNaFgQDNyxf4EZjNy-hIM",
+            "AIzaSyCrOmNyrJI_E1_FxPf7RJOJaYIiQA7jF0E",
+            "AIzaSyApwUEthNBFN8nbT2Fpjm02ud0fgk7LPJA",
+            "AIzaSyDC70HEYwod3Z1uo18E6_lsBdrxxSw9sI4",
+            "AIzaSyDAvu0PNSWLiZtuTiG0Dy4uW24yVEpfMSo",
+
+            /** fs.bimilyoncu **/
+            "AIzaSyDp2bMUPNAYuYbCO7qAKj1CWyzcB5dMibw",
+            "AIzaSyCKzy1bjKgGsR9TTfbI4Ghr8lSqC_64K8k",
+            "AIzaSyCpuhxQ6k3KMmaFluNDuHB9lB3isTa5DuM",
+            "AIzaSyCvBZ5Rchyb0qqHI1Lq1GrVn8bhwnQQIhQ",
+            "AIzaSyD_m3vrPzvLN2MQ_sPADj7FjEeTOEaHX0k",
+            "AIzaSyAum5tEQy16LmoWUEMnmIf1NR8LJatx6sk",
+            "AIzaSyCwO5Yw0BaAPmvF3zNUK9sBv1h-ZyhQ3Qo",
+            "AIzaSyDHtIGNohuxRZAJVEkpFPBRX_W1gCgt4pg",
+            "AIzaSyDrPz6H8HPSl_1O17Zz_m8kjVhZIChfxFU",
+            "AIzaSyAN0_Ig6rXAZoau67VL35qKiVkKqnah_9k",
+
+            /** MYKEYMAILONE **/
+            "AIzaSyB-HuJ6pMFse4QAEZcYXiai0LorMSlEpxc",
+            "AIzaSyAyaur-mNdI1jofZyzewuJ17TzdZQG-rcQ",
+            "AIzaSyDDk8MY7ZzP3efgseKYClUwMXJIOu5d0gg",
+            "AIzaSyBaKtI9SvD62CtclLhDvS_h8LoBJm8g4Ag",
+            "AIzaSyCxxANeHC3RW_wb4f8_V7BQu0atu6WvLmM",
+            "AIzaSyDfGpq0Oi5bECUHHcDeRW0xyd-AOUT5u90",
+            "AIzaSyBZ5za6scpolvFUmbRH6T4je0nJY28rKr4",
+            "AIzaSyDeneY4NKefHwN3O6E4WJS-q57evknSLHI",
+            "AIzaSyCwsaaEWyQQmvEzBT91adMrZxS3rr8J9Po",
+            "AIzaSyB3g1RRW97xILp8831Lt4bad7K4m3r5mwY",
+            "AIzaSyBMC8Y7nKChZptgFBv457HzVSWY-8Kn5Y8",
+            "AIzaSyDM6vyUWghBImyZYlAZaI721A3PhztOnjc",
+
+            /** MYKEYMAILTWO **/
+            "AIzaSyBhKko50a-UkZ1yK6c0vzTuERU1UR6iQmo",
+            "AIzaSyCoiuJCSCIx67ltF1dXQ7wTjTUXE6P3Lnw",
+            "AIzaSyAoSHRcL1A98X9keihyTh1PKQid9TiUYyo",
+            "AIzaSyAplYxtQlPW513Bqyn7xG9kHLizq1c2F6c",
+            "AIzaSyBC-b0zzzWbIP0eyxUbwUgVGhzDU1yRabA",
+            "AIzaSyDzee0ryNLDdJYNQwyv1WHjl9sQjpRr4XI",
+            "AIzaSyDRrpKtH7IrMq34Ag6w-bN-583QCEiaB5A",
+            "AIzaSyBcXwzXsp1QhDDoSQrfHXvKOYSmUi8jWLM",
+            "AIzaSyAS0gKGerEbLv-lnSkmhPmtONZm_qOa1pQ",
+            "AIzaSyDvjYGQ2Yv0r-rZVMkU_pMr0PX0zCKGPjI",
+            "AIzaSyAOTRbnVfyGQDoT2AY2XzQpNR7C7FFZ5Lc",
+            "AIzaSyBOlFl7zLxKUR6s720oIbEejUfJGMI1ReM",
 
 
-            /** bimilyoncu.key5 **/
-            "AIzaSyCldG8UM5zdJ2Og18Ia4lFRJEFS2ay2R7c",
-            "AIzaSyCOgc6F80QVKkfBCq8L5kws3vZBOwQQm9c",
-            "AIzaSyC9AjFMoaZtHYRym9pwgXRt8xrxjB7QwvI",
-            "AIzaSyDkXJLXyBgK8OToczeMoA_cSI4ewg2_goY",
-            "AIzaSyDD506vdEgmnmaIE-k1uHy4cbOd7M2CEks",
-            "AIzaSyCoLa0s5a2MROfKrPV0RghudqaXSIgaGL4",
-            "AIzaSyDRtKa_KgE3BzaKim6YooBWrC_WixGjlak",
-            "AIzaSyB9nDhOdoJG7biXE0EcK15xwyNqVlIfk3g",
-            "AIzaSyBCvwkMDnEb4a_MSdTJWvFjkgjSVJstHKc",
-            "AIzaSyDxGlhPgeDmwJdLjAcoYwLDcCPTcoY4Shs",
-            "AIzaSyDubVaEaLQJspFPB33NfghCmnCgLeE48zc",
-            "AIzaSyBY1UCqwHSGF7EvYWYTO_wXXIB91eyshG4",
+            /** klikhes.01 **/
+            "AIzaSyA5tPBwrrK1o0JzuhMgmcf0_z0RJsfLGEo",
+            "AIzaSyCvxUFncvYWl3BgSNlQ2PBmy3HOwaNOWKs",
+            "AIzaSyDks2Divm7-UXcMmGnpIMxLH6w52x7Q7hk",
+            "AIzaSyDj8nCUGXSkebZWqEjM97WOEKlvnOGTp2w",
+            "AIzaSyD7LNjkmC8XAKtxfJHaqVtUv_iwnUEKn_w",
+            "AIzaSyCwCr0VCHgUHZP8gSsKOCVKfBBm6w6DgvM",
+            "AIzaSyCYk3sgsyvI6_HLaM7SMo-bBolsD__lXyY",
+            "AIzaSyBCWsZnPWs664GZXa_3ImADTY0povLdJDA",
+            "AIzaSyCDpUG1a25OiubxHNA4czH3zM-OnBwRrjs",
+            "AIzaSyBElWcMWUQ5ke9jB-mDGzZYVQ1qDtVFmwQ",
 
+            /** klikhes.02 **/
+            "AIzaSyAVXWiDvRfGtAkLFJFdOf2d7QhFHI2DyaM",
+            "AIzaSyA0SbAi1UkRVQ3K-wBJEHD25frwoJjYbXg",
+            "AIzaSyAPpKIEosdzxUycBd_Dp71wYcyAtyKRPxU",
+            "AIzaSyBRrdrEReOSaD9Drm7O86EsHjp75icC75Q",
+            "AIzaSyDwtVmDkfq9YG_U8Bjm8RZzvv0LP5Htmbo",
+            "AIzaSyB9B_p5ESylSX_8gMflD76ZO9tceTnBvJk",
+            "AIzaSyAkgJGae6w0pDLISis_cYNFu8cwGrsPhVk",
+            "AIzaSyA-Qs5gShfWIgbPQJxnS9WT9H8ZasYhNOI",
+            "AIzaSyC1QVjrjIFL4_y-b0ZmiXz3eXQBzYvy68s",
+            "AIzaSyBT-jPdfdqbq1322ec00Mlu49B2kp9XWtw",
 
-            /** bimilyoncu.key6 **/
-            "AIzaSyD7pU3K5P6Nzlo_CtWrn0ZaTy0Cv2UG2HI",
-            "AIzaSyBknZYTpDIvNvY9RAz0LUSRI6r1UrrSFyw",
-            "AIzaSyB6I5ATDfDySonLbghCRZI5g_Ao9vNmlWM",
-            "AIzaSyBRo_mF5976lw5GPHkwjAbJQR7Uc3ISlTw",
-            "AIzaSyCLSvjvm_H5jG91uvjF6eZdFcQHAQPQT6Q",
-            "AIzaSyB-G7qYLuyKzgHQWJMPy7YpaudBF18UsoE",
-            "AIzaSyDSbP2V3Coo5FZ-ZQxZ1BqBajQt5g1shIs",
-            "AIzaSyD0R5jHgt2x-y3E02GxAZd2tqDLt_ZOw3E",
-            "AIzaSyCvWvFKvwsZM7rKfR6iYt7ljRPiLdIIYcU",
-            "AIzaSyByV4uc12MfB6KVBCCuoI0IxrvaBQMtHjo",
-            "AIzaSyDwYJkBVA5Y39Dv72thTGisppez-5CyKns",
-            "AIzaSyAqSO1978XBJDbLI3hmGn_B4AeIrELwoBo"
-
-
-
-
-
-
-
-
+            /** klikhes.03 **/
+            "AIzaSyDNyXj1ot9PnPmaMYEop14dKUwSICpvKJo",
+            "AIzaSyABx2LM4u5C0lo0kOgxEFIPC_P_ymS0kjg",
+            "AIzaSyBGv9BnH8B_1K4infJJFQJob1mQVwYWPGc",
+            "AIzaSyApNeG66x2K9JA1l2VgDL_J-0SuTt8I00o",
+            "AIzaSyD0AuRZwthI3RmRq-GfXQ-doBQg9Zx1UR0",
+            "AIzaSyB7mM4hLzFu7ZPl7aJBrbJvQj6QKdEKLu0",
+            "AIzaSyAYY0UvIKm0m3s7QBfb62LLl5rhHj-jDbI",
+            "AIzaSyAU7aCxmMGBF88mx37LRGqhgGz-FJTO9rM",
+            "AIzaSyDz6IR7NKDSAPY4qDIR6bV2KFh0kRQVuJI",
+            "AIzaSyDpc1XUlflB5h6nxhFrqbt8d9OhbMTpCsc"
         };
 
     public YoutubeConnector(final Context context, String sortBy, String contentType, boolean firstForFilter, String channelId, boolean isForFloat, boolean isForChannelPlayVideo) {

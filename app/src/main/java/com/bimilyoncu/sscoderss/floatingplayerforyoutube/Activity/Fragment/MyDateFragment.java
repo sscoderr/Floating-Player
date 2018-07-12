@@ -668,6 +668,8 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
                     ChannelListResponse rs = ytBuilder.channels().list("id,contentDetails").setMine(true).execute();
                     List<Channel> channelList = rs.getItems();
                     Channel channel = channelList.get(0);
+
+
                     AlertDialog.Builder builderSingle = new AlertDialog.Builder(getActivity());
                     TextView title = new TextView(getActivity());
                     title.setText(getActivity().getString(R.string.playlistChooseTitle));
@@ -676,10 +678,13 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
                     title.setPadding(0, 10, 0, 5);
                     title.setTextSize(21);
                     builderSingle.setCustomTitle(title);
+
                     final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1);
                     arrayAdapter.add(getString(R.string.playlistLikedVideos));
                     arrayAdapter.addAll(loadPlaylistName(channel.getId()) != null ? loadPlaylistName(channel.getId()) : new String[0]);
+
                     playlistId[0] = channel.getContentDetails().getRelatedPlaylists().getLikes();
+
                     builderSingle.setNegativeButton(getString(R.string.btnCancel), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

@@ -44,9 +44,8 @@
         </activity>
 
         <!-- Trial Start -->
-<!--
 
-        <activity
+       <!-- <activity
             android:name=".Trial.Activity.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -65,7 +64,6 @@
         <activity android:name=".Trial.Activity.ListActivity" />
         &lt;!&ndash; Finish Activities &ndash;&gt;
 -->
-
         <!-- Trial Finish -->
 
         <activity android:name=".Activity.ChannelVideoList" />

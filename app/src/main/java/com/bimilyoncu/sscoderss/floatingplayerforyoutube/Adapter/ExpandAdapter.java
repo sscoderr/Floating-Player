@@ -76,11 +76,13 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
             holder.myRelForDuration = (RelativeLayout) rowView.findViewById(R.id.semiTransBGRelative);
             holder.myRel = (RelativeLayout) rowView.findViewById(R.id.semiTransBGRelativeBig);
             holder.videoCount = (TextView) rowView.findViewById(R.id.video_Count);
+
             Typeface myTypeface = Typeface.createFromAsset(ct.getAssets(), "VarelaRound-Regular.ttf");
             holder.title.setTypeface(myTypeface);
             holder.channelTitle.setTypeface(myTypeface);
             holder.viewCount.setTypeface(myTypeface);
             holder.publishAt.setTypeface(myTypeface);
+
             rowView.setTag(holder);
         } else {
             holder = (ExpandAdapter.ViewHolder) rowView.getTag();
