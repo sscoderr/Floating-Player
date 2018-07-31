@@ -60,6 +60,7 @@ import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Connector.ServiceSearch
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Connector.YoutubeConnector;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.NetControl;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.LoadSelectKey;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Database.Item.dbFirstLoading;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Database.Usingdb;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Floaties.Floaty;
@@ -126,7 +127,9 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
         CacheClear(this);
 
         MSettings.activeActivity = MainActivity.this;
-        YoutubeConnector.KEY = YoutubeConnector.myApiKeys[(new Random()).nextInt(YoutubeConnector.myApiKeys.length)];
+
+        // API'yi getAlertKeys metodunun içinde jsondan çekiyor.
+        // YoutubeConnector.KEY = YoutubeConnector.myApiKeys[(new Random()).nextInt(YoutubeConnector.myApiKeys.length)];
 
         netControl = new NetControl(this);
         (MainActivity.this).getSupportActionBar().setElevation(0);
@@ -182,6 +185,9 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
                 }
             }).setCancelable(false).create().show();
         } else {
+            new LoadSelectKey(this);
+            // YoutubeConnector.KEY
+
             mHandler = new MyHandler();
 
             TelephonyManager tm = (TelephonyManager) getSystemService(getApplicationContext().TELEPHONY_SERVICE);

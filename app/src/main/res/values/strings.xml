@@ -62,6 +62,8 @@
     <string name="myDataFromYT">FromYT</string>
     <string name="myDataSuggest">Suggested</string>
 
+    <string name="apiKeyLink">http://bimilyoncu.us/apiKey.json</string>
+
 
     <string name="banner_ad_unit_id_trend_music" translatable="false">ca-app-pub-5808367634056272/3906326944</string>
     <string name="banner_ad_unit_id_trend_video" translatable="false">ca-app-pub-5808367634056272/8820877743</string>
