@@ -4,9 +4,11 @@ import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -61,6 +63,7 @@ import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Connector.YoutubeConnec
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.NetControl;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.LoadSelectKey;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.BroadcastPowerButton;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Database.Item.dbFirstLoading;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Database.Usingdb;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Floaties.Floaty;
@@ -83,7 +86,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import static com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings.CheckService;
 import static com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings.CounterForSimilarVideos;
@@ -186,9 +188,14 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
             }).setCancelable(false).create().show();
         } else {
             new LoadSelectKey(this);
-            // YoutubeConnector.KEY
+//            YoutubeConnector.KEY = "AIzaSyA-zwUZMDk91YccFjYT3W1AaEISxDr9KX0";
 
             mHandler = new MyHandler();
+
+            IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
+            filter.addAction(Intent.ACTION_SCREEN_OFF);
+            BroadcastReceiver mReceiver = new BroadcastPowerButton();
+            registerReceiver(mReceiver, filter);
 
             TelephonyManager tm = (TelephonyManager) getSystemService(getApplicationContext().TELEPHONY_SERVICE);
             MSettings.countryCode = tm.getNetworkCountryIso();

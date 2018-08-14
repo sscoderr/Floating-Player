@@ -125,6 +125,7 @@ public class Floaty {
 
         Intent intent = new Intent(context, FloatHeadService.class);
         context.startService(intent);
+
     }
 
     /**
@@ -228,9 +229,9 @@ public class Floaty {
                         mLinearLayout.setBackgroundColor(Color.argb(0, 0, 0, 0));
                         windowManager.updateViewLayout(mLinearLayout, params);
 
-
                         return true;
                     }
+
                     return super.dispatchKeyEvent(event);
                 }
             };
@@ -356,11 +357,21 @@ public class Floaty {
             metrics = new DisplayMetrics();
             windowManager.getDefaultDisplay().getMetrics(metrics);
 
+            int LAYOUT_FLAG;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+            } else {
+                LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_PHONE;
+            }
+
             params = new WindowManager.LayoutParams(
                     WindowManager.LayoutParams.WRAP_CONTENT,
                     WindowManager.LayoutParams.WRAP_CONTENT,
-                    WindowManager.LayoutParams.TYPE_PHONE,
-                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                    LAYOUT_FLAG,
+                    WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+                            | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
+                            | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+                            | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                     PixelFormat.TRANSLUCENT);
             params.gravity = Gravity.TOP | Gravity.LEFT;
 
@@ -462,7 +473,7 @@ public class Floaty {
             stopForeground(false);
         }
 
-        private void showBody() {
+        public void showBody() {
             params.x = metrics.widthPixels;
             params.y = 0;
 

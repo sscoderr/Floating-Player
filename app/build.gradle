@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "com.bimilyoncu.sscoderss.floatingplayerforyoutube"
         minSdkVersion 19
-        targetSdkVersion 23
+        targetSdkVersion 27
         versionCode 13
         versionName "2.3.1"
         vectorDrawables.useSupportLibrary = true
