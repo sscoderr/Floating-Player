@@ -38,7 +38,7 @@
 
         <activity
             android:name=".Activity.MainActivity"
-            android:label="@string/title_activity_main">
+            android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

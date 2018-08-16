@@ -86,4 +86,13 @@
     <string name="back">Geri</string>
     <string name="finish">Bitir</string>
     <string name="help">Yardım</string>
+
+    <string name="openVideoonYouTube">Videoyu Youtube\'de Aç?</string>
+    <string name="yes">Evet</string>
+    <string name="no">Hayır</string>
+
+    <string name="hizmetSartlari">Youtube Hizmet Şartları\'nı karşılamak için videolar arka planda veya ekran kapalıken oynatılamaz ve videolar indirilemez.\n\n
+    Uygulamanın youtube ile hiçbir ilişkisi yoktur.\n
+    Youtube API lerini kullanarak Youtube videoları oynatmaktadır.</string>
+    <string name="note">Not</string>
 </resources>

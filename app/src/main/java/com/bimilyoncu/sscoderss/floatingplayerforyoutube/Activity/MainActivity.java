@@ -1,6 +1,7 @@
 package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
@@ -28,6 +29,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.transition.Slide;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -64,6 +66,8 @@ import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.NetControl;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.LoadSelectKey;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.BroadcastPowerButton;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.SweetAlertDialog.SweetAlertDialog;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Database.DatabaseForSearchHistory;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Database.Item.dbFirstLoading;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Database.Usingdb;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Floaties.Floaty;
@@ -102,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
     private FragmentRefreshListenerForVideo fragmentRefreshListenerForVideo;
 
     private ProgressBar myPg;
-    
+
     // mypg
 
     private TabLayout tabLayout;
@@ -129,12 +133,15 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
         CacheClear(this);
 
         MSettings.activeActivity = MainActivity.this;
+        MSettings.mainActivity = MainActivity.this;
 
         // API'yi getAlertKeys metodunun içinde jsondan çekiyor.
         // YoutubeConnector.KEY = YoutubeConnector.myApiKeys[(new Random()).nextInt(YoutubeConnector.myApiKeys.length)];
 
         netControl = new NetControl(this);
         (MainActivity.this).getSupportActionBar().setElevation(0);
+
+
 
         AlertgetKeys();
     }
@@ -187,6 +194,10 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
                 }
             }).setCancelable(false).create().show();
         } else {
+            if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
+                watchYoutubeVideo(getIntent().getAction());
+            }
+
             new LoadSelectKey(this);
 //            YoutubeConnector.KEY = "AIzaSyA-zwUZMDk91YccFjYT3W1AaEISxDr9KX0";
 
@@ -321,7 +332,9 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
             firstLoading.setFirstLoading(1); // True yap
             usingdb.addFirstLoading(firstLoading);
 
-            startActivity(new Intent(MainActivity.this, SlideOnboardingActivity.class));
+            Intent intent = new Intent(MainActivity.this, SlideOnboardingActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+            startActivity(intent);
         }
     }
 
@@ -461,6 +474,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
             }
         });
 
+        final RelativeLayout developedYoutube = (RelativeLayout) MSettings.body.findViewById(R.id.relative_service_with_youtube);
         final RelativeLayout Similar = (RelativeLayout) MSettings.body.findViewById(R.id.relative_service_similar);
         final RelativeLayout Search = (RelativeLayout) MSettings.body.findViewById(R.id.relative_service_search);
         final RelativeLayout rlSimilar = (RelativeLayout) MSettings.body.findViewById(R.id.relativesimilar);
@@ -470,6 +484,13 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
 
         textViewServiceSimilar.setTypeface(Typeface.createFromAsset(MSettings.activeActivity.getAssets(), "VarelaRound-Regular.ttf"));
         textViewServiceSearch.setTypeface(Typeface.createFromAsset(MSettings.activeActivity.getAssets(), "VarelaRound-Regular.ttf"));
+
+        developedYoutube.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                watchYoutubeVideo(MSettings.youtubeWatchURL + MSettings.activeVideo.getId());
+            }
+        });
 
         Similar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -657,7 +678,10 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
         wv.setVerticalScrollBarEnabled(false);
         wv.setWebViewClient(new WebViewClient() {
                                 @Override
-                                public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                                public boolean shouldOverrideUrlLoading(WebView view, final String url) {
+                                    Log.e(".........", String.valueOf(MainActivity.this));
+
+                                    watchYoutubeVideo(url);
                                     return true;
                                 }
 
@@ -689,6 +713,49 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
         wv.getSettings().setUserAgentString("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.117 Safari/537.36");
         wv.addJavascriptInterface(new JSInterface(wv), "WebPlayerInterface");
         wv.loadUrl(MSettings.URL);
+    }
+
+    private void watchYoutubeVideo(final String url) {
+        try {
+            final String urlHead = "https://www.youtube.com";
+
+            if (url.substring(0, urlHead.length()).equals(urlHead)) {
+                new SweetAlertDialog(
+                        MSettings.activeActivityMet() != null ? MSettings.activeActivityMet() : MainActivity.this,
+                        SweetAlertDialog.WARNING_TYPE)
+
+                        .setTitleText(getString(R.string.AreYouSure))
+                        .setContentText(getString(R.string.openVideoonYouTube))
+                        .setConfirmText(getString(R.string.yes))
+                        .showCancelButton(true)
+                        .setCancelText(getString(R.string.no))
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                // Yes
+//                                                    watchYoutubeVideo(MainActivity.this, videoId);
+                                MSettings.activeActivity.startActivity(new Intent(Intent.ACTION_VIEW,
+                                        Uri.parse(url)));
+                                sDialog.cancel();
+                            }
+                        })
+                        .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                // No
+                                sDialog.cancel();
+                            }
+                        }).show();
+                MSettings.MinimizePlayer();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+            intent.setAction(url);
+            startActivity(intent);
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -962,6 +1029,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
     }
 
     boolean doubleBackToExitPressedOnce = false;
+
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -978,7 +1046,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 2000);
     }
@@ -987,5 +1055,18 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener 
     protected void onUserLeaveHint() {
         MSettings.MinimizePlayer();
         super.onUserLeaveHint();
+    }
+
+    public static boolean active = false;
+    @Override
+    public void onStart() {
+        super.onStart();
+        active = true;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        active = false;
     }
 }

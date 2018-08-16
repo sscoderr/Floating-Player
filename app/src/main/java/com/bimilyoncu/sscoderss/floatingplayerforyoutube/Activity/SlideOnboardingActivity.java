@@ -1,6 +1,8 @@
 package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity;
 
+import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Handler;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.AdapterSlider;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.MSettings;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Custom.SweetAlertDialog.SweetAlertDialog;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.R;
 
 import org.w3c.dom.Text;
@@ -38,6 +41,10 @@ public class SlideOnboardingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_slide_onboarding);
 
         getSupportActionBar().hide();
+
+        if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
+            HizmetSartlari();
+        }
 
         viewPager = (ViewPager) findViewById(R.id.slide_viewPager);
         linearLayoutTab = (LinearLayout) findViewById(R.id.slide_linearTab);
@@ -80,6 +87,20 @@ public class SlideOnboardingActivity extends AppCompatActivity {
         addDotsIndicator(0);
 
         viewPager.addOnPageChangeListener(viewListener);
+    }
+
+    private void HizmetSartlari(){
+        new SweetAlertDialog(SlideOnboardingActivity.this, SweetAlertDialog.NORMAL_TYPE)
+                .setTitleText(getString(R.string.note))
+                .setContentText(getString(R.string.hizmetSartlari))
+                .setConfirmText(getString(R.string.dialog_ok))
+                .showCancelButton(false)
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        sDialog.cancel();
+                    }
+                }).show();
     }
 
     private void addDotsIndicator(int position){

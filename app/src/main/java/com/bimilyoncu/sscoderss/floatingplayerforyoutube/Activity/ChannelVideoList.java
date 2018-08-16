@@ -1,5 +1,6 @@
 package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Handler;
@@ -44,6 +45,9 @@ public class ChannelVideoList extends AppCompatActivity implements OnScrollListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_channel_video_list);
+
+        MSettings.channelActivity = ChannelVideoList.this;
+
         mList = (ListView) findViewById(R.id.videolist_Channel);
         LayoutInflater li = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         myView = li.inflate(R.layout.loading_result, null);
@@ -92,6 +96,7 @@ public class ChannelVideoList extends AppCompatActivity implements OnScrollListe
                 MSettings.CounterForSimilarVideos = pos+1;
                 playedPoss = new ArrayList<Integer>();
                 MSettings.currentVItem = searchResultsForChannelList.get(pos);
+                MSettings.activeVideo = searchResultsForChannelList.get(pos);
                 MSettings.activeActivity = ChannelVideoList.this;
                 MainActivity mainActivity = new MainActivity();
                 mainActivity.getSimilarVideos(searchResultsForChannelList.get(pos).getId(), false, true, false, new String[]{});
@@ -165,5 +170,18 @@ public class ChannelVideoList extends AppCompatActivity implements OnScrollListe
             e.printStackTrace();
         }
         super.onUserLeaveHint();
+    }
+
+    public static boolean active = false;
+    @Override
+    public void onStart() {
+        super.onStart();
+        active = true;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        active = false;
     }
 }

@@ -461,6 +461,7 @@ public class MyDateFragment extends Fragment implements OnScrollListener,GoogleA
                 MSettings.CounterForSimilarVideos = 1;
                 playedPoss = new ArrayList<Integer>();
                 MSettings.currentVItem = response.get(pos);
+                MSettings.activeVideo = response.get(pos);
                 MSettings.activeActivity = getActivity();
                 MainActivity mainActivity = new MainActivity();
                 mainActivity.getSimilarVideos(String.valueOf(response.get(pos).getId()), false, false, false, new String[]{});

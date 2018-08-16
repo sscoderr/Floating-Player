@@ -27,7 +27,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.Volley;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.ChannelVideoList;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.MainActivity;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.PlaylistActivity;
+import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.SearchActivity;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.AdapterServiceSearchKey;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.AdapterServiceSearchVideo;
 import com.bimilyoncu.sscoderss.floatingplayerforyoutube.Adapter.AdapterSearchVideo;
@@ -66,6 +69,10 @@ public class MSettings {
 
     public static String countryCode;
 
+    public static Activity mainActivity;
+    public static Activity searchActivity;
+    public static Activity channelActivity;
+    public static Activity playlistActivity;
 
     public static Floaty floaty;
     public static View head;
@@ -91,6 +98,7 @@ public class MSettings {
     public static InterstitialAd interstitial;
     public static Token token = new Token();
     public static VideoItem currentVItem;
+    public static VideoItem activeVideo;
     public static boolean similarVideosIsLoaded=false;
     public static boolean IsRetry = false;
     public static boolean IsonPlayerNext = false;
@@ -135,6 +143,7 @@ public class MSettings {
                                 } else {
                                     webView.loadUrl(String.format("javascript:loadVideoById(\"%s\",\"small\");", new Object[]{currentVItem.getId()}));
                                 }
+                                MSettings.activeVideo = currentVItem;
                                 DatabaseForPlaylists db = new DatabaseForPlaylists(activeActivity);
                                 db.addVideoHistory(currentVItem.getId(), activeActivity);
                                 MyDateFragment.isHaveUpdate = true;
@@ -392,5 +401,19 @@ public class MSettings {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static Activity activeActivityMet() {
+        if (MainActivity.active) {
+            return mainActivity;
+        } else if (SearchActivity.active) {
+            return searchActivity;
+        } else if (PlaylistActivity.active) {
+            return playlistActivity;
+        } else if (ChannelVideoList.active) {
+            return channelActivity;
+        }
+
+        return null;
     }
 }

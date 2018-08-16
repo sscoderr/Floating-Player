@@ -1,6 +1,7 @@
 package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -96,6 +97,8 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        MSettings.searchActivity = SearchActivity.this;
 
         myCt = getApplicationContext();
         mList = (ListView) findViewById(R.id.videos_found);
@@ -268,6 +271,7 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
                     MSettings.CounterForSimilarVideos = 1;
                     playedPoss = new ArrayList<Integer>();
                     MSettings.currentVItem = searchResults.get(pos);
+                    MSettings.activeVideo = searchResults.get(pos);
                     MSettings.activeActivity = SearchActivity.this;
                     MainActivity mainActivity = new MainActivity();
                     mainActivity.getSimilarVideos(String.valueOf(searchResults.get(pos).getId()), false, false, false, new String[]{});
@@ -276,17 +280,16 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
                     MSettings.LoadVideo();
                     MSettings.LoadSixTapAds();
                 } else if (searchResults.get(pos).getId().length() == 24) {
-                    intent = new Intent(getApplicationContext(), ChannelVideoList.class);
+                    intent = new Intent(SearchActivity.this, ChannelVideoList.class);
                     MSettings.activeChannelId = searchResults.get(pos).getId();
                     intent.putExtra("CHANNEL_ID", searchResults.get(pos).getId());
                     startActivity(intent);
                 } else {
-                    intent = new Intent(getApplicationContext(), PlaylistActivity.class);
+                    intent = new Intent(SearchActivity.this, PlaylistActivity.class);
                     MSettings.activePlaylistId = searchResults.get(pos).getId();
                     intent.putExtra("PLAYLIST_ID", searchResults.get(pos).getId());
                     startActivity(intent);
                 }
-
             }
 
         });
@@ -664,5 +667,18 @@ public class SearchActivity extends AppCompatActivity implements OnScrollListene
             e.printStackTrace();
         }
         super.onUserLeaveHint();
+    }
+
+    public static boolean active = false;
+    @Override
+    public void onStart() {
+        super.onStart();
+        active = true;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        active = false;
     }
 }

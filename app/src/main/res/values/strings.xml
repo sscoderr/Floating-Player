@@ -115,5 +115,13 @@
 
     <string name="ListIsEmpty">List Is Empty!</string>
 
+    <string name="openVideoonYouTube">Open video on YouTube</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="hizmetSartlari">To meet the YouTube Terms of Service, videos can not be played while in background or screen is off, and videos can not be downloaded.\n\n
+    The app has no affiliation with YouTube.\n
+    Play Youtube videos using Youtube API s.</string>
+    <string name="note">Note</string>
 </resources>
 

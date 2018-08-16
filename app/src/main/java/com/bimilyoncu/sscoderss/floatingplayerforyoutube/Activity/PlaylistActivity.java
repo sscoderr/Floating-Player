@@ -1,5 +1,6 @@
 package com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -50,6 +51,7 @@ public class PlaylistActivity extends AppCompatActivity implements OnScrollListe
         setSupportActionBar(toolbar);*/
 
         netControl = new NetControl(this);
+        MSettings.playlistActivity = PlaylistActivity.this;
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +111,7 @@ public class PlaylistActivity extends AppCompatActivity implements OnScrollListe
                 MSettings.CounterForSimilarVideos=pos+1;
                 playedPoss=new ArrayList<Integer>();
                 MSettings.currentVItem = searchResultsForPlaylist.get(pos);
+                MSettings.activeVideo = searchResultsForPlaylist.get(pos);
                 MSettings.activeActivity = PlaylistActivity.this;
                 MainActivity mainActivity = new MainActivity();
                 mainActivity.getSimilarVideos(String.valueOf(searchResultsForPlaylist.get(pos).getId()),true,false,false,new String[]{});
@@ -178,5 +181,18 @@ public class PlaylistActivity extends AppCompatActivity implements OnScrollListe
             e.printStackTrace();
         }
         super.onUserLeaveHint();
+    }
+
+    public static boolean active = false;
+    @Override
+    public void onStart() {
+        super.onStart();
+        active = true;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        active = false;
     }
 }

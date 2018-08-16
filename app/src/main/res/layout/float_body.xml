@@ -203,6 +203,24 @@
                         android:textSize="12sp" />
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:id="@+id/relative_service_with_youtube"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/developed_youtube_background"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/imageview_service_with_youtube"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/developed_with_youtube" />
+
+                </RelativeLayout>
+
             </LinearLayout>
         </RelativeLayout>
 

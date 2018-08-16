@@ -113,6 +113,7 @@ public class TrendVideoFragment extends Fragment implements OnScrollListener  {
                 MSettings.CounterForSimilarVideos=1;
                 playedPoss=new ArrayList<Integer>();
                 MSettings.currentVItem = searchResults.get(pos);
+                MSettings.activeVideo = searchResults.get(pos);
                 MSettings.activeActivity = getActivity();
                 MainActivity mainActivity = new MainActivity();
                 mainActivity.getSimilarVideos(String.valueOf(searchResults.get(pos).getId()),false,false,false,new String[]{});
