@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.SlideOnboardingActivity"
+    tools:context="com.bimilyoncu.sscoderss.floatingplayerforyoutubev3.Activity.SlideOnboardingActivity"
     android:orientation="vertical">
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/slide_viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@color/material_blue_grey_95">
 
-    </android.support.v4.view.ViewPager>
+    </androidx.viewpager.widget.ViewPager>
 
     <LinearLayout
         android:id="@+id/slide_linearTab"
@@ -35,9 +35,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/material_blue_grey_80"
-                android:text="@string/back"
-                android:textSize="13sp"
-                android:visibility="gone" />
+                android:text="@string/next"
+                android:textSize="13sp" />
         </LinearLayout>
 
         <LinearLayout

@@ -13,12 +13,15 @@
     <string name="title_activity_main">Floating Player</string>
     <string name="filter">Filter</string>
     <string name="search">Search</string>
+    <string name="premium">Premium</string>
     <string name="bigSearch">QUICK SEARCH</string>
     <string name="optionMenuItemOne">Add Favorites</string>
     <string name="optionMenuItemTwo">Share</string>
+    <string name="optionMenuItemAddToPlaylis">Add to Playlist</string>
+    <string name="optionMenuItemTwitter">Twitter</string>
     <string name="optionMenuItemDelete">Delete</string>
-    <string name="optionMenuItemDeleteFavorite">Delete Favorite</string>
-    <string name="optionMenuItemDeleteHistory">Delete History</string>
+    <string name="optionMenuItemDeleteFavorite">Delete</string>
+    <string name="optionMenuItemDeleteHistory">Delete</string>
 
     <!-- TODO Filter Dialog -->
     <string name="titleForFilter">Filter Results</string>
@@ -60,17 +63,21 @@
     <string name="myDataFavorite">Favorites</string>
     <string name="myDataHistory">History</string>
     <string name="myDataFromYT">FromYT</string>
-    <string name="myDataSuggest">Suggested</string>
+    <string name="myDataPlaylist">Playlist</string>
 
-    <string name="apiKeyLink">http://bimilyoncu.us/apiKey.json</string>
+    <string name="apiKeyLink">http://sscoderr.com/json/apiKeysss.json</string><!--ssssssssss Don Forget-->
+    <string name="apiKeyUpdateLink">http://sscoderr.com/json/isHaveUpdatess.txt</string><!--ssssssssss Don Forget-->
 
 
-    <string name="banner_ad_unit_id_trend_music" translatable="false">ca-app-pub-5808367634056272/3906326944</string>
-    <string name="banner_ad_unit_id_trend_video" translatable="false">ca-app-pub-5808367634056272/8820877743</string>
-    <string name="banner_ad_unit_id_my_data" translatable="false">ca-app-pub-5808367634056272/4251077344</string>
+    <string name="banner_ad_unit_id_trend_music" translatable="false">ca-app-pub-2609460348345466/4893484518</string>
+    <string name="banner_ad_unit_id_trend_video" translatable="false">ca-app-pub-2609460348345466/6267217885</string>
+    <string name="banner_ad_unit_id_my_data" translatable="false">ca-app-pub-2609460348345466/7005584481</string>
+    <string name="banner_ad_unit_id_playlists" translatable="false">ca-app-pub-2609460348345466/8865461060</string>
 
-    <string name="admob_interstitial_id_close_service" translatable="false">ca-app-pub-5808367634056272/9460006141</string>
-    <string name="admob_interstitial_six_tap" translatable="false">ca-app-pub-5808367634056272/4169458037</string>
+    <string name="admob_interstitial_id_close_service" translatable="false">ca-app-pub-2609460348345466/4567123409</string>
+    <string name="admob_interstitial_six_tap" translatable="false">ca-app-pub-2609460348345466/2870898358</string>
+
+
     <string name="forKitkatAndBeforeMessage">Please Stop Video And Play Again</string>
 
     <string name="please_click_back_again_to_exit">Please click BACK again to exit!</string>
@@ -78,7 +85,7 @@
     <string name="similar">SIMILAR</string>
     <string name="favorites_list_is_empty">Favorites List Is Empty!</string>
     <string name="history_list_is_empty">History List Is Empty!</string>
-    <string name="recommented_list_is_empty">Recommented List Is Empty!</string>
+    <string name="playlist_list_is_empty">Playlist List Is Empty!</string>
 
 
     <string name="dialog_ok">OK</string>
@@ -90,15 +97,11 @@
     <string name="Deleted">Deleted!</string>
     <string name="YourHistoryHasBeenDeleted">Your history has been deleted!</string>
     <string name="welcome">Welcome!</string>
-    <string name="thisIsThePlayerScreen">This is the player screen!</string>
-    <string name="videoControlPanel">Video Control Panel</string>
-    <string name="homeAndBackButtonFunction">Home and Back button function</string>
+    <string name="ssplayertitle">Floating player for Youtube Update!</string>
 
-    <string name="next">Next</string>
-    <string name="back">Back</string>
+    <string name="next">Try It</string>
     <string name="finish">Finish</string>
     <string name="help">Help</string>
-
 
 
     <!-- Yeni Versiyon için oluşturulanlar -->
@@ -123,5 +126,42 @@
     The app has no affiliation with YouTube.\n
     Play Youtube videos using Youtube API s.</string>
     <string name="note">Note</string>
+    <string name="startAppId">210480126</string>
+    <string name="twitter_dialog">Dont Show Again</string>
+    <!--Notification-->
+    <string name="notification_channel_id" translatable="false">FloatingPlayer</string>
+    <string name="rate_title">Would you like to support us?</string>
+    <string name="rate_message">***** Rate us 5 Stars *****</string>
+    <string name="rate_now">Rate now</string>
+    <string name="rate_later">Not now</string>
+    <string name="search_vid">Video</string>
+    <string name="search_playlist">Playlist</string>
+    <string name="first_page_most_played_vids">Most and Last Played</string>
+    <string name="first_page_trends">Trend by Countries</string>
+    <string name="see_all">See All</string>
+    <string name="import_from_yt">Import Your Youtube Playlist</string>
+    <string name="create_new_playlist">Create New Playlist</string>
+    <string name="alert_playlist_hint">Playlist Name</string>
+    <string name="alert_create_playlist">Create</string>
+    <string name="toast_video_added_playlist">Saved as Local Playlist</string>
+
+
+
+    <string name="first_page_main_slider_hits">Hit Music</string>
+    <string name="first_page_main_slider_workout">Workout</string>
+    <string name="first_page_main_slider_party">Party Music</string>
+    <string name="first_page_main_slider_new_releases">New Releases</string>
+    <string name="first_page_recommendation_slider_title">Recommendation For You</string>
+    <string name="first_page_recommendation_refresh_button">Refresh</string>
+
+    <string name="empty_list_reload_text">Reload</string>
+
+    <string name="empty_list_message">Something went wrong.Please Reload</string>
+
+    <string name="app_bar_title_trends_countries">Trend by Countries</string>
+
+    <string name="trend_video_fragment_message">This Page Also Will Be Changed With Next Update.We Are Improving the App.Keep using the app For More Feature.**Do not forget rate us to support**.Thanks :)</string>
+
+
 </resources>
 

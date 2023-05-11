@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.bimilyoncu.sscoderss.floatingplayerforyoutube">
+    package="com.bimilyoncu.sscoderss.floatingplayerforyoutubev3">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.CLEAR_APP_CACHE"
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission
+        android:name="android.permission.CLEAR_APP_CACHE"
         tools:ignore="ProtectedPermissions" />
-
     <uses-permission android:name="android.permission.PREVENT_POWER_KEY" />
 
     <application
-        android:name="android.support.multidex.MultiDexApplication"
+        android:largeHeap="true"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/app_icon"
@@ -22,85 +23,56 @@
         android:showOnLockScreen="true"
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme"
+        android:usesCleartextTraffic="true"
         tools:replace="android:icon">
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-2609460348345466~9478052192"/>
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".Activity.SearchActivity"
-            android:label="@string/app_name" />
-
+            android:name="com.bimilyoncu.sscoderss.floatingplayerforyoutubev3.Activity.SearchActivity"
+            android:label="@string/app_name"
+            android:exported="false"/>
         <activity
-            android:name=".Activity.PlaylistActivity"
-            android:label="@string/title_activity_playlist" />
-
+            android:name="com.bimilyoncu.sscoderss.floatingplayerforyoutubev3.Activity.PlaylistActivity"
+            android:label="@string/title_activity_playlist"
+            android:exported="false"
+            android:theme="@style/MyMaterialTheme.NoActionBar" />
         <activity
-            android:name=".Activity.MainActivity"
-            android:label="@string/title_activity_main" >
+            android:name="com.bimilyoncu.sscoderss.floatingplayerforyoutubev3.Activity.MainActivity"
+            android:label="@string/title_activity_main"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- Trial Start -->
-
-      <!--  <activity
-            android:name=".Trial.Activity.MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>-->
-
-
-        <!-- Activities -->
+        <activity android:name="com.bimilyoncu.sscoderss.floatingplayerforyoutubev3.Activity.ChannelVideoList"
+            android:exported="false"/>
+        <activity android:name="com.bimilyoncu.sscoderss.floatingplayerforyoutubev3.Activity.SlideOnboardingActivity"
+            android:exported="false"/>
+        <activity android:name="com.bimilyoncu.sscoderss.floatingplayerforyoutubev3.Activity.CountryActivity"
+            android:exported="false"/>
         <activity
-            android:name=".Trial.Activity.SearchActivity"
-            android:label="@string/app_name" />
+            android:name="com.bimilyoncu.sscoderss.floatingplayerforyoutubev3.Activity.PlaylistListsActivity"
+            android:exported="false"/>
 
-        <activity android:name=".Trial.Activity.ListActivity" />
-        <!-- Finish Activities -->
 
-        <!-- Trial Finish -->
+        <service android:name="com.bimilyoncu.sscoderss.floatingplayerforyoutubev3.Floaties.Floaty$FloatHeadService" />
 
-        <activity android:name=".Activity.ChannelVideoList" />
-
-        <activity android:name=".Activity.SlideOnboardingActivity" />
-
-        <service android:name=".Floaties.Floaty$FloatHeadService" />
-
-        <receiver android:name=".Custom.BroadcastPowerButton" >
+        <receiver android:name="com.bimilyoncu.sscoderss.floatingplayerforyoutubev3.Custom.BroadcastPowerButton"
+            android:exported="false">
             <intent-filter>
-                <action android:name="android.intent.action.SCREEN_OFF"/>
-                <action android:name="android.intent.action.SCREEN_ON"/>
+                <action android:name="android.intent.action.SCREEN_OFF" />
+                <action android:name="android.intent.action.SCREEN_ON" />
             </intent-filter>
         </receiver>
-
-<!--
-        <receiver android:name=".Custom.Notification.ButtonPlayPause"
-            android:enabled="true">
-            <intent-filter>
-                <action android:name="PlayPauseClicked" />
-            </intent-filter>
-        </receiver>
-        <receiver android:name=".Custom.Notification.ButtonClose"
-            android:enabled="true">
-            <intent-filter>
-                <action android:name="Close" />
-            </intent-filter>
-        </receiver>
-        <receiver android:name=".Custom.Notification.ButtonNextMusic"
-            android:enabled="true">
-            <intent-filter>
-                <action android:name="NextMusic" />
-            </intent-filter>
-        </receiver>-->
     </application>
+
 </manifest>

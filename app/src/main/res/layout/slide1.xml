@@ -20,7 +20,6 @@
         android:id="@+id/slide1_imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:src="@drawable/service_toolbar" />
+        android:layout_margin="10dp" />
 
 </LinearLayout>

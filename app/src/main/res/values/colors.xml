@@ -42,4 +42,9 @@
 
     <color name="colorTransparentWhite">#cccccc</color>
     <color name="colorWhite">#FFFFFF</color>
+    <!--Notification-->
+    <color name="background_notification_color">#323232</color>
+    <color name="background_title_color">#ffffff</color>
+    <color name="background_subtext_color">#999999</color>
+    <color name="transparent_color">#00999999</color>
 </resources>

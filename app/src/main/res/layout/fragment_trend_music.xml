@@ -1,60 +1,213 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:id="@+id/layoutTrends">
+    android:id="@+id/layoutTrends"
+    android:scrollbars="none">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <RelativeLayout
+        <androidx.cardview.widget.CardView
+            app:cardCornerRadius="6dp"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.smarteist.autoimageslider.SliderView
+                android:id="@+id/imageSlider"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:sliderAnimationDuration="600"
+                app:sliderAutoCycleDirection="back_and_forth"
+                app:sliderAutoCycleEnabled="true"
+                app:sliderCircularHandlerEnabled="true"
+                app:sliderIndicatorAnimationDuration="600"
+                app:sliderIndicatorGravity="center_horizontal|bottom"
+                app:sliderIndicatorMargin="15dp"
+                app:sliderIndicatorOrientation="horizontal"
+                app:sliderIndicatorPadding="3dp"
+                app:sliderIndicatorRadius="@dimen/circle_size"
+                app:sliderIndicatorSelectedColor="#5A5A5A"
+                app:sliderIndicatorUnselectedColor="#FFF"
+                app:sliderScrollTimeInSec="1"
+                app:sliderStartAutoCycle="true" />
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:ignore="UselessParent"
-            android:layout_weight="10">
-            <ListView
-                android:id="@+id/trend_music_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:divider="@null"
-                android:dividerHeight="0dp"
-                android:scrollbars="none"
-                />
-            <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/myPBForFav"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:indeterminateDrawable="@drawable/progresbar"
-                android:visibility="invisible" />
-
-        </RelativeLayout>
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:orientation="vertical"
+            android:layout_marginTop="3dp"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp">
             <RelativeLayout
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <LinearLayout
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_centerHorizontal="true">
-                    <com.google.android.gms.ads.AdView
-                        android:id="@+id/adViewTrendMusic"
+                    android:text="@string/first_page_trends"
+                    android:textSize="15dp"
+                    android:textColor="#FFFFFF" />
+                <!--<RelativeLayout
+                    android:id="@+id/rel_see_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_weight="1"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/txtFavButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:text="@string/see_all"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+                </RelativeLayout>-->
+                <RelativeLayout
+                    android:id="@+id/rel_see_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_weight="1"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center">
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/my_custom_button_selected">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="7dp"
+                            android:paddingBottom="4dp"
+                            android:paddingTop="3dp"
+                            android:text="@string/see_all"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp" />
+                    </RelativeLayout>
 
-                        ads:adSize="BANNER"
-                        ads:adUnitId="@string/banner_ad_unit_id_trend_music">
-                    </com.google.android.gms.ads.AdView>
-                </LinearLayout>
+                </RelativeLayout>
             </RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recycle_country">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/recommendation_rel"
+            android:orientation="vertical"
+            android:layout_marginTop="3dp"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/first_page_recommendation_slider_title"
+                    android:textSize="15dp"
+                    android:textColor="#FFFFFF" />
+                <RelativeLayout
+                    android:id="@+id/rel_refresh_rec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_weight="1"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center">
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/my_custom_button_selected">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="7dp"
+                            android:paddingBottom="4dp"
+                            android:paddingTop="3dp"
+                            android:text="@string/first_page_recommendation_refresh_button"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp" />
+                    </RelativeLayout>
+
+                </RelativeLayout>
+            </RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recycle_recommendation">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/most_last_rel"
+            android:orientation="vertical"
+            android:layout_marginTop="3dp"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/first_page_most_played_vids"
+                        android:textSize="15dp"
+                        android:textColor="#FFFFFF" />
+            </RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recycle_last_and_most_listening">
+
+            </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
     </LinearLayout>
 
+</androidx.core.widget.NestedScrollView>
+<LinearLayout
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true">
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerHorizontal="true">
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adViewTrendMusic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_ad_unit_id_trend_music">
+        </com.google.android.gms.ads.AdView>
+    </LinearLayout>
+</RelativeLayout>
+</LinearLayout>
 </RelativeLayout>

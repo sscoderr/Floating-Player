@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.MainActivity"
+    tools:context="com.bimilyoncu.sscoderss.floatingplayerforyoutubev3.Activity.MainActivity"
     tools:showIn="@layout/activity_main"
     android:orientation="vertical">
     <LinearLayout
@@ -20,7 +20,7 @@
             android:layout_height="45dp"
             android:orientation="vertical">
 
-            <android.support.design.widget.TabLayout
+            <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -31,7 +31,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                app:tabTextAppearance="@style/TabSize"/>
+                app:tabTextAppearance="@style/TabSize">
+            </com.google.android.material.tabs.TabLayout>
 
          <!--   <com.gigamole.navigationtabstrip.NavigationTabStrip
                 android:id="@+id/tabLayout"
@@ -59,14 +60,14 @@
             android:background="#292929"
             android:orientation="vertical" />
 
-        <android.support.v4.view.ViewPager
+        <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/linearForTabAnimation"
             android:layout_centerHorizontal="true">
 
-        </android.support.v4.view.ViewPager>
+        </androidx.viewpager.widget.ViewPager>
 
     </LinearLayout>
 </LinearLayout>

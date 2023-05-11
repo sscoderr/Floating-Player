@@ -7,9 +7,25 @@
     android:orientation="vertical"
     android:id="@+id/layoutTrends">
     <LinearLayout
+        android:id="@+id/linearLayout_fragment_warning"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:gravity="center"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textview_trend_video_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/trend_video_fragment_message"
+            android:gravity="center"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/linearLayout_fragment_warning">
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,16 +52,27 @@
         </RelativeLayout>
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="52dp"
-            android:gravity="center">
-
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_centerHorizontal="true">
                     <com.google.android.gms.ads.AdView
                         android:id="@+id/adViewTrendVideo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+
                         ads:adSize="BANNER"
-                        ads:adUnitId="@string/banner_ad_unit_id_trend_video"></com.google.android.gms.ads.AdView>
+                        ads:adUnitId="@string/banner_ad_unit_id_trend_video">
+                    </com.google.android.gms.ads.AdView>
+                </LinearLayout>
+            </RelativeLayout>
         </LinearLayout>
+
     </LinearLayout>
 
 </RelativeLayout>

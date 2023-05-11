@@ -14,7 +14,7 @@
         android:title="@string/search"
         android:icon="@mipmap/search_button"
         app:showAsAction="always"
-        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
         android:layout_width="fill_parent"
         android:orderInCategory="1" />
 

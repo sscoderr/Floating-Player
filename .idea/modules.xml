@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/floatingPlayerForYoutube.iml" filepath="$PROJECT_DIR$/floatingPlayerForYoutube.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/floatingPlayerForYoutube.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/floatingPlayerForYoutube.app.iml" />
     </modules>
   </component>
 </project>

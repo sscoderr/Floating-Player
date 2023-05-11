@@ -17,7 +17,6 @@
 #}
 #sonradan Eklendi
 -ignorewarnings
-
 -keep class * {
     public private *;
 }

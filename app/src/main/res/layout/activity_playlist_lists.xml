@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <in.srain.cube.views.GridViewWithHeaderAndFooter
+        android:id="@+id/gridview_playlist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+            android:layout_marginTop="9dp"
+        android:gravity="center"
+        android:columnWidth="111dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="10dp"
+        android:stretchMode="spacingWidthUniform"
+        android:scrollbars="none"
+        android:listSelector="@drawable/grid_selector"
+        />
+        <ProgressBar
+            android:id="@+id/mypg_for_playlist_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:indeterminateDrawable="@drawable/progresbar"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+</LinearLayout>

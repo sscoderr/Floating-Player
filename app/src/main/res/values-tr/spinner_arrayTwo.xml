@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="sortby_arrayTwo">
-        <item>Hepsi</item>
-        <item>Kanallar</item>
+        <item>Videolar</item>
         <item>Oynatma Listeleri</item>
     </string-array>
 </resources>

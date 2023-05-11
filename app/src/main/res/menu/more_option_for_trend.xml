@@ -4,4 +4,6 @@
         android:title="@string/optionMenuItemOne" />
     <item android:id="@+id/share"
         android:title="@string/optionMenuItemTwo" />
+    <item android:id="@+id/add_to_playlist"
+        android:title="@string/optionMenuItemAddToPlaylis" />
 </menu>

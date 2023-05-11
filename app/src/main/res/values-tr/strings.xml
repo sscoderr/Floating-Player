@@ -59,14 +59,14 @@
     <string name="myDataFavorite">Favoriler</string>
     <string name="myDataHistory">Geçmiş</string>
     <string name="myDataFromYT">Youtubeden</string>
-    <string name="myDataSuggest">Önerilenler</string>
+    <string name="myDataPlaylist">Playlist</string>
     <string name="forKitkatAndBeforeMessage">Lütfen Videoyu Durdurup Tekrar Oynatın</string>
 
     <string name="please_click_back_again_to_exit">Çıkmak için tekrar basınız!</string>
     <string name="similar">BENZER</string>
     <string name="favorites_list_is_empty">Favoriler Listesi Boş!</string>
     <string name="history_list_is_empty">Geçmiş Listesi Boş!</string>
-    <string name="recommented_list_is_empty">Önerilen Listesi Boş!</string>
+    <string name="playlist_list_is_empty">Önerilen Listesi Boş!</string>
     <string name="AreYouSure">Emin misiniz?</string>
     <string name="Deleted">Silindi!</string>
     <string name="DeleteThisHistory">Geçmişi Sil!</string>
@@ -78,9 +78,6 @@
     <string name="stopfinishvideoOff">Auto Play:Kapalı</string>
     <string name="stopfinishvideoOn">Auto Play:Açık</string>
     <string name="welcome">Hoşgeldiniz!</string>
-    <string name="thisIsThePlayerScreen">Burası player ekranı!</string>
-    <string name="videoControlPanel">Video Kontrol Paneli</string>
-    <string name="homeAndBackButtonFunction">Ev ve Geri tuşlarının görevleri</string>
 
     <string name="next">İleri</string>
     <string name="back">Geri</string>

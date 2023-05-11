@@ -9,6 +9,14 @@
         android:layout_width="wrap_content"
         android:orderInCategory="1"/>
 
+    <!--<item android:id="@+id/premium"
+        android:title="@string/premium"
+        android:icon="@mipmap/ic_premium"
+        app:showAsAction="always"
+        android:layout_width="wrap_content"
+        android:orderInCategory="1"/>
+        -->
+
     <item android:id="@+id/rate_button"
         android:title="@string/rateApp"
         app:showAsAction="never"
@@ -27,6 +35,11 @@
 
     <item android:id="@+id/help_button"
         android:title="@string/help"
+        app:showAsAction="never"
+        android:layout_width="wrap_content" />
+
+    <item android:id="@+id/twitter_button"
+        android:title="@string/optionMenuItemTwitter"
         app:showAsAction="never"
         android:layout_width="wrap_content" />
 

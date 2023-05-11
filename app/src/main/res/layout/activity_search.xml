@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context="com.bimilyoncu.sscoderss.floatingplayerforyoutube.Activity.SearchActivity">
+    tools:context="com.bimilyoncu.sscoderss.floatingplayerforyoutubev3.Activity.SearchActivity">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -45,6 +45,72 @@
             android:layout_centerVertical="true"
             android:indeterminateDrawable="@drawable/progresbar"
             android:visibility="invisible" />
+
+        <LinearLayout
+            android:id="@+id/empty_list_warner"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/img_empty_list">
+                </ImageView>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/empty_list_message" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <RelativeLayout
+                    android:id="@+id/empty_list_reload_btn"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_my_custom_button"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp"
+                    >
+                    <TextView
+                        android:id="@+id/txtHistoryButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/custom_button_padding_horizontal"
+                        android:paddingRight="@dimen/custom_button_padding_horizontal"
+                        android:text="@string/empty_list_reload_text"
+                        android:textColor="#424242"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
 
     </RelativeLayout>
 </LinearLayout>

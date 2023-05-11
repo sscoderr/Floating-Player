@@ -14,4 +14,11 @@
     <dimen name="alert_width">290dp</dimen>
     <dimen name="common_circle_width">3dp</dimen>
     <dimen name="progress_circle_radius">34dp</dimen>
+
+    <dimen name="popup_default_width">90dp</dimen>
+    <dimen name="popup_minimum_width">90dp</dimen>
+
+    <dimen name="popup_default_height">190dp</dimen>
+    <dimen name="grid_item">100dp</dimen>
+    <dimen name="circle_size">1dp</dimen>
 </resources>

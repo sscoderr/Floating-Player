@@ -1,37 +1,40 @@
 {
   "project_info": {
-    "project_number": "360605206794",
-    "project_id": "floating-player-for-youtube"
+    "project_number": "951244054380",
+    "firebase_url": "https://floating-music-player-cf4a2.firebaseio.com",
+    "project_id": "floating-music-player-cf4a2",
+    "storage_bucket": "floating-music-player-cf4a2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:360605206794:android:34a39307aff5643c",
+        "mobilesdk_app_id": "1:951244054380:android:7b2a8a7e6964b9006cdd49",
         "android_client_info": {
-          "package_name": "com.bimilyoncu.sscoderss.floatingplayerforyoutube"
+          "package_name": "com.bimilyoncu.sscoderss.floatingplayerforyoutubev3"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "951244054380-rt5u5vg5n1lgefohvruj2nfkc3lq9ij2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyCyTgbaPBwXS-bkq62fx24vSyidxnotbPQ"
+          "current_key": "AIzaSyBdbXXPHsLowCiZKgEvJ4YSIjgDcu4lQAU"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 2,
-          "analytics_property": {
-            "tracking_id": "UA-98050235-1"
-          }
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 1
+          "other_platform_oauth_client": [
+            {
+              "client_id": "951244054380-rt5u5vg5n1lgefohvruj2nfkc3lq9ij2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-2609460348345466~9478052192"
     }
   ],
   "configuration_version": "1"

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+        <RelativeLayout
+            android:background="?selectableItemBackgroundBorderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/grid_playlist_thumb"
+                    android:layout_width="@dimen/grid_item"
+                    android:layout_height="@dimen/grid_item"
+                    android:src="@mipmap/app_icon"
+                    android:scaleType="centerCrop">
+                </ImageView>
+            </LinearLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="@dimen/grid_item"
+            android:layout_height="@dimen/grid_item"
+            android:foreground="@drawable/shadow_for_rel"
+            android:id="@+id/rel">
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="@dimen/grid_item"
+            android:layout_height="@dimen/grid_item">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/m_relative"
+                android:gravity="center">
+                        <TextView
+                            android:id="@+id/grid_video_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="10"
+                            android:layout_marginLeft="5dp"
+                            android:textColor="#ffffff"
+                            android:textSize="18sp"
+                            android:gravity="center"
+                            android:typeface="monospace"> </TextView>
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/playlist_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="2dp"
+                android:text="Kurdistan"
+                android:textColor="#ffffff"
+                android:textSize="11sp"
+                android:gravity="center">
+            </TextView>
+        </RelativeLayout>
+        <!--If you put any object here(out of that relative which at upside) in gridview will be a problem. so when u want put anything else put in relative which upside-->
+    </RelativeLayout>
+</LinearLayout>
+
