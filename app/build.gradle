@@ -10,7 +10,6 @@ android {
         targetSdkVersion 31
         versionCode 59
         versionName "5.9"
-//When u change this line also change the app version on the server by ftp(filezilla).It should be same with server's version(Update server's version when app published on playstore)
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
     }
